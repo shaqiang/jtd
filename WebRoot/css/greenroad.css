@@ -1,0 +1,44 @@
+.initsig{
+            margin:0;
+            padding: 0;
+            margin-left:0px;
+            margin-top: 600px;
+            width:1800px;
+            height: 25px;
+            position: absolute;
+        }
+
+
+        .initsigtime{
+            margin:0;
+            padding: 0;
+            margin-left:0px;
+            margin-top: 820px;
+            position: absolute;
+        }
+
+
+        .initsigdistance{
+            margin:0;
+            padding: 0;
+            margin-left:-1px;
+            margin-top: 0px;
+            position: absolute;
+        }
+
+        .initsigspeed{
+            margin:0;
+            padding: 0;
+            position: absolute;
+        }
+
+
+        .initsigt{
+            float: left;
+            margin:0;
+            padding: 0;
+            width: 100%;
+            height: 20px;
+            border: 1px solid #b3d4fc;
+            background-color: #5ffc11;
+        }

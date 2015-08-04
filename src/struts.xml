@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+	<constant name="struts.ui.theme" value="simple"></constant>
+	<constant name="struts.objectFactory" value="spring"></constant>
+	<constant name="struts.multipart.maxSize" value="1000000000" /> 
+	<constant name="struts.devMode" value="true"></constant>
+	<constant name="struts.multipart.saveDir" value="/tmp"></constant>
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	
+	<package name="usero" extends="struts-default">
+		<global-results>
+			<result name="adminLogin">/login.jsp</result>
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+		</global-results>
+		<action name="toolkitAction" class="toolkitAction">
+		</action>
+		<action name="useroAction" class="useroAction">
+			<result name="loginSucc">/main.jsp</result>
+			<result name="list">/usero_manage.jsp</result>
+			<result name="load">/usero_update.jsp</result>
+			<result name="updatepwd">/usero_update_password.jsp</result>
+			
+			<result name="invalid.token">/op_failure.jsp</result>
+			<interceptor-ref name="defaultStack" />
+            <interceptor-ref name="token" >
+            	<param name="includeMethods">add</param>
+            	<param name="excludeMethods">default</param>
+            </interceptor-ref>
+		</action>
+	</package>
+	
+	<package name="userarea" extends="struts-default">
+		<action name="userareaAction" class="userareaAction">
+			<result name="alllist">/pianqu_manage.jsp</result>
+			<result name="list">/userarea_manage.jsp</result>
+			<result name="load">/pianqu_update.jsp</result>
+			<result name="load2">/userarea_update.jsp</result>
+			<result name="invalid.token">/op_failure.jsp</result>
+			<interceptor-ref name="defaultStack" />
+            <interceptor-ref name="token" >
+            	<param name="includeMethods">add</param>
+            	<param name="excludeMethods">default</param>
+            </interceptor-ref>
+		</action>
+	</package>
+	
+	<package name="oplog" extends="struts-default">
+		<action name="oplogAction" class="oplogAction">
+		
+			<result name="siglist">/oplog_siglist.jsp</result>
+			<result name="list">/oplog_manage.jsp</result>
+			<result name="load">/oplog_update.jsp</result>
+			
+			<result name="invalid.token">/op_failure.jsp</result>
+			<interceptor-ref name="defaultStack" />
+            <interceptor-ref name="token" >
+            	<param name="includeMethods">add</param>
+            	<param name="excludeMethods">default</param>
+            </interceptor-ref>
+		</action>
+	</package>
+	
+	<package name="flow" extends="struts-default">
+		<action name="flowAction" class="flowAction">
+			<result name="opsessiongo">/op_sessiongo.jsp</result>
+		
+			<result name="list">/flow_table.jsp</result>
+			<result name="listline">/flow_line.jsp</result>
+			<result name="listbar">/flow_bar.jsp</result>
+			
+			<result name="invalid.token">/op_failure.jsp</result>
+			<interceptor-ref name="defaultStack" />
+            <interceptor-ref name="token" >
+            	<param name="includeMethods">add</param>
+            	<param name="excludeMethods">default</param>
+            </interceptor-ref>
+		</action>
+	</package>
+	
+	<package name="devlog" extends="struts-default">
+		<action name="devlogAction" class="devlogAction">
+			<result name="siglist">/devlog_siglist.jsp</result>
+			<result name="list">/devlog_manage.jsp</result>
+			<result name="load">/devlog_update.jsp</result>
+			
+			<result name="invalid.token">/op_failure.jsp</result>
+			<interceptor-ref name="defaultStack" />
+            <interceptor-ref name="token" >
+            	<param name="includeMethods">add</param>
+            	<param name="excludeMethods">default</param>
+            </interceptor-ref>
+		</action>
+	</package>
+	
+	<package name="map" extends="struts-default">
+		<global-results>
+			<result name="adminLogin">/login.jsp</result>
+			<result name="index">/index.jsp</result>
+		</global-results>
+		<action name="mapAction" class="mapAction">
+			<result name="map">/smap.jsp</result>
+		</action>
+	</package>
+	
+	<package name="sig" extends="struts-default">
+		<action name="sigAction" class="sigAction">
+			<result name="traffic">/traffic.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+	</package>
+	
+	
+	<package name="sigpublicparam" extends="struts-default">
+		<global-results>
+			<result name="adminLogin">/login.jsp</result>
+			<result name="index">/index.jsp</result>
+		</global-results>
+		<action name="sigpublicparamAction" class="sigpublicparamAction">
+			<result name="cssz-cs">/cssz-cs.jsp</result>
+			<result name="map">/smap.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+	</package>
+	
+	<package name="solution" extends="struts-default">
+		<global-results>
+			<result name="adminLogin">/login.jsp</result>
+			<result name="index">/index.jsp</result>
+		</global-results>
+		<action name="solutionAction" class="solutionAction">
+			<result name="cssz-fa">/cssz-fa.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+	</package>
+	
+	
+	<package name="green" extends="struts-default">
+		<global-results>
+			<result name="adminLogin">/login.jsp</result>
+			<result name="index">/index.jsp</result>
+		</global-results>
+		<action name="greenAction" class="greenAction">
+			<result name="cssz-ct">/cssz-ct.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+	</package>
+	
+		
+	<package name="promotion" extends="struts-default">
+		<global-results>
+			<result name="adminLogin">/login.jsp</result>
+			<result name="index">/index.jsp</result>
+		</global-results>
+		<action name="promotionAction" class="promotionAction">
+			<result name="cssz-sj">/cssz-sj.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+	</package>
+	
+	
+	<package name="sigtime" extends="struts-default">
+		<global-results>
+			<result name="adminLogin">/login.jsp</result>
+			<result name="index">/index.jsp</result>
+		</global-results>
+		<action name="sigtimeAction" class="sigtimeAction">
+			<result name="cssz-time">/cssz-time.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+	</package>
+	
+	
+	<package name="greenroad" extends="struts-default">
+		<global-results>
+			<result name="adminLogin">/login.jsp</result>
+			<result name="index">/index.jsp</result>
+		</global-results>
+		<action name="greenroadAction" class="greenroadAction">
+			<result name="lbd">/lbd.jsp</result>
+			<result name="tq">/tqcontrol.jsp</result>
+			<result name="greenroad">/greenroad.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+	</package>
+	
+	<package name="realtime_ajax" extends="json-default">  
+        <action name="realtime" class="sigAction" method="realtime">  
+            <result type="json">  
+                <param name="excludeNullProperties">true</param>  
+            </result>  
+        </action>   
+    </package>  
+    
+    <package name="map_ajax" extends="json-default">
+		<action name="addOrUpdate" class="mapAction" method="addOrUpdate"/>	
+		<action name="addOrUpdateLine" class="mapAction" method="addOrUpdateLine"/>	
+		<action name="load" class="mapAction" method="load"/>
+		<action name="loadArea" class="mapAction" method="loadArea"/>
+		<action name="loadAreas" class="mapAction" method="loadAreas"/>
+		<action name="deleteMarker" class="mapAction" method="deleteMarker"/>
+		<action name="checkMarkerName" class="mapAction" method="checkMarkerName"/>
+	</package>
+	
+	
+	<package name="greenmap_ajax" extends="json-default">
+		<action name="addOrUpdateLine" class="greenroadAction" method="addOrUpdateLine"/>	
+		<action name="loadLines" class="greenroadAction" method="loadLines"/>	
+		<action name="addOrUpdateTqLine" class="greenroadAction" method="addOrUpdateTqLine"/>	
+		<action name="loadTqLines" class="greenroadAction" method="loadTqLines"/>	
+		<action name="deleteLine" class="greenroadAction" method="deleteLine"/>	
+		<action name="deleteTqLine" class="greenroadAction" method="deleteTqLine"/>	
+	</package>
+	
+     <package name="sig_ajax" extends="json-default">
+		<action name="doCommand" class="sigAction" method="doCommand"/>
+		<action name="sigStatus" class="sigAction" method="sigStatus"/>
+		<action name="runByPharse" class="sigAction" method="runByPharse"/>
+	</package>
+	
+	 <package name="solution_ajax" extends="json-default">
+		<action name="updateSolution" class="solutionAction" method="updateSolution"/>
+	 </package>
+	
+	 <package name="green_ajax" extends="json-default">
+		<action name="updateGreen" class="greenAction" method="updateGreen"/>
+	 </package>
+	 
+	  <package name="sigtime_ajax" extends="json-default">
+		<action name="updateStepTimes" class="sigtimeAction" method="updateStepTimes"/>
+	 </package>
+	
+	<package name="signpublicparam_ajax" extends="json-default">
+		<action name="suretime" class="sigpublicparamAction" method="suretime"/>
+		<action name="checkIOSession" class="sigpublicparamAction" method="checkIOSession"/>
+	 </package>
+	 
+	 <package name="greenroad_ajax" extends="json-default">
+		<action name="setPharseTime" class="greenroadAction" method="setPharseTime"/>
+		<action name="doControl" class="greenroadAction" method="doControl"/>
+	</package>
+	 
+	<package name="area_ajax" extends="json-default">
+		<action name="addArea" class="userareaAction" method="addArea"/>
+		<action name="checkAreaname" class="userareaAction" method="checkAreaname"/>
+	</package>
+	
+		 
+	<package name="promotion_ajax" extends="json-default">
+		<action name="promotionSig" class="promotionAction" method="promotionSig"/>
+	</package>
+</struts>
+
