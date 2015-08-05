@@ -143,10 +143,18 @@ public class ParametersCmdFactory extends CmdFactoryBase implements ICmdParser{
 		int checkflow 				= data[16];
 		int innermark				= data[17];
 		int Workingset 				= data[18];
+		System.out.println("data[18]----------------------------------------------"+data[18]);
 		int SigSun 					= data[19];
 		int SigSunTime[] 			= new int[7];
+		int SigSunStatus[] = new int[7];
 		for (int i = 0; i < SigSunTime.length; i++) {
-			SigSunTime[i] 			= SigSun&((int)Math.pow(2,i));
+			SigSunTime[6-i] 			= SigSun&((int)Math.pow(2,i));
+			System.out.println("SigSunTime[i]:"+SigSunTime[6-i]);
+			if(SigSunTime[6-i]>0){
+				SigSunStatus[6-i]=1;
+			}else{
+				SigSunStatus[6-i]=0;
+			}
 		}
 		
 		
@@ -184,13 +192,13 @@ public class ParametersCmdFactory extends CmdFactoryBase implements ICmdParser{
 			signpublicparam.setCheckflow(checkflow);
 			signpublicparam.setInnermark(String.valueOf(innermark));
 			signpublicparam.setWorkingset(Workingset);
-			signpublicparam.setMon(SigSunTime[0]);
-			signpublicparam.setTue(SigSunTime[1]);
-			signpublicparam.setWes(SigSunTime[2]);
-			signpublicparam.setThir(SigSunTime[3]);
-			signpublicparam.setFra(SigSunTime[4]);
-			signpublicparam.setSata(SigSunTime[5]);
-			signpublicparam.setSun(SigSunTime[6]);
+			signpublicparam.setMon(SigSunStatus[0]);
+			signpublicparam.setTue(SigSunStatus[1]);
+			signpublicparam.setWes(SigSunStatus[2]);
+			signpublicparam.setThir(SigSunStatus[3]);
+			signpublicparam.setFra(SigSunStatus[4]);
+			signpublicparam.setSata(SigSunStatus[5]);
+			signpublicparam.setSun(SigSunStatus[6]);
 			signpublicparam.setGmintime(gmintime);
 			signpublicparam.setGmaxtime(gmaxtime);
 			signpublicparam.setZdbctime(zdbctime);
@@ -256,7 +264,7 @@ public class ParametersCmdFactory extends CmdFactoryBase implements ICmdParser{
 			System.out.println("-------------------------------signpublicparam update");	
 			signpublicparamService.updateByPublicid(Red_Clearance_Time,Yellow_Flash_Time,number+"",
 					comparam+"",checkflow,innermark,Workingset,
-					SigSunTime[0],SigSunTime[1],SigSunTime[2],SigSunTime[3],SigSunTime[4],SigSunTime[5],SigSunTime[6],
+					SigSunStatus[0],SigSunStatus[1],SigSunStatus[2],SigSunStatus[3],SigSunStatus[4],SigSunStatus[5],SigSunStatus[6],
 					gmintime,gmaxtime,zdbctime,countdownmode,xrfxtime,cycle,xyxr,
 					SigSpecialTime[0][0],SigSpecialTime[0][1],SigSpecialTime[1][0],SigSpecialTime[1][1],
 					SigSpecialTime[2][0],SigSpecialTime[2][1],SigSpecialTime[3][0],SigSpecialTime[3][1],

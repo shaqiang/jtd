@@ -27,7 +27,6 @@ function initialize() {
 			areaid = parseInt(areaidstr);
 		}
 		AreaInit();
-		console.log(searchStrURL);
 	    var mapCanvas = document.getElementById("map_canvas");
 		var myOptions = {
 		zoom: markerZoom,   
@@ -190,7 +189,6 @@ function setMarkerEvents(marker)
 	        	  maphelper.bindInstanceEvent(marker, 'click', function(event,map,marker) {
 	        	    if(deleteable)
         			{
-        				console.log("delete");
 						deleteMarker(marker.id);
 					}
 	        });
@@ -239,8 +237,8 @@ function setMarkerEvents(marker)
 //初始化地图所有标志
 function MarkersInit()
 {
-	console.log("Markers    Init........");
-		console.log("areaid...."+areaid);
+	//console.log("Markers    Init........");
+	//	console.log("areaid...."+areaid);
 		$.ajax({   
 	            url:'load',//这里是你的action或者servlert的路径地址   
 	            type:'post', //数据发送方式   
@@ -254,7 +252,7 @@ function MarkersInit()
 	            success: function(msg)
 	            { //成功
 	            		encodeURI(msg);
-	            		console.log(msg);
+	            	//	console.log(msg);
 	            		numbers = [];
 	            		if(msg!=null)
 	            		{
@@ -270,7 +268,7 @@ function MarkersInit()
 							        icon: "images/boot2.png"
 					
 							 	 });
-							 	  console.log(maphelper);  
+							 	//  console.log(maphelper);  
 							  marker.dbclickable = true;
 							  marker.connectSuccess = true;
 							  marker.initOver = true;
@@ -292,7 +290,7 @@ function MarkersInit()
 //初始化当前区域
 function AreaInit()
 {
-		console.log("Area  Init........");
+	//	console.log("Area  Init........");
 		$.ajax({   
 	            url:'loadArea',//这里是你的action或者servlert的路径地址   
 	            type:'post', //数据发送方式   
@@ -306,7 +304,7 @@ function AreaInit()
 	            success: function(msg)
 	            { //成功
 	            		encodeURI(msg);
-	            		console.log(msg);
+	            //		console.log(msg);
 	            		if(msg!=null)
 	            		{
 	            			$("#areaname").val(msg.areaname);

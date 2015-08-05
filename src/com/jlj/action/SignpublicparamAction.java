@@ -35,6 +35,7 @@ import com.jlj.service.ISignpublicparamService;
 import com.jlj.util.Commands;
 import com.jlj.vo.AjaxMsgVO;
 import com.opensymphony.xwork2.ActionSupport;
+import com.thoughtworks.xstream.converters.basic.DateConverter;
 
 @Component("sigpublicparamAction")
 @Scope("prototype")
@@ -155,6 +156,7 @@ public class SignpublicparamAction extends ActionSupport implements RequestAware
 		}
 		//根据sigNumber来查询信号机公共参数
 		sigpubparam = sigpubparamService.getPublicparamByNumber(sigNumber);
+		
 		if(sigpubparam!=null&&sigpubparam.getNumber()!=null)
 		{
 			//判断信号机公共参数中的signid是否为空，如果为空则设置公共参数中的signid对应sig
@@ -241,6 +243,9 @@ public class SignpublicparamAction extends ActionSupport implements RequestAware
 		{
 			sigpubparam.setXyxr(0);
 		}
+		
+		System.out.println("周日"+suntimeable);
+		System.out.println("特殊日"+spetimeable);
 		//工作日设置处理
 		if(spetimeable==null)
 		{
@@ -342,23 +347,25 @@ public class SignpublicparamAction extends ActionSupport implements RequestAware
 			request.put("errorMsg", errorMsg);
 			return "index";
 		}
-		//if(this.getCurrrenSession(sigNumber)!=null){
+		System.out.println("行人请求"+sigpubparam.getXyxr());
+		if(this.getCurrrenSession(sigNumber)!=null){
 			//System.out.println("1-获取界面数据，更新数据库--------------------------------");
-			sigpubparamService.update(sigpubparam);//修改-from lq
+			//sigpubparamService.update(sigpubparam);//修改-from lq
 			//System.out.println("2-获取数据库数据，下发命令--------------------------------");
 			updateSigPublicparamBytes(sigNumber,getCurrrenSession(sigNumber));
+			Thread.sleep(2000);//线程等待2秒让信号机进行调阅
 			//System.out.println("3-调阅新命令和新数据，更新数据库--------------------------------");//("+newDatas+")
 			Commands.executeCommand(5,this.getCurrrenSession(sigNumber));//编号5 公共参数调阅
 			String errorMsg="修改一般参数成功.";
 			request.put("errorMsg", errorMsg);
 			return "index";
-		/*}
+		}
 		else
 		{
 			String errorMsg="信号机["+sigNumber+"]连接异常,检查信号机是否断开.";
 			request.put("errorMsg", errorMsg);
 			return "index";
-		}*/
+		}
 	}
 	
 	private void updateSigPublicparamBytes(String sigNumber,IoSession currrenSession) {
@@ -374,13 +381,16 @@ public class SignpublicparamAction extends ActionSupport implements RequestAware
 				int checkflow = sigpubparam.getCheckflow();//checkflow//data[16]
 				String innermark = sigpubparam.getInnermark();//innermark//data[17]
 				int workingset = sigpubparam.getWorkingset();//Workingset//data[18]
-				
 				Integer[] days = sigpubparam.getDays();//SigSunTime[]
+				for (int i = 0; i < days.length; i++) {
+					System.out.println(days[i]);
+				}
 				int gmintime = sigpubparam.getGmintime();//gmintime//data[26]
 				int gmaxtime = sigpubparam.getGmaxtime();//gmaxtime//data[27]
 				int zdbctime = sigpubparam.getZdbctime();//zdbctime//data[28]
 				int countdownmode = sigpubparam.getCountdownmode();//countdownmode//data[29]
 				int xrfxtime = sigpubparam.getXrfxtime();//xrfxtime//data[42]
+				System.out.println("下发的行人请求："+	sigpubparam.getXyxr());
 				int cycle = sigpubparam.getCycle();//cycle//data[43]
 				int xyxr = sigpubparam.getXyxr();//xyxr//data[44]
 				Integer[] getSpecialmonths = sigpubparam.getSpecialmonths();//SigSpecialTime[][]
@@ -404,18 +414,21 @@ public class SignpublicparamAction extends ActionSupport implements RequestAware
 				msendDatas[15] = Byte.parseByte(comparam, 16);
 				msendDatas[16] = (byte)checkflow;
 				//msendDatas[17] = Byte.parseByte(innermark, 16);
-				msendDatas[17] = (byte)workingset;
+				msendDatas[18] = (byte)workingset;
+				
+				msendDatas[19] = 0;
+				
 				for (int i = 0; i < 7; i++) {
-					msendDatas[18] |= days[i]<<(6-i);
+					msendDatas[19] |= days[i]<<(6-i);
 				}
 				
 				msendDatas[26] = (byte) gmintime;
 				msendDatas[27] = (byte) gmaxtime;
 				msendDatas[28] = (byte) zdbctime;
 				msendDatas[29] = (byte) countdownmode;
-				msendDatas[30] = (byte) xrfxtime;
-				msendDatas[31] = (byte) cycle;
-				msendDatas[32] = (byte) xyxr;
+				msendDatas[42] = (byte) xrfxtime;
+				msendDatas[43] = (byte) cycle;
+				msendDatas[44] = (byte) xyxr;
 				
 				for( int j =0 ;j < 24;j++){
 					msendDatas[58+j*2]   =	getSpecialmonths[j].byteValue();
@@ -436,7 +449,7 @@ public class SignpublicparamAction extends ActionSupport implements RequestAware
 			       }  
 				
 				//System.out.println("=======================公共参数下发========================================");
-				
+			       System.out.print(DataConvertor.bytesToHexString(msendDatas));
 				for (int i = 37; i < 41; i++) {
 					System.out.print((msendDatas[i]&0xff)+" ");
 				}

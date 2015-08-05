@@ -13,19 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>默认主页面</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
-<link href="css/stilearn-helper.css" rel="stylesheet" type="text/css" />
-<script src="js/stilearn-base.js"></script>
-<script src="js/holder.js"></script>
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="jconfirmaction.jquery.js"></script>
 
-<script type="text/javascript">
-	
-	$(document).ready(function() {
-		$('.ask').jConfirmAction();
-	});
-	
-</script>
 
 </head>
 

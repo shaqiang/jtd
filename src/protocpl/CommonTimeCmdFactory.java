@@ -104,6 +104,7 @@ public class CommonTimeCmdFactory extends CmdFactoryBase implements ICmdParser{
 //		String clientIP = ((InetSocketAddress)session.getRemoteAddress()).getAddress().getHostAddress();
 		//保存信号机的公共参数下发命令的数据-start-from jlj
 		String datastr = DataConvertor.toHexString(data);
+		System.out.println("接收的时间段数据帧------------"+datastr);
 		System.out.println("普通日参数0-7长度是--------------------="+data.length);
 			//根据ip查出信号机
 			if(sig!=null){

@@ -1,95 +1,3 @@
-//一般参数
-function initPublicParam() {
-	//css部分
-	$("#xyxr").click(function () {
-		if($("#xyxr").val()==0)
-  		{
-  			$("#xyxr").val(1);
-  		}else
-  		{
-  			$("#xyxr").val(0);
-  		}
-		if ($("#xyxr").attr("checked") == "checked") {
-			$("#xr").show();
-		} else {
-			$("#xr").hide();
-		}
-	});
-	$("#spetime").click(function () {
-		if($("#spetime").val()==0)
-  		{
-  			$("#spetime").val(1);
-  		}else
-  		{
-  			$("#spetime").val(0);
-  		}
-		if ($("#spetime").attr("checked") == "checked") {
-			$("#spe").show();
-		} else {
-			$("#spe").hide();
-		}
-	});
-	$("#suntime").click(function () {
-		if($("#suntime").val()==0)
-  		{
-  			$("#suntime").val(1);
-  		}else
-  		{
-  			$("#suntime").val(0);
-  		}
-		if ($("#suntime").attr("checked") == "checked") {
-			$("#sunt").show();
-		} else {
-			$("#sunt").hide();
-		}
-	});
-	
-
-	//checkbox部分
-	if ($("#xyxr").attr("value") == 1) {
-		$("#xyxr").attr("checked", "checked");
-		$("#xr").show();
-	} else {
-		$("#xr").hide();
-	}
-	if ($("#spetime").attr("value") == 1) {
-		$("#spetime").attr("checked", "checked");
-		$("#spe").show();
-	} else {
-		$("#spe").hide();
-	}
-	if ($("#suntime").attr("value") == 1) {
-		$("#suntime").attr("checked", "checked");
-		$("#sunt").show();
-	} else {
-		$("#sunt").hide();
-	}
-	
-	
-	
-	//checkbox部分
-	if ($("#mon").attr("value") == 1) {
-		$("#mon").attr("checked", "checked");
-	}
-	if ($("#tue").attr("value") == 1) {
-		$("#tue").attr("checked", "checked");
-	}
-	if ($("#wes").attr("value") == 1) {
-		$("#wes").attr("checked", "checked");
-	}
-	if ($("#thir").attr("value") == 1) {
-		$("#thir").attr("checked", "checked");
-	}
-	if ($("#fra").attr("value") == 1) {
-		$("#fra").attr("checked", "checked");
-	}
-	if ($("#sata").attr("value") == 1) {
-		$("#sata").attr("checked", "checked");
-	}
-	if ($("#sun").attr("value") == 1) {
-		$("#sun").attr("checked", "checked");
-	}
-}
 
 
 function cleanAll()
@@ -100,6 +8,125 @@ function cleanAll()
 }
 
 $(document).ready(function(){
+
+	//加载页面,初始化checkbox部分
+	if (xyxrinit == 1) {
+		$("#xyxr").val(1);
+		$("#xyxr").attr("checked", "checked");
+		$("#xr").show();
+	} else {
+		$("#xyxr").val(0);
+		$("#xr").hide();
+	}
+	if (spetimeinit== 1) {
+		$("#spetime").val(1);
+		$("#spetime").attr("checked", "checked");
+		$("#spe").show();
+	} else {
+		$("#spetime").val(0);
+		$("#spe").hide();
+	}
+	if (suntimeinit == 1) {
+		$("#suntime").val(1);
+		$("#suntime").attr("checked", "checked");
+		$("#sunt").show();
+	} else {
+		$("#suntime").val(0);
+		$("#sunt").hide();
+	}
+	if (moninit == 1) {
+		$("#mon").val(1);
+		$("#mon").attr("checked", "checked");
+	}else
+	{
+		$("#mon").val(0);
+	}
+	if (tueinit == 1) {
+		$("#tue").val(1);
+		$("#tue").attr("checked", "checked");
+	}else
+	{
+		$("#tue").val(0);
+	}
+	if (wesinit == 1) {
+		$("#wes").val(1);
+		$("#wes").attr("checked", "checked");
+	}else
+	{
+		$("#wes").val(0);
+	}
+	if (thirinit == 1) {
+		$("#thir").val(1);
+		$("#thir").attr("checked", "checked");
+	}else
+	{
+		$("#thir").val(0);
+	}
+	if (frainit == 1) {
+		$("#fra").val(1);
+		$("#fra").attr("checked", "checked");
+	}else
+	{
+		$("#fra").val(0);
+	}
+	if (satainit == 1) {
+		$("#sata").val(1);
+		$("#sata").attr("checked", "checked");
+	}else
+	{
+		$("#sata").val(0);
+	}
+	if (suninit == 1) {
+		$("#sun").val(1);
+		$("#sun").attr("checked", "checked");
+	}else
+	{
+		$("#sun").val(0);
+	}
+	
+	
+	$(".checkinputweek").click(function () {
+		if ($(this).attr("checked") == "checked") {
+			$(this).val(1);
+		} else {
+			$(this).val(0);
+		}
+	});
+	
+	$("#xyxr").click(function () {
+		if ($("#xyxr").attr("checked") == "checked") {
+			$("#xyxr").val(0);
+			$("#xr").show();
+		} else {
+			$("#xyxr").val(1);
+			$("#xr").hide();
+		}
+	});
+	$("#spetime").click(function () {
+		if ($("#spetime").attr("checked") == "checked") {
+			$("#spetime").val(0);
+			$("#spe").show();
+		} else {
+			$("#spetime").val(1);
+			$("#spe").hide();
+		}
+	});
+	$("#suntime").click(function () {
+		if ($("#suntime").attr("checked") == "checked") {
+			$("#suntime").val(0);
+			$("#sunt").show();
+		} else {
+			$("#suntime").val(1);
+			$("#sunt").hide();
+		}
+	});
+	
+	
+	
+	//checkbox部分
+	
+
+
 	$(".dfinput").on("blur",function(){
 			var	time = parseInt($(this).val());
 				var id  = $(this).attr("id");
@@ -164,7 +191,6 @@ $(document).ready(function(){
 		});
 		
 		
-		
 		$(".ydfinput").on("blur",function(){
 				var	time = parseInt($(this).val());
 					if(isNaN(time)||time>12||time<0)
@@ -188,4 +214,8 @@ $(document).ready(function(){
 
 });
 
-
+function diaoyueCS()
+{
+	executeCommand(5);
+	self.location.reload();
+}

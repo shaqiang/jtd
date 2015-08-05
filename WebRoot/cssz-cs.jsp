@@ -22,18 +22,22 @@
 
 		<script type="text/javascript" src="js/jquery.idTabs.min.js"></script>
 		<script type="text/javascript" src="js/select-ui.min.js"></script>
-		<script type="text/javascript" src="editor/kindeditor.js"></script>
 		<script type="text/javascript" src="js/privatecssz-cs.js"></script>
 		<script type="text/javascript" src="js/privatesig.js"></script>
 
-		<script type="text/javascript">
-    KE.show({
-        id : 'content7',
-        cssPath : './index.css'
-    });
-  </script>
 
 		<script type="text/javascript">
+			var xyxrinit = <s:property value="sigpubparam.xyxr"/>;
+			var suntimeinit = <s:property value="suntimeable"/>;
+			var spetimeinit = <s:property value="spetimeable"/>;
+			var moninit = <s:property value="sigpubparam.mon"/>;
+			var tueinit = <s:property value="sigpubparam.tue"/>;
+			var wesinit = <s:property value="sigpubparam.wes"/>;
+			var thirinit = <s:property value="sigpubparam.thir"/>;
+			var frainit = <s:property value="sigpubparam.fra"/>;
+			var satainit = <s:property value="sigpubparam.sata"/>;
+			var suninit = <s:property value="sigpubparam.sun"/>;
+		
 $(document).ready(function(e) {
     $(".select1").uedSelect({
 		width : 200			  
@@ -80,13 +84,14 @@ $(document).ready(function(e) {
   
  
 });
+
 </script>
 	</head>
 
-	<body onload="initPublicParam()"  bgcolor="#EAF1F7">
+	<body   bgcolor="#EAF1F7">
 
 		<form id="publicparamform" name="publicparamform" action="sigpublicparamAction!update"
-			method="post">
+			method="post" onkeydown="if(event.keyCode==13)return false;">
 
 			<div class="formbody">
 				<div id="usual1" class="usual">
@@ -200,7 +205,7 @@ $(document).ready(function(e) {
 								<div class="csbox">
 
 									<input id="xyxr" name="sigpubparam.xyxr" class="checkinput"
-										type="checkbox" value="${sigpubparam.xyxr}" />
+										type="checkbox"  />
 
 									<txt>
 									行人触发功能使用
@@ -225,53 +230,53 @@ $(document).ready(function(e) {
 						<div
 							style="width: 70%; padding-top: 15px; padding-bottom: 15px; float: left;">
 							<div>
-								<span class="csbox"> <input type="checkbox"
-										class="checkinput" id="suntime" name="suntimeable"
-									 value="${suntimeable}" /> 周 日</span>
+								<span class="csbox"> <input type="checkbox" 	class="checkinput" 
+										 id="suntime" name="suntimeable"
+									  /> 周 日</span>
 							</div>
 							<div id="sunt">
 								<table width="90%" border="0" cellspacing="0" cellpadding="0">
 									<tr>
 										<td>
 											<span class="csbox"> <input type="checkbox"
-													class="checkinput" id="mon" name="sigpubparam.mon"
-													value="${sigpubparam.mon}" cssClass="checkinput"></input>
+													class="checkinputweek" id="mon" name="sigpubparam.mon"
+													 ></input>
 												星期一</span>
 										</td>
 										<td>
 											<span class="csbox"> <input type="checkbox"
-													class="checkinput" id="tue" name="sigpubparam.tue"
-													value="${sigpubparam.tue}" cssClass="checkinput"></input>
+													class="checkinputweek" id="tue" name="sigpubparam.tue"
+													 ></input>
 												星期二</span>
 										</td>
 										<td>
 											<span class="csbox"> <input type="checkbox"
-													class="checkinput" id="wes" name="sigpubparam.wes"
-													value="${sigpubparam.wes}" cssClass="checkinput"></input>
+													class="checkinputweek" id="wes" name="sigpubparam.wes"
+													 ></input>
 												星期三</span>
 										</td>
 										<td>
 											<span class="csbox"> <input type="checkbox"
-													class="checkinput" id="thir" name="sigpubparam.thir"
-													value="${sigpubparam.thir}" cssClass="checkinput"></input>
+													class="checkinputweek" id="thir" name="sigpubparam.thir"
+													></input>
 												星期四</span>
 										</td>
 										<td>
 											<span class="csbox"> <input type="checkbox"
-													class="checkinput" id="fra" name="sigpubparam.fra"
-													value="${sigpubparam.fra}" cssClass="checkinput"></input>
+													class="checkinputweek" id="fra" name="sigpubparam.fra"
+													 ></input>
 												星期五</span>
 										</td>
 										<td>
 											<span class="csbox"> <input type="checkbox"
-													class="checkinput" id="sata" name="sigpubparam.sata"
-													value="${sigpubparam.sata}" cssClass="checkinput"></input>
+													class="checkinputweek" id="sata" name="sigpubparam.sata"
+													></input>
 												星期六</span>
 										</td>
 										<td>
 											<span class="csbox"> <input type="checkbox"
-													class="checkinput" id="sun" name="sigpubparam.sun"
-													value="${sigpubparam.sun}" cssClass="checkinput"></input>
+													class="checkinputweek" id="sun" name="sigpubparam.sun"
+													></input>
 												星期天</span>
 										</td>
 
@@ -292,7 +297,7 @@ $(document).ready(function(e) {
 							<div>
 								<span class="csbox"> <input id="spetime"
 										name="spetimeable" class="checkinput" type="checkbox"
-										value="${spetimeable}" /> 特殊日</span>
+										/> 特殊日</span>
 							</div>
 							<div id="spe">
 								<table width="98%" border="0" cellspacing="0" cellpadding="0">
@@ -466,7 +471,7 @@ $(document).ready(function(e) {
 								<li>
 									<span><img src="images/settings.png" alt="" width="24"
 											height="24" /> </span>
-									<input name="" type="submit" class="toolbarbtn" value="设置完成"
+									<input name="" type="submit" id="submit_cs" class="toolbarbtn" value="设置完成"
 										onclick="" />
 								<li>
 									<span><img src="images/recycle.png" alt="" width="24"
@@ -477,7 +482,7 @@ $(document).ready(function(e) {
 									<span><img src="images/clipboard.png" alt="" width="24"
 											height="24" /> </span>
 									<input name="5" type="button" class="toolbarbtn" value="调　阅"
-										onclick="executeCommand(5)" />
+										onclick="diaoyueCS()" />
 								<li>
 									<span><img src="images/t03.png" alt="" /> </span>
 									<input name="clean" type="button" class="toolbarbtn" value="清　空" onclick="cleanAll()"/>

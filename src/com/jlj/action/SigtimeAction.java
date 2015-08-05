@@ -334,6 +334,7 @@ public class SigtimeAction extends ActionSupport implements RequestAware,
 			
 			this.updateCommonTimeBytes(this.getCurrrenSession(sigNumber));
 			System.out.println("update3-调阅新命令和新数据，更新数据库--------------------------------");
+			Thread.sleep(6000);//线程等待2秒让信号机进行调阅
 			Commands.executeCommand(6,this.getCurrrenSession(sigNumber));//commontime 编号6
 			Thread.sleep(100);
 			Commands.executeCommand(7,this.getCurrrenSession(sigNumber));//commontime 编号7
@@ -398,6 +399,7 @@ public class SigtimeAction extends ActionSupport implements RequestAware,
 		this.updateCommonTimeBytes(this.getCurrrenSession(sigNumber));
 		
 		System.out.println("updateStepTimes3-调阅新命令和新数据，更新数据库--------------------------------");
+		Thread.sleep(2000);//线程等待2秒让信号机进行调阅
 		Commands.executeCommand(6,this.getCurrrenSession(sigNumber));//commontime 编号6
 		Thread.sleep(100);
 		Commands.executeCommand(7,this.getCurrrenSession(sigNumber));//commontime 编号7
@@ -420,7 +422,7 @@ public class SigtimeAction extends ActionSupport implements RequestAware,
 			int hdtime = commontime.getHdtime();//(int)data[16+i*40]
 			int qchdtime = commontime.getQchdtime();//(int)data[17+i*40]
 			Integer[] worktime = commontime.getTimes();//worktime[]
-			
+//			System.out.println("i="+i+","+hour+","+minute+","+seconds);
 			//1-获取数据库中保存的命令
 			Sig sig1 = sigService.querySigByNumber(sigNumber);
 			if(sig1==null){
@@ -440,24 +442,24 @@ public class SigtimeAction extends ActionSupport implements RequestAware,
 					datastr1 = issued2.getDatas();
 				}
 			}
-			System.out.println("datastr2="+datastr1);
+//			System.out.println("datastr2="+datastr1);
 			byte[] msendDatas = DataConvertor.decode(datastr1,332);
-			
+			System.out.println("commontime.getTimetype()"+commontime.getTimetype());
 			switch(commontime.getTimetype()){
-				case 1:
+				case 0:
 					msendDatas[6] = (byte)0x83 ;
 					break;
-				case 2:
+				case 1:
 					msendDatas[6] = (byte)0x84;
 					break;
-				case 3:
+				case 2:
 					msendDatas[6] = (byte)0x85;
 					break;
 			}
 			
-			
 			msendDatas[7]=i<8?(byte) (0x00):(byte) (0x01);
-			
+			System.out.println("msendDatas[6] "+msendDatas[6] );
+			System.out.println("msendDatas[7]"+msendDatas[7]);
 			for (int j = 0; j < 8; j++) {
 				msendDatas[10+i*40] = (byte) hour;
 				msendDatas[11+i*40] = (byte) minute;
@@ -485,9 +487,10 @@ public class SigtimeAction extends ActionSupport implements RequestAware,
 		       for (int i2 = 0; i2 < 2; i2++) {  
 		    	   msendDatas[msendDatas.length-i2-1]  = (byte) (k >>> (i2 * 8));  
 		       }  
-			
+		   	System.out.println("下发时间段的数据帧----="+DataConvertor.bytesToHexString(msendDatas));
 			System.out.println("=======================时间段参数下发========================================");
-			
+			System.out.println("msendDatas[10]:"+msendDatas[10]);
+			System.out.println("msendDatas[11]:"+msendDatas[11]);
 			for (int i3 = 0; i3 < msendDatas.length; i3++) {
 				System.out.print(msendDatas[i3]);
 			}

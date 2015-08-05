@@ -336,7 +336,7 @@ public class SolutionAction extends ActionSupport implements RequestAware,
 		//下发命令
 	
 		this.updateSolutionBytes(this.getCurrrenSession(sigNumber));
-		
+		Thread.sleep(2000);//线程等待2秒让信号机进行调阅
 		System.out.println("3-调阅新命令和新数据，更新数据库--------------------------------");
 		int commandId = solutionService.loadById(soid).getOrderid()+12;
 		Commands.executeCommand(commandId,this.getCurrrenSession(sigNumber));
@@ -362,7 +362,7 @@ public class SolutionAction extends ActionSupport implements RequestAware,
 		}
 		
 		Issuedcommand issued1 = issuedcommandService.loadBySigidAndNumber(sig1.getId(),12+orderid);//根据sigip和number确定唯一命令
-		System.out.println("updateSolutionBytes solution datas================"+issued1.getDatas());
+		//System.out.println("updateSolutionBytes solution datas================"+issued1.getDatas());
 		String datastr1 ="";
 		if(issued1!=null){
 			datastr1 = issued1.getDatas();
@@ -471,7 +471,7 @@ public class SolutionAction extends ActionSupport implements RequestAware,
 							
 						}
 						
-						System.out.println("the msendDatas"+i*2+10+k*8+" is "+msendDatas[i*2+10+k*8]+"the msendDatas"+i*2+11+k*8+" is "+msendDatas[i*2+11+k*8]);
+					//	System.out.println("the msendDatas"+i*2+10+k*8+" is "+msendDatas[i*2+10+k*8]+"the msendDatas"+i*2+11+k*8+" is "+msendDatas[i*2+11+k*8]);
 					}
 					
 				}

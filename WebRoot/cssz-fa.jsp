@@ -20,14 +20,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 
 		<script type="text/javascript" src="js/jquery.idTabs.min.js"></script>
 		<script type="text/javascript" src="js/select-ui.min.js"></script>
-		<script type="text/javascript" src="editor/kindeditor.js"></script>
 		<script type="text/javascript" src="js/privatecssz-fa.js"></script>
-		<script type="text/javascript">
-    KE.show({
-        id : 'content7',
-        cssPath : './index.css'
-    });
-  </script>
 
 		<script type="text/javascript">
 $(document).ready(function(e) {
@@ -81,24 +74,6 @@ $(document).ready(function(e) {
 				               <s:hidden id="c15" name="conflictVO.c_32"></s:hidden>
 				                <s:hidden id="c16" name="conflictVO.c_33"></s:hidden>
 				                
-				<!--                 
-				 <s:property  value="conflictVO.c_00"></s:property>
-				  <s:property  value="conflictVO.c_01"></s:property>
-				   <s:property  value="conflictVO.c_02"></s:property>
-				    <s:property  value="conflictVO.c_03"></s:property>
-				     <s:property  value="conflictVO.c_10"></s:property>
-				      <s:property  value="conflictVO.c_11"></s:property>
-				       <s:property  value="conflictVO.c_12"></s:property>
-				        <s:property  value="conflictVO.c_13"></s:property>
-				         <s:property  value="conflictVO.c_20"></s:property>
-				          <s:property  value="conflictVO.c_21"></s:property>
-				           <s:property  value="conflictVO.c_22"></s:property>
-				            <s:property  value="conflictVO.c_23"></s:property>
-				             <s:property  value="conflictVO.c_30"></s:property>
-				              <s:property  value="conflictVO.c_31"></s:property>
-				               <s:property  value="conflictVO.c_32"></s:property>
-				                <s:property  value="conflictVO.c_33"></s:property>
-				                --> 
 				<div id="tab3" class="tabson">
 					<div style="width: 100%; float: left;">
 						<ul class="forminfo">
@@ -112,7 +87,7 @@ $(document).ready(function(e) {
 										<s:select list="solutions" name="solution.id"  id="solutions"
 							listKey="id" listValue="soluname" value="solution.id" onchange="changeSolution()" cssClass="select1"></s:select>
 									</div>
-									&nbsp;&nbsp;&nbsp;&nbsp;<b>*</b>注意：请按顺序操作相位.
+									&nbsp;&nbsp;&nbsp;&nbsp;<b style="color:red;">*注意：请按顺序操作相位.</b>
 								</div>
 							</li>
 						</ul>

@@ -3,7 +3,7 @@ function changeTimeSelect()
 {
 	var timetype = $("#timetype").val();
 	var orderid = $("#orderid").val();
-	console.log("sigtimeAction!sigtimes?timetype="+timetype+"&orderid="+orderid);
+	//console.log("sigtimeAction!sigtimes?timetype="+timetype+"&orderid="+orderid);
 	location.href = "sigtimeAction!sigtimes?timetype="+timetype+"&orderid="+orderid;
 }
 
@@ -12,7 +12,7 @@ function changeSoSelect()
 	var timetype = $("#timetype").val();
 	var orderid = $("#orderid").val();
 	var soid = $("#soid").val();
-	console.log("sigtimeAction!sigtimes?timetype="+timetype+"&orderid="+orderid+"&soid="+soid);
+	//console.log("sigtimeAction!sigtimes?timetype="+timetype+"&orderid="+orderid+"&soid="+soid);
 	location.href = "sigtimeAction!sigtimes?timetype="+timetype+"&orderid="+orderid+"&soid="+soid;
 }
 
@@ -25,6 +25,10 @@ function changeControl()
 	}else
 	{
 		$("#seconds").attr("readOnly","true");
+		$(document).ready(function(){
+			$("#seconds").val(0);
+		});
+	
 	}
 }
 
@@ -58,6 +62,7 @@ function updateStepTimes()
 					alert('修改相位执行时间成功.');  
 				}
 				msg = "";
+				self.location.reload();
             }  
    	    });  
 }

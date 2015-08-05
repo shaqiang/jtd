@@ -302,7 +302,7 @@ $(document).ready(function(e) {
 					</div>
 					<div
 						style="width: 90%; float: left; margin-top: 20px; color: #999; text-align: center;">
-						注：基准路口(默认第一条数据)距离设置为0，其余路口的距离是与基准路口的距离。允许非对称相位
+						<b style="color:red;">注意：基准路口(默认第一条数据)距离设置为0，其余路口的距离是与基准路口的距离。允许非对称相位</b>
 						<input type="hidden" id="mklid"
 							value="<s:property value="mklid"/>" />
 					</div>

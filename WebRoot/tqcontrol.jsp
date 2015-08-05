@@ -11,19 +11,13 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>无标题文档</title>
+		<title>特勤控制</title>
 		<link href="css/style.css" rel="stylesheet" type="text/css" />
 		<link href="css/lbd.css" rel="stylesheet" type="text/css" />
 		<link href="css/select.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/select-ui.min.js"></script>
 		
-		<!--[if IE 6]>
-	<script src="js/IE6PNG.js"></script>
-	<script type="text/javascript">
-		IE6PNG.fix('.png');
-	</script>
-<![endif]-->
 		<script type="text/javascript">
 $(document).ready(function(e) {
     $(".select1").uedSelect({
@@ -92,7 +86,7 @@ console.log(sigVOs);
 					
 					
 					<div style="float: left; line-height: 35px; width: auto;">
-						<span>	注：当不设置开始日期或开始时间时,默认立即执行特勤控制. </span>
+						<b style="color:red;">	*注意：当不设置开始日期或开始时间时,默认立即执行特勤控制. </b>
 					</div>
 					
 					<div style="float: left; line-height: 35px; width: 90%;">

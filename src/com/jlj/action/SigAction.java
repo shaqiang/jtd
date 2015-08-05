@@ -156,7 +156,7 @@ public class SigAction extends ActionSupport implements RequestAware,
 		//System.out.println("sig================="+sig);
 		if (sig != null) {
 			
-			System.out.println(sig.getId());
+			//System.out.println(sig.getId());
 			//curruntSigIp = sig.getIp();
 			//session.put("sigIp", sig.getIp());// 从地图中进入信号机，将信号机ip传入session
 			curruntSigNumber = sig.getNumber();
@@ -322,7 +322,7 @@ public class SigAction extends ActionSupport implements RequestAware,
 				default:
 					break;
 				}
-				System.out.println(conflictname);
+				//System.out.println(conflictname);
 				
 			}
 			

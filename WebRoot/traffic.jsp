@@ -23,7 +23,6 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 
 <script type="text/javascript" src="js/jquery.idTabs.min.js"></script>
 <script type="text/javascript" src="js/select-ui.min.js"></script>
-<script type="text/javascript" src="editor/kindeditor.js"></script>
 
 
 

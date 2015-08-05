@@ -22,15 +22,8 @@
 
 		<script type="text/javascript" src="js/jquery.idTabs.min.js"></script>
 		<script type="text/javascript" src="js/select-ui.min.js"></script>
-		<script type="text/javascript" src="editor/kindeditor.js"></script>
 		<script type="text/javascript" src="js/privatecssz-sj.js"></script>
 
-		<script type="text/javascript">
-    KE.show({
-        id : 'content7',
-        cssPath : './index.css'
-    });
-  </script>
 
 		<script type="text/javascript">
 $(document).ready(function(e) {

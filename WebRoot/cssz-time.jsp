@@ -22,14 +22,7 @@
 
 		<script type="text/javascript" src="js/jquery.idTabs.min.js"></script>
 		<script type="text/javascript" src="js/select-ui.min.js"></script>
-		<script type="text/javascript" src="editor/kindeditor.js"></script>
 		<script type="text/javascript" src="js/privatecssz-time.js"></script>
-		<script type="text/javascript">
-    KE.show({
-        id : 'content7',
-        cssPath : './index.css'
-    });
-  </script>
 		<script type="text/javascript">
 $(document).ready(function(e) {
     $(".select1").uedSelect({
@@ -128,13 +121,13 @@ $(document).ready(function(e) {
 									</li>
 								</ul>
 							</div>
-							<b>*</b>注意：请按相位顺序设置执行时间.
+							<b style="color:red;">*注意：请按相位顺序设置执行时间.</b>
 						</li>
 					</ul>
 					<div style="width: 100%; float: left;">
 						<div class="csleft" style="line-height: 35px;">
 						<form id="sigtimeform" name="sigtimeform" action="sigtimeAction!update"
-									method="post">
+									method="post" onkeydown="if(event.keyCode==13)return false;">
 									<s:hidden name="commontime.id"></s:hidden>
 									<s:hidden name="commontime.orderid"></s:hidden>
 									<s:hidden name="commontime.timetype"></s:hidden>
@@ -281,6 +274,7 @@ $(document).ready(function(e) {
 									</td>
 								</tr>
 							</table>
+								<b style="color:red;">*注意：唯有控制方式为协调控制时，才可设置秒数，秒表示相位差时间.</b>
 							</form>
 						</div>
 						<div class="csright">
