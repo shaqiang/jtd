@@ -44,4 +44,6 @@ public interface IDevlogService {
 	public abstract List<Devlog> querySigList(String ipAddress, int iserror, int page,
 			int size);
 
+	public abstract void deleteAllBySigid(int iserror, int sigid);
+
 }

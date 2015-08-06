@@ -136,6 +136,13 @@ $(document).ready(function(e) {
 							</tr>
 						</thead>
 						<tbody>
+						<s:if test="%{devlogs.size()==0}">
+							<tr>
+								<td colspan="4" align="center">
+									暂无信息
+								</td>
+							</tr>
+						</s:if>
 						<s:iterator value="devlogs" var="devlog">
 							<tr>
 								<td>

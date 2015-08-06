@@ -174,6 +174,14 @@ $(document).ready(function(e) {
 							</tr>
 						</thead>
 						<tbody>
+							<s:if test="%{flows.size()==0}">
+								<tr>
+									<td colspan="14" align="center">
+										暂无信息
+									</td>
+								</tr>
+							</s:if>
+						
 							<s:iterator value="flows" var="flow" status="index">
 							<tr>
 								<td>

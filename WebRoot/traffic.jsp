@@ -307,8 +307,8 @@ var btn=document.getElementById('show_btn');
 
 		  <li  id="manyCommands">初始化所有参数</li> 
 		  <li  onclick="executeCommand(0)">调阅实时状态</li> 
-		   <li  onclick="executeCommand(37)">清空故障记录</li> 
-		    <li  onclick="executeCommand(34)">清除累计流量</li> 
+		   <li  onclick="clearErrorcode()">清空故障记录</li> 
+		    <li  onclick="clearFlow()">清除累计流量</li> 
          </ul>
        </div>
        <div style="width:100%; float:left; margin-bottom:10px;">

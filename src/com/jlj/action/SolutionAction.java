@@ -339,6 +339,7 @@ public class SolutionAction extends ActionSupport implements RequestAware,
 		Thread.sleep(2000);//线程等待2秒让信号机进行调阅
 		System.out.println("3-调阅新命令和新数据，更新数据库--------------------------------");
 		int commandId = solutionService.loadById(soid).getOrderid()+12;
+		
 		Commands.executeCommand(commandId,this.getCurrrenSession(sigNumber));
 		
 		return NONE;

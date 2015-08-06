@@ -61,6 +61,8 @@ public interface IFlowService {
 
 	public abstract Flow getById(int flow_returnid);
 
+	public abstract void deleteAllBySigid(int sigid);
+
 
 
 }

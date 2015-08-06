@@ -165,6 +165,11 @@ $(document).ready(function(e) {
 						</div>
 					</div>
 					
+						<div style="float: left; line-height: 35px; width: 90%;">
+								<b style="color:red;">注意：设置开始时间，所有无电缆联动下的信号机都将于此时间开始，不设置则为原来默认开始时间.</b>
+					</div>
+				
+					
 					<div style="float: left; line-height: 35px; width: 90%;">
 						<label>
 							<input name="input" type="button" class="scbtn"
@@ -295,7 +300,6 @@ $(document).ready(function(e) {
 
 									</tr>
 								</s:iterator>
-
 
 							</tbody>
 						</table>

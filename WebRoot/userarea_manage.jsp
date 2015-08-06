@@ -121,6 +121,13 @@ $(document).ready(function(e) {
 							</tr>
 						</thead>
 						<tbody>
+							<s:if test="%{userareas.size()==0}">
+								<tr>
+									<td colspan="3" align="center">
+										暂无信息
+									</td>
+								</tr>
+							</s:if>
 							<s:iterator value="userareas" var="userarea" status="index">
 								<tr>
 									<!-- 

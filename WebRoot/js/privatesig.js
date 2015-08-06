@@ -621,3 +621,61 @@ function clearAllLight(id)
 		$("."+id+"_0_3").attr("src","images/rod/l030.png");
 		updateFang[id+"_0_3"] = 0;
 }
+
+function clearErrorcode()
+{
+	if(confirm("您确定要清除故障信息吗？"))
+	{
+		executeCommand(33);
+	$.ajax({   
+            url:'clearErrorcode',//这里是你的action或者servlert的路径地址   
+            type:'post', //数据发送方式  
+            dataType:'json',
+            traditional: true,  
+            error: function(msg)
+            { //失败   
+            	alert('发送命令失败');   
+            },   
+            success: function(msg)
+            { //成功   
+				if(msg!=null)
+				{
+					//alert(msg.message);
+				}else
+				{
+					alert("该信号机的故障信息已清除.");
+				}
+            }  
+   	    });  
+	
+	}
+	
+}
+
+function clearFlow()
+{
+	if(confirm("您确定要清除车流量信息吗？"))
+	{
+		executeCommand(34);
+		$.ajax({   
+	            url:'clearFlow',//这里是你的action或者servlert的路径地址   
+	            type:'post', //数据发送方式  
+	            dataType:'json',
+	            traditional: true,  
+	            error: function(msg)
+	            { //失败   
+	            	alert('发送命令失败');   
+	            },   
+	            success: function(msg)
+	            { //成功   
+					if(msg!=null)
+					{
+						//alert(msg.message);
+					}else
+					{
+						alert("该信号机的车流量信息已清除.");
+					}
+	            }  
+	   	    });  
+   	  }
+}

@@ -41,6 +41,7 @@ $(document).ready(function(){
 					{
 						//console.log("获取了这里的00");
 						conflictStr = $("#c1").val();
+						//console.log("东左的冲突"+conflictStr);
 					}
 					else if(headnumber=="01")
 					{
@@ -113,8 +114,10 @@ $(document).ready(function(){
 					}
 					//console.log("冲突:"+conflictStr);
 					//第二部：分两种情况，一种为 id 一种为 class 解析conflictStr 并逐一找出冲突的灯当前的颜色是否为绿色如果为绿色则返回
+					//console.log("img[0].id"+img[0].id);
 					if(img[0].id==null||img[0].id =="")
 					{
+						//console.log("this is class");
 						//class
 						var imgclass= img[0].classList[0];
 						conflictStart = imgclass.substring(0,1);
@@ -153,6 +156,7 @@ $(document).ready(function(){
 					}else
 					{
 						//id
+						//console.log("this is id");
 						var imgid = img[0].id;
 						//console.log("imgid:-------------------------"+imgid);
 						

@@ -219,6 +219,8 @@
 		<action name="doCommand" class="sigAction" method="doCommand"/>
 		<action name="sigStatus" class="sigAction" method="sigStatus"/>
 		<action name="runByPharse" class="sigAction" method="runByPharse"/>
+		<action name="clearErrorcode" class="sigAction" method="clearErrorcode"/>
+		<action name="clearFlow" class="sigAction" method="clearFlow"/>
 	</package>
 	
 	 <package name="solution_ajax" extends="json-default">

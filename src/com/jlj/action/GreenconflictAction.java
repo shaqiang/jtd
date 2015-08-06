@@ -147,6 +147,7 @@ public class GreenconflictAction extends ActionSupport implements RequestAware,
 			//System.out.println("2-获取数据库数据，下发命令--------------------------------");
 			
 			this.updateGreenconflictBytes(sigNumber,this.getCurrrenSession(sigNumber));
+			Thread.sleep(2000);
 			//System.out.println("3-调阅新命令和新数据，更新数据库--------------------------------");
 			Commands.executeCommand(35,this.getCurrrenSession(sigNumber));//绿冲突 编号35
 			String message = "命令已发送成功";

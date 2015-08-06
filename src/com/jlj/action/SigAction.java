@@ -26,6 +26,8 @@ import com.jlj.model.Greenconflict;
 import com.jlj.model.Sig;
 import com.jlj.model.SigPara;
 import com.jlj.model.Usero;
+import com.jlj.service.IDevlogService;
+import com.jlj.service.IFlowService;
 import com.jlj.service.IGreenconflictService;
 import com.jlj.service.ISigService;
 import com.jlj.util.Commands;
@@ -70,7 +72,13 @@ public class SigAction extends ActionSupport implements RequestAware,
 	private int gltime;
 	private int rltime;
 	private int yltime;
-
+	
+	/*
+	 * 其他service
+	 */
+	private IDevlogService devlogService;
+	private IFlowService flowService;
+	
 	public String sigStatus() {
 		Usero usero = (Usero)session.get("usero");
 		 int userid = usero.getId();
@@ -687,7 +695,76 @@ public class SigAction extends ActionSupport implements RequestAware,
 		
 		return NONE;
 	}
-
+	
+	public String clearErrorcode()
+	{
+		sigNumber = (String) session.get("sigNumber");
+		if(sigNumber==null){
+			String errorMsg="会话失效,请刷新页面重新进入信号机主界面";
+			request.put("errorMsg", errorMsg);
+			return "index";
+		}
+		IoSession currrenSession=this.getCurrrenSession(sigNumber);
+		if(currrenSession==null)
+		{
+			AjaxMsgVO msgVO = new AjaxMsgVO();
+			String message = "信号机["+sigNumber+"]连接异常,检查信号机是否断开.";
+			msgVO.setMessage(message);
+			JSONObject jsonObj = JSONObject.fromObject(msgVO);
+			PrintWriter out;
+			try {
+				response.setContentType("text/html;charset=UTF-8");
+				out = response.getWriter();
+				out.print(jsonObj.toString());
+				out.flush();
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return NONE;
+		}
+		Sig sig = sigService.querySigByNumber(sigNumber);
+		if(sig!=null){
+			int iserror = 1;
+			devlogService.deleteAllBySigid(iserror,sig.getId());
+		}
+		
+		return NONE;
+	}
+	 
+	public String clearFlow()
+	{
+		sigNumber = (String) session.get("sigNumber");
+		if(sigNumber==null){
+			String errorMsg="会话失效,请刷新页面重新进入信号机主界面";
+			request.put("errorMsg", errorMsg);
+			return "index";
+		}
+		IoSession currrenSession=this.getCurrrenSession(sigNumber);
+		if(currrenSession==null)
+		{
+			AjaxMsgVO msgVO = new AjaxMsgVO();
+			String message = "信号机["+sigNumber+"]连接异常,检查信号机是否断开.";
+			msgVO.setMessage(message);
+			JSONObject jsonObj = JSONObject.fromObject(msgVO);
+			PrintWriter out;
+			try {
+				response.setContentType("text/html;charset=UTF-8");
+				out = response.getWriter();
+				out.print(jsonObj.toString());
+				out.flush();
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return NONE;
+		}
+		Sig sig = sigService.querySigByNumber(sigNumber);
+		if(sig!=null){
+			flowService.deleteAllBySigid(sig.getId());
+		}
+		return NONE;
+	}
 	/**
 	 * 添加
 	 * 
@@ -863,6 +940,23 @@ public class SigAction extends ActionSupport implements RequestAware,
 
 	public void setSigNumber(String sigNumber) {
 		this.sigNumber = sigNumber;
+	}
+
+	public IDevlogService getDevlogService() {
+		return devlogService;
+	}
+
+	@Resource
+	public void setDevlogService(IDevlogService devlogService) {
+		this.devlogService = devlogService;
+	}
+
+	public IFlowService getFlowService() {
+		return flowService;
+	}
+	@Resource
+	public void setFlowService(IFlowService flowService) {
+		this.flowService = flowService;
 	}
 	
 	

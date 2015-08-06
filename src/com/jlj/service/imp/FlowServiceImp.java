@@ -116,7 +116,7 @@ public class FlowServiceImp implements IFlowService  {
 			}
 			p = new Object[]{'%'+convalue+'%'};
 		}
-//		queryString += " order by mo.id desc ";
+		queryString += " order by mo.id desc ";
 		return flowDao.pageList(queryString,p,page,size);
 	}
 	
@@ -174,7 +174,7 @@ public class FlowServiceImp implements IFlowService  {
 			queryString += " and mo.time <='"+time2+"'";
 		}
 		p = new Object[]{sigid};
-//		queryString += " order by mo.id desc ";
+		queryString += " order by mo.id desc ";
 		return flowDao.pageList(queryString, p, page, size);
 	}
 	public int getPageCount(int totalCount, int size) {
@@ -190,7 +190,7 @@ public class FlowServiceImp implements IFlowService  {
 	public List<Flow> queryList(int page, int size) {
 		String queryString = "from Flow mo where 1=1 ";
 		Object[] p = null;
-//		queryString += " order by mo.id desc ";
+		queryString += " order by mo.id desc ";
 		return flowDao.pageList(queryString,p,page,size);
 	}
 	public List<Flow> queryConditionList2(int sigid, String time1, String time2) {
@@ -203,7 +203,13 @@ public class FlowServiceImp implements IFlowService  {
 			queryString += " and mo.time <='"+time2+"'";
 		}
 		p = new Object[]{sigid};
-//		queryString += " order by mo.id desc ";
+		queryString += " order by mo.id desc ";
 		return flowDao.getObjectsByCondition(queryString, p);
+	}
+	public void deleteAllBySigid(int sigid) {
+		String queryString = "delete from Flow mo where mo.sig.id=?";
+		Object[] p = new Object[]{sigid};
+		flowDao.updateFlowByhql(queryString, p);
+		
 	}
 }

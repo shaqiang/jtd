@@ -89,7 +89,7 @@ $(document).ready(function(e) {
 					
 						<div style="width: 30%; padding-top: 15px; padding-bottom: 15px; float: left;">
 							<div class="csbox">
-								FTP服务&nbsp;&nbsp;&nbsp;IP&nbsp;&nbsp;&nbsp;&nbsp：
+								FTP服务&nbsp;&nbsp;&nbsp;IP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：
 								<s:textfield name="centerIp" id="centerIp" cssClass="dfinput"
 									cssStyle="width:150px;" readonly="true"></s:textfield>
 								

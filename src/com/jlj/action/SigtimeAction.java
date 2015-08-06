@@ -334,7 +334,7 @@ public class SigtimeAction extends ActionSupport implements RequestAware,
 			
 			this.updateCommonTimeBytes(this.getCurrrenSession(sigNumber));
 			System.out.println("update3-调阅新命令和新数据，更新数据库--------------------------------");
-			Thread.sleep(6000);//线程等待2秒让信号机进行调阅
+			Thread.sleep(2000);//线程等待2秒让信号机进行调阅
 			Commands.executeCommand(6,this.getCurrrenSession(sigNumber));//commontime 编号6
 			Thread.sleep(100);
 			Commands.executeCommand(7,this.getCurrrenSession(sigNumber));//commontime 编号7

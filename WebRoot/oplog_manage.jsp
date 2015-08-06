@@ -143,6 +143,13 @@ $(document).ready(function(e) {
 							</tr>
 						</thead>
 						<tbody>
+							<s:if test="%{oplogs.size()==0}">
+								<tr>
+									<td colspan="5" align="center">
+										暂无信息
+									</td>
+								</tr>
+							</s:if>
 							<s:iterator value="oplogs" var="oplog">
 							<tr>
 								<td>

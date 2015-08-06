@@ -21,6 +21,19 @@ function jumpNullPage(url,page){
 	window.location=url;
 }
 
+function jumpIserrorPage(url,page,iserror){
+	var page=page;
+	if(isNaN(page)){
+		var page2=document.getElementById(page).value;
+		page=parseInt(page2);
+	}
+	
+	var url=url+'?page='+page+'&iserror='+iserror;
+	url=encodeURI(url);
+	url=encodeURI(url);
+	window.location=url;
+}
+
 //分页显示
 function jumpPage(url,page,con,convalue,status,pid){
 console.log("enter1");

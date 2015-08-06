@@ -81,6 +81,14 @@ $(document).ready(function(e) {
 							</tr>
 						</thead>
 						<tbody>
+						<s:if test="%{devlogs.size()==0}">
+							<tr>
+								<td colspan="4" align="center">
+									暂无信息
+								</td>
+							</tr>
+						</s:if>
+						
 						<s:iterator value="devlogs" var="devlog" status="index">
 							<tr>
 								<td>
@@ -109,19 +117,19 @@ $(document).ready(function(e) {
 								<td height="34" colspan="6" align="center" bgcolor="#FFFFFF">
 									记录数：<s:property value="totalCount" />&nbsp;&nbsp;&nbsp;
 									<a
-										href="javascript:jumpNullPage('devlogAction!plist',<s:property value="1"/>);"
+										href="javascript:jumpIserrorPage('devlogAction!plist',<s:property value="1"/>,<s:property value="iserror"/>);"
 										target="main">首页</a>&nbsp;&nbsp;
 									<a
-										href="javascript:jumpNullPage('devlogAction!plist',<s:property value="page-1"/>);"
+										href="javascript:jumpIserrorPage('devlogAction!plist',<s:property value="page-1"/>,<s:property value="iserror"/>);"
 										target="main">上一页</a>&nbsp;&nbsp;&nbsp;
 									<a
-										href="javascript:jumpNullPage('devlogAction!plist',<s:property value="page+1"/>);"
+										href="javascript:jumpIserrorPage('devlogAction!plist',<s:property value="page+1"/>,<s:property value="iserror"/>);"
 										target="main">下一页</a>&nbsp;&nbsp;&nbsp;
 									<a
-										href="javascript:jumpNullPage('devlogAction!plist',<s:property value="pageCount"/>);"
+										href="javascript:jumpIserrorPage('devlogAction!plist',<s:property value="pageCount"/>,<s:property value="iserror"/>);"
 										target="main">尾页</a>&nbsp;&nbsp;&nbsp;
 									<input type='button' class="exit"
-										onclick="jumpNullPage('devlogAction!plist',document.getElementById('page').value);"
+										onclick="jumpIserrorPage('devlogAction!plist',document.getElementById('page').value,<s:property value="iserror"/>);"
 										value='转到' />
 									&nbsp; 当前页：
 									<input onpaste="return false" onkeypress="checkPage();"
