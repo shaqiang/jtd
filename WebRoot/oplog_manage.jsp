@@ -111,8 +111,9 @@ $(document).ready(function(e) {
 										<input name="input2" type="submit" class="scbtn" value="查询" />
 
 										<input name="input3" type="reset" class="scbtn" value="重置" />
-
+										<!-- 
 										<input name="input6" type="button" class="scbtn" value="删除" />
+										 -->
 									</td>
 								</tr>
 							</table>
@@ -124,7 +125,10 @@ $(document).ready(function(e) {
 						<thead>
 							<tr>
 								<th width="5%">
+									序号
+									<!-- 
 									<input name="input" type="checkbox" value="" checked="checked" />
+									 -->
 								</th>
 								<th width="16%">
 									时间
@@ -150,10 +154,14 @@ $(document).ready(function(e) {
 									</td>
 								</tr>
 							</s:if>
-							<s:iterator value="oplogs" var="oplog">
+							<s:iterator value="oplogs" var="oplog" status="index">
 							<tr>
 								<td>
+									<s:property value="#index.count"/>
+									<!-- 
 									<input name="input" type="checkbox" value="" />
+									 -->
+									
 								</td>
 								<td>
 									<s:date name="optime" format="yyyy-MM-dd HH:mm:ss"/>
