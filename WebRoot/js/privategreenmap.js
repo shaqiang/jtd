@@ -207,9 +207,14 @@ function MarkersInit()
 	            },   
 	            success: function(msg)
 	            { //成功
-	            		encodeURI(msg);
-	            		
-	            	 	markermsg = msg;
+	            	if(typeof(msg.length)=='undefined')//判断msg为错误提示还是正确数据
+            		{
+            			//错误提示
+            			alert(msg.message);
+            		}else
+            		{
+            			//正常数值
+            			markermsg = msg;
 	            	 	for(var i=0;i<markermsg.length;i++)
 			    	    {
 			    	    	numbers.push(markermsg[i].number);
@@ -229,6 +234,8 @@ function MarkersInit()
 						  setMarkerEvents(marker);
 						  initMarkers.push(marker);
 			    	    } 	   
+            		}
+	            	 	
 			    	   
 	            }  
     	    });  

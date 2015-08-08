@@ -28,6 +28,7 @@ import com.jlj.model.Usero;
 import com.jlj.service.IGreenroadService;
 import com.jlj.service.ISigService;
 import com.jlj.service.IUserareaService;
+import com.jlj.vo.AjaxMsgVO;
 import com.jlj.vo.MarkerVO;
 import com.jlj.vo.UserareaVO;
 import com.opensymphony.xwork2.ActionSupport;
@@ -83,7 +84,6 @@ public class MapAction extends ActionSupport implements RequestAware,
 	 */
 	
 	
-	
 	/**
 	 * 加载当前地图的区域
 	 * @return
@@ -137,41 +137,60 @@ public class MapAction extends ActionSupport implements RequestAware,
 	public String load() throws Exception {
 		usero = (Usero) session.get("usero");
 		if(usero==null){
+			//通过 ajax msg的长度就可以判断出当前的信息为错误提示还是正常信息 undefined
+			AjaxMsgVO msgVO = new AjaxMsgVO();
+			String message = "连接超时,请刷新页面并重新登入.";
+			msgVO.setMessage(message);
+			JSONObject jsonObj = JSONObject.fromObject(msgVO);
+			PrintWriter errorout;
+			try {
+				response.setContentType("text/html;charset=UTF-8");
+				errorout = response.getWriter();
+				errorout.print(jsonObj.toString());
+				errorout.flush();
+				errorout.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			return null;
 		}
 		
-		userarea = getCurrentUserarea(usero,areaid);
-		
 		sigs = new ArrayList<Sig>();
-		if(userarea!=null)
+		if(areaid!=0)
 		{
+			//areaid 不为0表示前台有区域传入后台，则显示当前区域下的所有有效信号机
+			userarea = getCurrentUserarea(usero,areaid);
+			if(userarea!=null)
+			{
+				/*
+				 * sigs_userarea 当前区域下的信号机
+				 */
+				List<Sig> sigs_userarea = getCurrentSigs(userarea);
+				if(sigs_userarea!=null&&sigs_userarea.size()>0)
+				{
+					sigs.addAll(sigs_userarea);
+				}
+			}
 			/*
-			 * sigs_userarea 当前区域下的信号机
+			 * 不属于任何区域的信号机
 			 */
-			List<Sig> sigs_userarea = getCurrentSigs(userarea);
-			if(sigs_userarea!=null&&sigs_userarea.size()>0)
+			List<Sig> allsigs = sigService.getNotNullSigs();//所有信号机
+			List<Sig> sigs_nullarea = new ArrayList<Sig>();//区域为null的信号机
+			for(int i=0;i<allsigs.size();i++)
 			{
-				sigs.addAll(sigs_userarea);
+				if(allsigs.get(i).getUserarea()==null)
+				{
+					sigs_nullarea.add(allsigs.get(i));
+				}
 			}
-			
-		}
-		/*
-		 * 不属于任何区域的信号机
-		 */
-		List<Sig> allsigs = sigService.getSigs();//所有信号机
-		
-		List<Sig> sigs_nullarea = new ArrayList<Sig>();//区域为null的信号机
-		
-		for(int i=0;i<allsigs.size();i++)
-		{
-			if(allsigs.get(i).getUserarea()==null)
+			if(sigs_nullarea!=null&&sigs_nullarea.size()>0)
 			{
-				sigs_nullarea.add(allsigs.get(i));
+				sigs.addAll(sigs_nullarea);
 			}
-		}
-		if(sigs_nullarea!=null&&sigs_nullarea.size()>0)
+		}else
 		{
-			sigs.addAll(sigs_nullarea);
+			//areaid 为0表示前台有无区域传入后台，则显示所有区域下的所有有效信号机
+			sigs = sigService.getNotNullSigs();
 		}
 		if(sigs!=null&&sigs.size()>0)
 		{

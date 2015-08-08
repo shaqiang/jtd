@@ -79,7 +79,7 @@ $(function(){
     <span><img src="images/leftico02.png" /></span>优化控制</div>
     <ul class="menuson">
         <li><cite></cite><a href="greenmap.jsp" target="rightFrame">无电缆联动</a></li>
-         <li><cite></cite><a href="tqmap.jsp" target="rightFrame">特勤控制</a></li>
+         <li><cite></cite><a href="stqmap.jsp" target="rightFrame">特勤控制</a></li>
        <li><cite></cite><a href="areayhmap.jsp" target="rightFrame">区域优化</a></li>
         </ul>     
     </dd>

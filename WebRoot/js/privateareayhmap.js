@@ -205,28 +205,34 @@ function MarkersInit()
 	            },   
 	            success: function(msg)
 	            { //成功
-	            		encodeURI(msg);
-	            		
-	            	 	markermsg = msg;
-	            	 	for(var i=0;i<markermsg.length;i++)
-			    	    {
-			    	    	numbers.push(markermsg[i].number);
-				    	     var marker =  maphelper.markerPoint({
-						  	    id:  markermsg[i].id,
-								lat: markermsg[i].lat,
-						        lng: markermsg[i].lng,
-						        title: '红绿灯',
-						        icon: "images/boot2.png"
-				
-						 	 });
-						  marker.connectSuccess = true;
-						  marker.initOver = true;
-						  marker.number = markermsg[i].number;
-						  marker.name = markermsg[i].name;
-						  marker.address = markermsg[i].address;
-						  setMarkerEvents(marker);
-						  initMarkers.push(marker);
-			    	    } 	   
+	            		if(typeof(msg.length)=='undefined')//判断msg为错误提示还是正确数据
+	            		{
+	            			//错误提示
+	            			alert(msg.message);
+	            		}else
+	            		{
+	            			markermsg = msg;
+		            	 	for(var i=0;i<markermsg.length;i++)
+				    	    {
+				    	    	numbers.push(markermsg[i].number);
+					    	     var marker =  maphelper.markerPoint({
+							  	    id:  markermsg[i].id,
+									lat: markermsg[i].lat,
+							        lng: markermsg[i].lng,
+							        title: '红绿灯',
+							        icon: "images/boot2.png"
+					
+							 	 });
+							  marker.connectSuccess = true;
+							  marker.initOver = true;
+							  marker.number = markermsg[i].number;
+							  marker.name = markermsg[i].name;
+							  marker.address = markermsg[i].address;
+							  setMarkerEvents(marker);
+							  initMarkers.push(marker);
+				    	    } 	   
+	            		}
+	            	 	
 			    	   
 	            }  
     	    });  

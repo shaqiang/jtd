@@ -137,13 +137,13 @@ public class DiaoYueCmdFactory extends CmdFactoryBase implements ICmdParser{
 	  				sig = new Sig();
 	  				sig.setIserror(0);
 	  				sig.setNumber(number+"");
-	  				Userarea userarea = userareaService.loadById(1);//load未知区域
-	  				if(userarea==null){
-	  					System.out.println("userarea=null--------------------");
-	  				}
-	  				sig.setUserarea(userarea);
+	  				//新增信号机时，不设置区域即userarea为null-from lq 20150807
+//	  				Userarea userarea = userareaService.loadById(1);//load未知区域
+//	  				if(userarea==null){
+//	  					System.out.println("userarea=null--------------------");
+//	  				}
+//	  				sig.setUserarea(userarea);
 	  				sigService.add(sig);
-	  				
 	  			}
 	  			//插入设备连接日志
   				Devlog devlog = new Devlog();

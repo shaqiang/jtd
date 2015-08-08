@@ -12,12 +12,11 @@ var markersJson = '';
 var user=null;
 var numbers=[];
 var options = "";
-var areaid = 0;//当前区域
 var ulimit = 10;//用户权限
 var searchStrURL = decodeURI(location.search);
 
-
-//特勤控制
+var	 poly = new Object();
+//特勤控制默认所有区域
 var markerids = [];
 var linesmsg = [];
 var dbclickable = true;
@@ -27,21 +26,13 @@ var dots = Array();
 var lineId = Date.parse(new Date());//时间做唯一标示表示当前线的ID
 
 var poly = null;
-
 google.maps.event.addDomListener(window, "load", initialize);
 
  function initialize() {
-		if(searchStrURL!=null&&searchStrURL!="")
-		{
-			var areaidstr = searchStrURL.substring(searchStrURL.indexOf("=")+1,searchStrURL.length);
-			areaid = parseInt(areaidstr);
-		}
-		AreaInit();
-		console.log(searchStrURL);
 	    var mapCanvas = document.getElementById("map_canvas");
 		var myOptions = {
-		zoom: markerZoom,   
-		center: new Array(lng, lat),  
+		zoom: 10,   
+		center: new Array(119.82376098632812, 31.34542731758161),  
 		disableDefaultUI: false, 
 		disableDefaultUI: false,   
 		navigationControl: true,   
@@ -61,15 +52,8 @@ google.maps.event.addDomListener(window, "load", initialize);
 
     maphelper = new mapHelper();
     mapobj = maphelper.initMap(mapCanvas, myOptions);
-	if(ulimit<=0)
-	{
-	
-		AreasInit();
-	}
 	MarkersInit();
-	console.log("initialize ulimit:"+ulimit);
 	GreenLinesInit();
-	//google.maps.event.addListener(mapobj, "rightclick", reset);
 
 }
 
@@ -83,9 +67,8 @@ function ClearPoly() {
 
 
 
-	//初始化信号机
+//初始化信号机
 function initSignal(marker) {
-   
     //标记动画
     if (marker.getAnimation() != null) {
         marker.setAnimation(null);
@@ -108,7 +91,6 @@ function initSignal(marker) {
 			    function(event) {
 			    		marker.setAnimation(null);
 			    });
-
     setMarkerEvents(marker);
 
 }
@@ -191,7 +173,7 @@ function setMarkerEvents(marker)
 
 }
 
-//初始化地图所有标志
+//初始化当前所有信号机
 function MarkersInit()
 {
 		$.ajax({   
@@ -199,16 +181,21 @@ function MarkersInit()
 	            type:'post', //数据发送方式   
 	            dataType:'json', 
 	            async:false,
-	            data: { "areaid":areaid},
 	            error: function(msg)
 	            { //失败   
 	            	alert('加载失败,有可能是登陆时间过长用户名失效,请重新登陆');   
 	            },   
 	            success: function(msg)
 	            { //成功
-	            		encodeURI(msg);
-	            		
-	            	 	markermsg = msg;
+            		if(typeof(msg.length)=='undefined')//判断msg为错误提示还是正确数据
+            		{
+            			//错误提示
+            			alert(msg.message);
+            		}else
+            		{
+            			//正常数值
+            			console.log(msg);
+            			markermsg = msg;
 	            	 	for(var i=0;i<markermsg.length;i++)
 			    	    {
 			    	    	numbers.push(markermsg[i].number);
@@ -220,6 +207,8 @@ function MarkersInit()
 						        icon: "images/boot2.png"
 				
 						 	 });
+						 	//  console.log(maphelper);  
+						  marker.dbclickable = true;
 						  marker.connectSuccess = true;
 						  marker.initOver = true;
 						  marker.number = markermsg[i].number;
@@ -227,80 +216,13 @@ function MarkersInit()
 						  marker.address = markermsg[i].address;
 						  setMarkerEvents(marker);
 						  initMarkers.push(marker);
-			    	    } 	   
-			    	   
-	            }  
-    	    });  
-}
-//初始化当前区域
-function AreaInit()
-{
-		$.ajax({   
-	            url:'loadArea',//这里是你的action或者servlert的路径地址   
-	            type:'post', //数据发送方式   
-	            dataType:'json', 
-	            async:false,
-	            data: { "areaid":areaid},
-	            error: function(msg)
-	            { //失败   
-	            	alert('加载失败,有可能是登陆时间过长用户名失效,请重新登陆');  
-	            },   
-	            success: function(msg)
-	            { //成功
-	            		encodeURI(msg);
-						$("#areaname").val(msg.areaname);
-						lng = msg.lng;
-						lat = msg.lat;
-						ulimit = msg.ulimit;
-						markerZoom = msg.size;
-						areaid = msg.id;
-						console.log("AreaInit areaid"+areaid,"AreaInit ulimit"+ulimit);
-						if(ulimit==0)
-						{
-							$("#areasdiv").show();
-						}else
-	            		{
-	            			lng = 119.71389770507812;
-							lat = 31.336923737413848;
-							markerZoom = 13;
-	            		}
+			    	    } 	 
+            		}
 	            }  
     	    });  
 }
 
-
-//初始化当前用户的所有区域
-function AreasInit()
-{
-		$.ajax({   
-	            url:'loadAreas',//这里是你的action或者servlert的路径地址   
-	            type:'post', //数据发送方式   
-	            dataType:'json', 
-	            async:false,
-	            error: function(msg)
-	            { //失败   
-	            	alert('加载失败,有可能是登陆时间过长用户名失效,请重新登陆'); 
-	            },   
-	            success: function(msg)
-	            { //成功
-	            	encodeURI(msg);
-	            	$("#areaid option").remove();
-					for(var i=0;i<msg.length;i++)
-	            	{
-	            		if(areaid==msg[i].id)
-	            		{
-	            				$("#areaid").append("<option value=" + msg[i].id + "  selected>" + msg[i].areaname + "</option>");
-	            		}else
-	            		{
-	            				$("#areaid").append("<option value=" + msg[i].id + ">" + msg[i].areaname + "</option>");
-	            		}
-		            
-	            	} 
-	            }  
-    	    });  
-}
-
-//初始化地图所有标志
+//初始化所有特勤方案
 function GreenLinesInit()
 {
 		$.ajax({   
@@ -314,62 +236,14 @@ function GreenLinesInit()
 	            },   
 	            success: function(msg)
 	            { //成功
-	            		encodeURI(msg);
-	            		
-	            	 	console.log(msg);
 	            	 	linesmsg = msg;
-	            	 	for(var i=0;i<linesmsg.length;i++)
-			    	    {
-			    	    	
-			    	    	//处理mlids
-			    	    	var sigmids = linesmsg[i].sigmids.split(",");
-			    	    	for(var j=0;j<sigmids.length-1;j++)
-			    	    	{
-			    	    		for(var k=0;k<initMarkers.length;k++)
-								{
-									if(initMarkers[k].id==parseInt(sigmids[j]))
-									{
-										dots.push(new Array(initMarkers[k].getPosition().kb,initMarkers[k].getPosition().jb));
-									}
-								}
-			    	    	}
-			    	    	console.log("GreenLinesInit  dots"+dots);
-			    	    	  var	 poly = maphelper.polyline({
-										dots:dots,						
-										color:"#008000",
-										weight:16,
-										opacity:0.5,
-										id:linesmsg[i].marklineid
-								});
-								dots = Array();
-								maphelper.bindInstanceEvent(poly, 'dblclick', function(event,map,poly) {
-									self.location='greenroadAction!tq?mklid='+poly.id; 
-									
-					        });
-			    	    	
-			    	    	/*
-			    	    		for(var i=0;i<initMarkers.length;i++)
-								{
-									if(initMarkers[i].id==marker.id)
-									{
-										console.log(initMarkers[i]);
-										dots.push(new Array(initMarkers[i].getPosition().kb,initMarkers[i].getPosition().jb));
-									}
-								}
-							    	    var	 poly = maphelper.polyline({
-										dots:dots,						
-										color:"#008000",
-										weight:16,
-										opacity:0.5,
-										id:linesmsg[i].marklineid
-								});
-								
-									maphelper.bindInstanceEvent(poly, 'dblclick', function(event,map) {
-									
-									console.log("这条线被打开了");
-					        });
-					        */
-			    	    } 	   
+	            	 	console.log(linesmsg);
+		            	$("#tqid option").remove();
+		            	$("#tqid").append("<option value='0' selected>"+'请选择特勤方案'+"</option>");
+						for(var i=0;i<msg.length;i++)
+		            	{
+		            		$("#tqid").append("<option value=" + msg[i].id + ">" + msg[i].name + "</option>");
+		            	} 
 	            }  
     	    });  
 }
@@ -387,52 +261,11 @@ function getMarkerContent(marker)
 }
 
 
-
-//添加单个信号机标记
-function saveMarker(id)
-{
-	for(var i=0;i<initMarkers.length;i++)
-	{
-		if(initMarkers[i].id == id)
-		{
-			var number = $('#numberSelect').val();
-			var address = $('#address').val();
-			var name = $('#name').val();
-			var lat = initMarkers[i].getPosition().jb;
-			var lng = initMarkers[i].getPosition().kb;
-			
-			$.ajax({   
-	            url:'addOrUpdate',//这里是你的action或者servlert的路径地址   
-	            type:'post', //数据发送方式     
-	 			data: { "id":id,"number":number,"address":address,"name":name,"lat":lat,"lng":lng},
-	            error: function(msg)
-	            { //失败   
-	            	alert('信号机增加失败');   
-	            },   
-	            success: function(msg)
-	            { //成功   
-	          		if(infowindow)
-					infowindow.close();
-					alert('信号机绑定成功');   
-	            }  
-    	    });   
-    	    
-    	    initMarkers[i].initOver = true;
-    	    initMarkers[i].setAnimation(null);
-    	    initMarkers[i].name = name;
-    	    initMarkers[i].address = address;
-    	    initMarkers[i].number = number;
-		}
-	}
-}
-
-
 //删除单个信号机标记
 function deleteMarker(id)
 {
 	for(var i=0;i<initMarkers.length;i++)
 	{
-	
 		if(initMarkers[i].id == id)
 		{
 			$.ajax({   
@@ -454,11 +287,10 @@ function deleteMarker(id)
 	}
 }
 
-
 function Polyline() {
 
 
-		//改变新增区域按钮状态
+	//改变新增区域按钮状态
 	if($("#addroad").css("background-image")!="none")
 	{
 		$("#addroad").css("background-image",'none').css("color","#000");
@@ -514,11 +346,78 @@ function saveLine()
    	    });   
 	
 	}
-	
 }
 
-function changeArea()
+$(document).ready(function(){
+	$("#tqid").on('change',function(){
+		maphelper.clearLine();
+		var selectedLineid = $(this).val();
+		for(var i=0;i<linesmsg.length;i++)
+  	    {
+  	    	//处理mlids
+  	    	var lineObj = linesmsg[i];
+  	    	if(lineObj.id==selectedLineid)
+  	    	{
+  	    		var sigmids = lineObj.sigmids.split(",");
+	  	    	for(var j=0;j<sigmids.length-1;j++)
+	  	    	{
+	  	    		for(var k=0;k<initMarkers.length;k++)
+					{
+						if(initMarkers[k].id==parseInt(sigmids[j]))
+						{
+							dots.push(new Array(initMarkers[k].getPosition().kb,initMarkers[k].getPosition().jb));
+						}
+					}
+	  	    	}
+	  	    	 poly = maphelper.polyline({
+						dots:dots,						
+						color:"#008000",
+						weight:16,
+						opacity:0.5,
+						id:lineObj.marklineid
+				});
+				dots = Array();
+				maphelper.bindInstanceEvent(poly, 'dblclick', function(event,map,poly) {
+					self.location='greenroadAction!tq?mklid='+poly.id; 
+	       		 });
+  	    	}
+  	  } 	   
+		
+	
+	});
+
+
+});
+
+function changeTq()
 {
-	location.href = "tqmap.jsp?areaid="+parseInt($("#areaid").val());
+	for(var i=0;i<linesmsg.length;i++)
+  	    {
+  	    	//处理mlids
+  	    	var sigmids = linesmsg[i].sigmids.split(",");
+  	    	for(var j=0;j<sigmids.length-1;j++)
+  	    	{
+  	    		for(var k=0;k<initMarkers.length;k++)
+				{
+					if(initMarkers[k].id==parseInt(sigmids[j]))
+					{
+						dots.push(new Array(initMarkers[k].getPosition().kb,initMarkers[k].getPosition().jb));
+					}
+				}
+  	    	}
+  	    	console.log("GreenLinesInit  dots"+dots);
+  	    	  var	 poly = maphelper.polyline({
+					dots:dots,						
+					color:"#008000",
+					weight:16,
+					opacity:0.5,
+					id:linesmsg[i].marklineid
+			});
+			dots = Array();
+			maphelper.bindInstanceEvent(poly, 'dblclick', function(event,map,poly) {
+				self.location='greenroadAction!tq?mklid='+poly.id; 
+				
+        });
+  	  } 	   
 }
 

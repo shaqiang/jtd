@@ -850,6 +850,20 @@ h2{font-weight:normal;}
 	color: #8E8E8E;
 }
 
+.dfinputtq{
+	width: 145px;
+	height: 25px;
+	line-height: 25px;
+	border-top: solid 1px #a7b5bc;
+	border-left: solid 1px #a7b5bc;
+	border-right: solid 1px #ced9df;
+	border-bottom: solid 1px #ced9df;
+	background: url(../images/inputbg.gif) repeat-x;
+	text-indent: 10px;
+	color: #8E8E8E;
+}
+
+
 
 .timeinput{
 	width: 345px;

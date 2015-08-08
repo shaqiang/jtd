@@ -251,11 +251,15 @@ function MarkersInit()
 	            },   
 	            success: function(msg)
 	            { //成功
-	            		encodeURI(msg);
-	            	//	console.log(msg);
 	            		numbers = [];
-	            		if(msg!=null)
+	            		
+	            		if(typeof(msg.length)=='undefined')//判断msg为错误提示还是正确数据
 	            		{
+	            			//错误提示
+	            			alert(msg.message);
+	            		}else
+	            		{
+	            			//正常数值
 	            			markermsg = msg;
 		            	 	for(var i=0;i<markermsg.length;i++)
 				    	    {
@@ -279,8 +283,6 @@ function MarkersInit()
 							  initMarkers.push(marker);
 				    	    } 	 
 	            		}
-	            	 	
-			    	   
 	            }  
     	    });  
     	    addOption();//初始化select

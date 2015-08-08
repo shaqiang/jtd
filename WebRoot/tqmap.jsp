@@ -24,16 +24,11 @@
 
 <body >
  <div style="float：left;width:660px;">
- <s:if test="#session.usero.ulimit==0">
- 			 &nbsp;&nbsp;可选区域 : <select id="areaid" name="select4" class="dfinputarea" onchange="changeArea();">
+ 			 &nbsp;&nbsp;特勤方案 : <select id="tqid" name="select4" class="dfinputtq" onchange="changeTq();">
 											</select>
- 	 	</s:if>
- 	 	<s:else>
-	 				当前区域：<input type="text" name="areaname" id="areaname" class="dfinputarea" size="17" readonly="readonly"/>
-				</s:else>
-   <input type="button" onclick="Polyline()" id="addroad" value=" 添加特勤控制 " style="margin-left:20px;margin-top:10px;width:100px;height:20px; background:url(images/topbtn02.fw.png); color:#FFF; border-bottom:#039 1px solid; border-right:#039 1px solid;"/>
-    <input type="button" onclick="saveLine()" id="saveroad" value="保存特勤控制 " style="margin-left:20px;margin-top:10px;width:100px;height:20px; background:url(images/topbtn02.fw.png); color:#FFF; border-bottom:#039 1px solid; border-right:#039 1px solid;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	
+   <input type="button" onclick="Polyline()" id="addroad" value=" 添加特勤方案 " style="margin-left:20px;margin-top:10px;width:100px;height:20px; background:url(images/topbtn02.fw.png); color:#FFF; border-bottom:#039 1px solid; border-right:#039 1px solid;"/>
+   <input type="button" onclick="saveLine()" id="saveroad" value="编辑特勤方案 " style="margin-left:20px;margin-top:10px;width:100px;height:20px; background:url(images/topbtn02.fw.png); color:#FFF; border-bottom:#039 1px solid; border-right:#039 1px solid;"/>&nbsp;&nbsp;&nbsp;
+   <input type="button" onclick="deleteLine()" id="saveroad" value="删除特勤方案" style="margin-left:20px;margin-top:10px;width:100px;height:20px; background:url(images/topbtn02.fw.png); color:#FFF; border-bottom:#039 1px solid; border-right:#039 1px solid;"/>
 											</div>
    <div id="map_canvas" style="margin:4px ;width:98%; height:760px;border:2px solid #cfdfe4">
    		地图加载失败....
