@@ -19,6 +19,7 @@ import com.jlj.action.SigAction;
 import com.jlj.model.Devlog;
 import com.jlj.model.Flow;
 import com.jlj.model.Sig;
+import com.jlj.model.Solution;
 import com.jlj.model.Userarea;
 import com.jlj.service.ICommontimeService;
 import com.jlj.service.IDevlogService;
@@ -144,6 +145,19 @@ public class DiaoYueCmdFactory extends CmdFactoryBase implements ICmdParser{
 //	  				}
 //	  				sig.setUserarea(userarea);
 	  				sigService.add(sig);
+	  				//新增两条相位方案
+	  				Solution solution1 = new Solution();
+	  				solution1.setOrderid(32);
+	  				solution1.setSoluname("相位方案32");
+	  				solution1.setSig(sig);
+	  				solutionService.add(solution1);
+	  				
+	  				Solution solution2 = new Solution();
+	  				solution1.setOrderid(32);
+	  				solution1.setSoluname("相位方案33");
+	  				solution1.setSig(sig);
+	  				solutionService.add(solution2);
+	  				
 	  			}
 	  			//插入设备连接日志
   				Devlog devlog = new Devlog();
