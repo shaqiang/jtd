@@ -57,7 +57,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @Component("greenroadAction")
 @Scope("prototype")
 public class GreenroadAction extends ActionSupport implements RequestAware,
-		SessionAware, ServletResponseAware, ServletRequestAware,Runnable {
+		SessionAware, ServletResponseAware, ServletRequestAware{
 
 	private static final long serialVersionUID = 1L;
 	Map<String, Object> request;
@@ -121,7 +121,8 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	private String gtime;
 	private String rtime;
 	private String ytime;
-	private String begindate;
+	private String tqname;
+	private Long marklineid;
 	
 
 	/*
@@ -512,25 +513,23 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	 * @return
 	 * @throws Exception
 	 */
-	public String doControl() throws Exception {
-		//System.out.println(dates);
+	public String saveControl() throws Exception {
+		System.out.println(tqname);
+		System.out.println(marklineid);
 		//System.out.println(gtime);//绿灯持续时间
 		//System.out.println(ytime);//黄灯持续时间
 		//System.out.println(rtime);//红灯持续时间
-		//System.out.println(begindate+" "+begintime);//开始执行特勤控制日期
-		//System.out.println(DateTimeKit.getLocal_Time());
-		String startdate = "";
-		if(begindate.equals("")||begintime.equals(""))
+		
+		greenroad = greenroadService.loadByMkid(marklineid);//修改名称方案
+		if(greenroad!=null)
 		{
-			 startdate = DateTimeKit.getLocal_Time();
-		}else
-		{
-			 startdate = begindate+" "+begintime;
+			greenroad.setName(tqname);
+			greenroadService.update(greenroad);
 		}
 		
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");  
-	    Date start=sdf.parse(startdate); 
+		
 	    setSpecifiedPharseVO(dates,gtime,ytime,rtime);
+	    
 	    for (int j = 0;j < pharseVOS.size(); j++) {
 			String number = pharseVOS.get(j).getNumber();
 			IoSession currrenSession=this.getCurrrenSession(number);
@@ -554,15 +553,9 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 			}
 	    }
 	    
-		Timer timer = new Timer("tq",true);  
-        timer.schedule(new TimerTask() {  
-  
-            @Override  
-            public void run() {  
             	
-            	for (int j = 0;j < pharseVOS.size(); j++) {
-        			
-        			IoSession currrenSession=this.getCurrrenSession(pharseVOS.get(j).getNumber());
+        for (int j = 0;j < pharseVOS.size(); j++) {
+        	
         			byte send_byte[] = new byte[27+8+4];
         			send_byte[0] = (byte) 0xff;
         			send_byte[1] = (byte) 0xff;
@@ -601,7 +594,6 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
         				int deng = Integer.parseInt(solus[i].substring(solus[i].indexOf(":")+1));
         				System.out.println("stepid="+stepid+",fangxiang="+roadtype+",dengtype="+dengtype+",deng="+deng);
         				
-        					
         					switch (roadtype) {
         					case 0:
         						if(dengtype == 0){
@@ -806,47 +798,15 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
         		    	   send_byte[send_byte.length-i1-1]  = (byte) (k >>> (i1 * 8));  
         		       }  
         			
-        		   	System.out.println("=======================下发特勤控制命令（按指定相位）========================================");
         			
         			for (int i3 = 0; i3 < send_byte.length; i3++) {
         				System.out.print(send_byte[i3]);
         			}
-        			System.out.println("========================下发特勤控制命令（按指定相位）=======================================");
-        			if(currrenSession!=null)
-        			{
-        				currrenSession.write(send_byte);
-        			}
-        		
+        			System.out.println("========================下发特勤控制命令（按指定相位） 保存至数据库=======================================");
+        			//currrenSession.write(send_byte);
+        			String number = pharseVOS.get(j).getNumber();
         			
         		}
-            	
-            	
-            }  
-            
-            public IoSession getCurrrenSession(String sigNumber)
-        	{
-        		for(IoSession session : TimeServerHandler.iosessions)
-        		{
-        			if(session.getAttribute("number")!=null)
-        			{
-        				if(session.getAttribute("number").equals(sigNumber))
-        				{
-        					return session;
-        				}
-        			}
-        		}
-        		return null;
-        	}
-              
-        }, start); 
-        
-        
-//		String nowdate = DateTimeKit.getLocal_Time();
-//		int interval = DateTimeKit.minutesBetweenStr(nowdate,startdate);
-//		System.out.println(interval+",1111");
-//		
-//		System.out.println(startdate.equals(nowdate));
-		
 		return NONE;
 	}
 	
@@ -2024,20 +1984,27 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	}
 
 
-	public String getBegindate() {
-		return begindate;
+	public String getTqname() {
+		return tqname;
 	}
 
 
-	public void setBegindate(String begindate) {
-		this.begindate = begindate;
+	public void setTqname(String tqname) {
+		this.tqname = tqname;
 	}
 
 
-	public void run() {
-		// TODO Auto-generated method stub
-		
+	public Long getMarklineid() {
+		return marklineid;
 	}
+
+
+	public void setMarklineid(Long marklineid) {
+		this.marklineid = marklineid;
+	}
+
+	
+	
 	
 	
 

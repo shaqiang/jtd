@@ -242,7 +242,7 @@
 	 
 	 <package name="greenroad_ajax" extends="json-default">
 		<action name="setPharseTime" class="greenroadAction" method="setPharseTime"/>
-		<action name="doControl" class="greenroadAction" method="doControl"/>
+		<action name="saveControl" class="greenroadAction" method="saveControl"/>
 	</package>
 	 
 	<package name="area_ajax" extends="json-default">

@@ -123,7 +123,6 @@ public class SolutionAction extends ActionSupport implements RequestAware,
 				request.put("errorMsg", errorMsg);
 				return "index";
 			}
-
 	}
 	
 	//获得绿冲突对象

@@ -251,14 +251,24 @@ $(document).ready(function(e) {
         </tbody>
       </table>
     </div>
-
+	
     <ul class="forminfo">
       <li>
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td width="539">&nbsp;</td>
             <td width="590" height="50">
-            <input name="input2" onclick="saveGreen()" type="button" class="scbtn" value="提交"/></td>
+            <div style="float: center; line-height: 35px; padding-left: 20px;">
+								<ul class="toolbar2">
+													<li>
+														<span><img src="images/note-2.png" alt="" width="24"
+																height="24" /> </span>
+														<input  type="submit" id="submit_cs" class="toolbarbtn" value="保存并发送绿冲突表"
+															onclick="saveGreen()"  />
+															</li>
+													</ul>
+										</div>
+            </td>
           </tr>
         </table>
         

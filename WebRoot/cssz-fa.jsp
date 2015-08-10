@@ -47,7 +47,7 @@ $(document).ready(function(e) {
 				<div class="itab">
 					<ul>
 						<li>
-							<a href="sigpublicparamAction!publicParam">一般参数</a>
+							<a href="sigpublicparamAction!publicParam">公共参数</a>
 						</li>
 						<li>
 							<a href="solutionAction!solutions" class="selected">相位方案</a>
@@ -89,6 +89,15 @@ $(document).ready(function(e) {
 									</div>
 									&nbsp;&nbsp;&nbsp;&nbsp;<b style="color:red;">*注意：请按顺序操作相位.</b>
 								</div>
+							<div style="float: left; line-height: 35px; padding-left: 20px;">
+								<ul class="toolbar">
+									<li onclick="saveSolution()" style="height: 28px; line-height: 28px;">
+										<span><img src="images/note-2.png" width="24"
+												height="20" />
+										</span>保存并发送相位方案
+									</li>
+								</ul>
+							</div>
 							</li>
 						</ul>
 						<div>
@@ -257,14 +266,7 @@ $(document).ready(function(e) {
 						
 						</div>
 
-					<div class="xwbtn" >
-								<ul class="toolbar">
-									<li onclick="saveSolution()" style="height: 36px;width: 150px;">
-										<span><img src="images/note-2.png" alt="" /> </span>保存相位方案
-									</li>
-								</ul>
-							</div>
-					</div>
+					
 					<script type="text/javascript"> 
       $("#usual1 ul").idTabs(); 
     </script>

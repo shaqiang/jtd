@@ -51,13 +51,13 @@ $(document).ready(function(e) {
 				<div class="itab">
 					<ul>
 						<li>
-							<a href="sigpublicparamAction!publicParam">一般参数</a>
+							<a href="sigpublicparamAction!publicParam">公共参数</a>
 						</li>
 						<li>
 							<a href="solutionAction!solutions">相位方案</a>
 						</li>
 						<li>
-							<a href="sigtimeAction!sigtimes" class="selected"> 时间段参数</a>
+							<a href="sigtimeAction!sigtimes" class="selected">时间段参数</a>
 						</li>
 					</ul>
 				</div>
@@ -112,16 +112,18 @@ $(document).ready(function(e) {
 								</div>
 								<b>*</b>
 							</div>
+							<!--  
 							<div style="float: left; line-height: 35px; padding-left: 20px;">
 								<ul class="toolbar">
 									<li onclick="updateStepTimes()" class="click" style="height: 28px; line-height: 28px;">
 										<span><img src="images/time.png" alt="" width="24"
 												height="24" />
-										</span>保存相位执行时间
+										</span>保存并发送相位执行时间
 									</li>
 								</ul>
 							</div>
-							<b style="color:red;">*注意：请按相位顺序设置执行时间.</b>
+							-->
+							<b style="color:red;">注意：请按相位顺序设置执行时间.</b>
 						</li>
 					</ul>
 					<div style="width: 100%; float: left;">
@@ -264,17 +266,19 @@ $(document).ready(function(e) {
 									cssStyle="width:150px;" placeholder="范围:0-9"></s:textfield>
 									</td>
 								</tr>
-								<tr>
-									<td colspan="2" align="right">
-										<div style="line-height: 35px;">
-											<input name="input5" type="submit" class="scbtn"
-												style="margin-right: auto; margin-right: auto; height: 25px;"
-												value="保存参数" onclick="" />
-										</div>
-									</td>
-								</tr>
 							</table>
 								<b style="color:red;">*注意：唯有控制方式为协调控制时，才可设置秒数，秒表示相位差时间.</b>
+								
+								<div style="float: center; line-height: 35px; padding-left: 20px;">
+								<ul class="toolbar2">
+													<li>
+														<span><img src="images/note-2.png" alt="" width="24"
+																height="24" /> </span>
+														<input  type="submit" id="submit_cs" class="toolbarbtn2" value="保存并发送时间段参数"
+															onclick="updateStepTimes()"  />
+															</li>
+													</ul>
+										</div>
 							</form>
 						</div>
 						<div class="csright">

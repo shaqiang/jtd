@@ -57,9 +57,6 @@ function updateStepTimes()
 				if(msg!=null)
 				{
 					alert(msg.message);
-				}else
-				{
-					alert('修改相位执行时间成功.');  
 				}
 				msg = "";
 				self.location.reload();

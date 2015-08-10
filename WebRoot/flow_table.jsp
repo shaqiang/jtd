@@ -117,6 +117,8 @@ $(document).ready(function(e) {
 										<input name="input2" type="submit" class="scbtn" value="查询" />
 
 										<input name="input3" type="reset" class="scbtn" value="重置" />
+										
+										<input name="input4" onclick="clearFlow()" type="button" class="scbtn" value="清除累计流量" />
 									</td>
 								</tr>
 							</table>

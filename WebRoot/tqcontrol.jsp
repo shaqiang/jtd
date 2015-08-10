@@ -39,7 +39,8 @@ $(document).ready(function(e) {
 
 var conflictVOs = <s:property value="conflictVOs" escape="false"/>;
 var sigVOs = <s:property value="sigVOs" escape="false"/>;
-console.log(sigVOs);
+var marklineid = <s:property value="greenroad.marklineid"/>;
+console.log(marklineid);
 </script>
 <script type="text/javascript" src="js/tq.js"></script>
 	</head>
@@ -63,37 +64,13 @@ console.log(sigVOs);
 
 					<div style="float: left; line-height: 35px; width: 90%;">
 						<label>
-							开始日期：
+							特勤方案名称：
 						</label>
 						<div class="vocation">
 							<span style="margin-right: 5px;"> 
-								<input type="date" name="begindate" class="dfinput" formate="yyyy-MM-dd" id="begindate" style="width: 165px;"  />
-									</span>
+								<input type="text" name="greenroad.name" class="dfinput" id="tqname" style="width: 165px;"  />
+							</span>
 						</div>
-					</div>
-
-					
-					<div style="float: left; line-height: 35px; width: 90%;">
-						<label>
-							开始时间：
-						</label>
-						<div class="vocation">
-							<span style="margin-right: 5px;"> 
-								<input type="time" name="begintime" class="dfinput"  id="begintime" style="width: 165px;"  />
-									</span>
-						</div>
-					</div>
-					
-					
-					<div style="float: left; line-height: 35px; width: auto;">
-						<b style="color:red;">	*注意：当不设置开始日期或开始时间时,默认立即执行特勤控制. </b>
-					</div>
-					
-					<div style="float: left; line-height: 35px; width: 90%;">
-						<label>
-							<input name="input" type="button" class="scbtn"
-							style="margin-top: 15px;" onclick="deleteTqLine()" value="删除当前控制" />
-						</label>
 					</div>
 					
 					<div style="width: 100%; float: left; margin-top: 28px;">
@@ -309,8 +286,8 @@ console.log(sigVOs);
 					</div>
 					<div
 						style="width: 90%; float: left; margin-top: 20px; color: #999; text-align: center;">
-						<input name="input" type="button" class="scbtn" onclick="doControl()"
-							style="margin-top: 15px;"  value="执行特勤控制" />
+						<input name="input" type="button" class="scbtn" onclick="saveControl()"
+							style="margin-top: 15px;"  value="保存特勤控制" />
 					</div>
 					
 					<p>

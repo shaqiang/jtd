@@ -98,7 +98,7 @@ $(document).ready(function(e) {
 					<div class="itab">
 						<ul>
 							<li>
-								<a href="sigpublicparamAction!publicParam" class="selected">一般参数</a>
+								<a href="sigpublicparamAction!publicParam" class="selected">公共参数</a>
 							</li>
 							<li>
 								<a href="solutionAction!solutions">相位方案</a>
@@ -469,23 +469,28 @@ $(document).ready(function(e) {
 
 							<ul class="toolbar2">
 								<li>
-									<span><img src="images/settings.png" alt="" width="24"
+									<span><img src="images/note-2.png" alt="" width="24"
 											height="24" /> </span>
-									<input name="" type="submit" id="submit_cs" class="toolbarbtn" value="设置完成"
+									<input name="" type="submit" id="submit_cs" class="toolbarbtn" value="保存并发送公共参数"
 										onclick="" />
+										</li>
+										<!--  
 								<li>
 									<span><img src="images/recycle.png" alt="" width="24"
 											height="24" /> </span>
-									<input name="reset" type="reset" class="toolbarbtn" value="恢复默认"
+									<input name="reset" type="reset" class="toolbarbtn" value="恢复页面设置参数"
 										onclick="" />
+										</li>-->
 								<li>
 									<span><img src="images/clipboard.png" alt="" width="24"
 											height="24" /> </span>
 									<input name="5" type="button" class="toolbarbtn" value="调　阅"
 										onclick="diaoyueCS()" />
+										</li>
 								<li>
 									<span><img src="images/t03.png" alt="" /> </span>
 									<input name="clean" type="button" class="toolbarbtn" value="清　空" onclick="cleanAll()"/>
+									</li>
 							</ul>
 
 						</div>

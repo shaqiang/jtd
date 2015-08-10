@@ -25,7 +25,7 @@ var clickable = false;
 var dots = Array();
 var lineId = Date.parse(new Date());//时间做唯一标示表示当前线的ID
 
-var poly = null;
+var poly = new Object();
 google.maps.event.addDomListener(window, "load", initialize);
 
  function initialize() {
@@ -123,15 +123,13 @@ function setMarkerEvents(marker)
 						}
 					}
 				}
-				console.log(dots);
-				 poly = maphelper.polyline({
+				poly = maphelper.polyline({
 						dots:dots,						
 						color:"#008000",
 						weight:16,
 						opacity:0.5,
 						id:lineId
 				});
-	 			//$("#total_km").empty().text((poly.getLength()/1000).toFixed(3) + "km");  
 	 		}
 		});
 		
@@ -310,13 +308,16 @@ function ClearPoly() {
 }
 
 
-function saveLine()
+function saveAndUpdateLine()
 {
-	if(markerids.length<2)
+	poly = maphelper.getLine(lineId);//首先获得当前特勤线路
+	//判断特勤线路
+	if(typeof(poly)=='undefined')
 	{
-		alert("当前没有可保存的特勤控制,请点击添加特勤控制按钮");
+		alert("当前没有可编辑的特勤方案,请选择特勤方案或添加特勤方案");
 	}else
 	{
+		poly = maphelper.getLine(lineId);
 		console.log(poly);
 		//改变新增区域按钮状态
 		if($("#addroad").css("background-image")=="none")
@@ -324,27 +325,29 @@ function saveLine()
 			$("#addroad").css("background-image",'url(images/topbtn02.fw.png)').css("color","#fff");
 			 clickable = false;
 		}
-		var sids = "";
-		for(var i=0;i<markerids.length;i++)
+		//通过markerids.length判断是新增特勤路线还是修改已存在的特勤路线		
+		if(markerids.length>0)
 		{
-			sids = sids +markerids[i]+",";
+				console.log("新增");
+				var sids = "";
+				for(var i=0;i<markerids.length;i++)
+				{
+					sids = sids +markerids[i]+",";
+				}
+				$.ajax({   
+	            url:'addOrUpdateTqLine',//这里是你的action或者servlert的路径地址   
+	            type:'post', //数据发送方式     
+	 			data: { "mklid":lineId,"sids":sids},
+	            error: function(msg)
+	            { //失败   
+	            		alert("当前特勤方案保存失败"); 
+	            },   
+	            success: function(msg)
+	            { //成功   
+	            }  
+	   	    });   
 		}
-		console.log(lineId,sids);
-		$.ajax({   
-            url:'addOrUpdateTqLine',//这里是你的action或者servlert的路径地址   
-            type:'post', //数据发送方式     
- 			data: { "mklid":lineId,"sids":sids},
-            error: function(msg)
-            { //失败   
-            		alert("当前特勤控制保存失败"); 
-            },   
-            success: function(msg)
-            { //成功   
-				alert("当前特勤控制保存成功");  
-				self.location.reload();  //刷新本页
-            }  
-   	    });   
-	
+   	    self.location='greenroadAction!tq?mklid='+poly.id; 
 	}
 }
 
@@ -354,7 +357,6 @@ $(document).ready(function(){
 		var selectedLineid = $(this).val();
 		for(var i=0;i<linesmsg.length;i++)
   	    {
-  	    	//处理mlids
   	    	var lineObj = linesmsg[i];
   	    	if(lineObj.id==selectedLineid)
   	    	{
@@ -376,48 +378,18 @@ $(document).ready(function(){
 						opacity:0.5,
 						id:lineObj.marklineid
 				});
+				lineId = lineObj.marklineid;
+				console.log(lineId);
 				dots = Array();
 				maphelper.bindInstanceEvent(poly, 'dblclick', function(event,map,poly) {
 					self.location='greenroadAction!tq?mklid='+poly.id; 
 	       		 });
   	    	}
   	  } 	   
-		
 	
 	});
 
 
 });
 
-function changeTq()
-{
-	for(var i=0;i<linesmsg.length;i++)
-  	    {
-  	    	//处理mlids
-  	    	var sigmids = linesmsg[i].sigmids.split(",");
-  	    	for(var j=0;j<sigmids.length-1;j++)
-  	    	{
-  	    		for(var k=0;k<initMarkers.length;k++)
-				{
-					if(initMarkers[k].id==parseInt(sigmids[j]))
-					{
-						dots.push(new Array(initMarkers[k].getPosition().kb,initMarkers[k].getPosition().jb));
-					}
-				}
-  	    	}
-  	    	console.log("GreenLinesInit  dots"+dots);
-  	    	  var	 poly = maphelper.polyline({
-					dots:dots,						
-					color:"#008000",
-					weight:16,
-					opacity:0.5,
-					id:linesmsg[i].marklineid
-			});
-			dots = Array();
-			maphelper.bindInstanceEvent(poly, 'dblclick', function(event,map,poly) {
-				self.location='greenroadAction!tq?mklid='+poly.id; 
-				
-        });
-  	  } 	   
-}
 

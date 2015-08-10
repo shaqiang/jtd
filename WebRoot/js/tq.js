@@ -366,7 +366,7 @@ $(document).ready(function(){
 		
 });
 
-function doControl()
+function saveControl()
 {
 	var msg = "";
 	for(var prop in updateFang){
@@ -409,14 +409,19 @@ function doControl()
 	console.log(gtime);
 	console.log(rtime);
 	console.log(ytime);
-	var begintime = $("#begintime").val();
+	var tqname = $("#tqname").val();
+	if(tqname==null||tqname=='')
+	{
+		alert("特勤方案名称不行为空.");
+		return;
+	}
 	var begindate = $("#begindate").val();
 	console.log(begintime);
 	console.log(begindate);
 		$.ajax({   
-            url:'doControl',//这里是你的action或者servlert的路径地址   
+            url:'saveControl',//这里是你的action或者servlert的路径地址   
             type:'post', //数据发送方式  
-            data: {"dates":msg,"gtime":gtime,"rtime":rtime,"ytime":ytime,"begintime":begintime,"begindate":begindate},  
+            data: {"dates":msg,"gtime":gtime,"rtime":rtime,"ytime":ytime,"tqname":tqname,"marklineid":marklineid},  
             traditional: true, 
             dataType:'json', 
             error: function(msg)
@@ -430,7 +435,8 @@ function doControl()
             		alert(msg.message);
             	}else
             	{
-            		alert('特勤控制设置成功');   
+            		alert('特勤控制保存成功');   
+            		self.location='stqmap.jsp'; 
             	}
             }  
    	    });  

@@ -228,4 +228,87 @@ function checkNum2(){
         obj.focus();
     }
 }
+function executeCommand(id)
+{
+	$.ajax({   
+            url:'doCommand',//这里是你的action或者servlert的路径地址   
+            type:'post', //数据发送方式  
+            data: { "commandId":id},   
+            dataType:'json',
+            error: function(msg)
+            { //失败   
+            	alert('命令发送失败');   
+            },   
+            success: function(msg)
+            { //成功   
+				//alert('发送命令成功');   
+				if(msg!=null)
+				{
+					alert(msg.message);
+				}else
+				{
+					alert('命令发送成功');  
+				}
+            }  
+   	    });   
+}
+
+
+function clearFlow()
+{
+	if(confirm("您确定要清除车流量信息吗？"))
+	{
+		executeCommand(34);
+		$.ajax({   
+	            url:'clearFlow',//这里是你的action或者servlert的路径地址   
+	            type:'post', //数据发送方式  
+	            dataType:'json',
+	            traditional: true,  
+	            error: function(msg)
+	            { //失败   
+	            	alert('发送命令失败');   
+	            },   
+	            success: function(msg)
+	            { //成功   
+					if(msg!=null)
+					{
+						//alert(msg.message);
+					}else
+					{
+						alert("该信号机的车流量信息已清除.");
+					}
+	            }  
+	   	    });  
+   	  }
+}
+
+function clearErrorcode()
+{
+	if(confirm("您确定要清除故障信息吗？"))
+	{
+		executeCommand(33);
+		$.ajax({   
+            url:'clearErrorcode',//这里是你的action或者servlert的路径地址   
+            type:'post', //数据发送方式  
+            dataType:'json',
+            traditional: true,  
+            error: function(msg)
+            { //失败   
+            	alert('发送命令失败');   
+            },   
+            success: function(msg)
+            { //成功   
+				if(msg!=null)
+				{
+					//alert(msg.message);
+				}else
+				{
+					alert("该信号机的故障信息已清除.");
+				}
+            }  
+   	    });  
+	
+	}
+	
+}
 

@@ -297,7 +297,7 @@ var btn=document.getElementById('show_btn');
        </div>
        <div style="width:100%; float:left; margin-bottom:10px;">
          <ul class="toolbar" >
-           <li onclick="javascript:location.href='cssz.html'" style="cursor: auto;"><span><img src="images/boot.png" alt="" width="24" height="24" /></span>设 置 :</li>
+           <li  style="cursor: auto;"><span><img src="images/shezhi3.png" alt="" width="24" height="24" /></span><b>设 置 </b></li>
          </ul>
          <ul class="toolbar1">
            
@@ -305,20 +305,25 @@ var btn=document.getElementById('show_btn');
        <li onclick="javascript:location.href='sigpublicparamAction!publicParam'">设置参数</li>
 		<li  onclick="javascript:location.href='promotionAction!promotion?sigNumber=<s:property  value="sig.number"/>'">高级设置</li>
 
-		  <li  id="manyCommands">初始化所有参数</li> 
-		  <li  onclick="executeCommand(0)">调阅实时状态</li> 
-		   <li  onclick="clearErrorcode()">清空故障记录</li> 
-		    <li  onclick="clearFlow()">清除累计流量</li> 
+		   <li  id="manyCommands">初始化所有参数</li> 
+		   <li  id="#">恢复默认参数</li> 
+		   <!--
+		   <li  onclick="executeCommand(0)">调阅实时状态</li> 
+		     -->
+		  
          </ul>
        </div>
        <div style="width:100%; float:left; margin-bottom:10px;">
          <ul class="toolbar" >
-           <li style="cursor: auto;"><span><img src="images/car.png" alt="" width="24" height="24" /></span>查 看 :</li>
+           <li style="cursor: auto;"><span><img src="images/chakan.png" alt="" width="24" height="24" /></span><b>查 看 </b></li>
          </ul>
          <ul class="toolbar1">
-       <li class="click2"><a href="flowAction!list?sigid=<s:property value="sig.id"/>">汽车流量</a></li>
+       <li class="click2"><a href="flowAction!list?sigid=<s:property value="sig.id"/>">流量信息</a></li>
        <li class="click3"><a href="devlogAction!plist?iserror=1">故障信息</a></li>
-       <!-- 
+     
+          <!-- 
+            <li  onclick="clearErrorcode()">清空故障记录</li> 
+	   <li  onclick="clearFlow()">清除累计流量</li> 
        <li class="click4"><a href="oplogAction!plist">操作日志</a></li>
         -->
          </ul>
@@ -327,7 +332,7 @@ var btn=document.getElementById('show_btn');
        
        <div style="width:100%; float:left; margin-bottom:10px;">
          <ul class="toolbar" >
-           <li style="cursor: auto;"><span><img src="images/13.png" alt="" width="24" height="23" /></span>控 制 :</li>
+           <li style="cursor: auto;"><span><img src="images/settings.png" alt="" width="24" height="23" /></span><b>控 制 </b></li>
          </ul>
          <ul class="toolbar1">
        <li id="show_btn" onclick="show_div()">手　动</li>
@@ -366,9 +371,9 @@ var btn=document.getElementById('show_btn');
          <ul class="toolbar1" style="margin-left:80px; ">
 	         		<li  onclick="allRed(0)">指定相位全红<br /></li>
 	         		<li  onclick="clearAllLight(0)">指定相位清空<br /></li>
-	         		<li>绿灯时间&nbsp;&nbsp;<input style="border:1px dotted #CCC;;width:60%;height:100%" id="gltime" class="ptime" type="text" placeholder="范围:1-99" name="gltime" value="10"/>×10秒</li>
-	         		<li>黄灯时间&nbsp;&nbsp;<input style="border:1px dotted #CCC;;width:60%;height:100%" id="yltime"  class="ptime"  type="text" placeholder="范围:3-9" name="yltime" value="3"/>秒</li>	
-	         		<li>红灯时间&nbsp;&nbsp;<input style="border:1px dotted #CCC;;width:60%;height:100%" id="rltime"   class="ptime" type="text"  placeholder="范围:3-9" name="rltime" value="3"/>秒</li>
+	         		<li>绿灯时间&nbsp;&nbsp;<input style="border:1px dotted #CCC;;width:23%;height:100%" id="gltime" class="ptime" type="text" placeholder="范围:1-99" name="gltime" value="10"/>×10秒</li>
+	         		<li>黄灯时间&nbsp;&nbsp;<input style="border:1px dotted #CCC;;width:23%;height:100%" id="yltime"  class="ptime"  type="text" placeholder="范围:3-9" name="yltime" value="3"/>秒</li>	
+	         		<li>红灯时间&nbsp;&nbsp;<input style="border:1px dotted #CCC;;width:23%;height:100%" id="rltime"   class="ptime" type="text"  placeholder="范围:3-9" name="rltime" value="3"/>秒</li>
 	         </ul>
          <div class="picbox">
 										<div style="width: 100%; float: left; height: ">

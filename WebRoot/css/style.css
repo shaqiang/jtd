@@ -794,7 +794,6 @@ h2{font-weight:normal;}
 	border-bottom: solid 1px #ced9df;
 	background: url(../images/inputbg.gif) repeat-x;
 	text-indent: 10px;
-	color: #8E8E8E;
 }
 
 .ydfinput{
@@ -807,7 +806,6 @@ h2{font-weight:normal;}
 	border-bottom: solid 1px #ced9df;
 	background: url(../images/inputbg.gif) repeat-x;
 	text-indent: 10px;
-	color: #8E8E8E;
 }
 
 .rdfinput{
@@ -820,7 +818,6 @@ h2{font-weight:normal;}
 	border-bottom: solid 1px #ced9df;
 	background: url(../images/inputbg.gif) repeat-x;
 	text-indent: 10px;
-	color: #8E8E8E;
 }
 
 
@@ -834,7 +831,6 @@ h2{font-weight:normal;}
 	border-bottom: solid 1px #ced9df;
 	background: url(../images/inputbg.gif) repeat-x;
 	text-indent: 10px;
-	color: #8E8E8E;
 }
 
 .dfinputarea{
@@ -847,7 +843,6 @@ h2{font-weight:normal;}
 	border-bottom: solid 1px #ced9df;
 	background: url(../images/inputbg.gif) repeat-x;
 	text-indent: 10px;
-	color: #8E8E8E;
 }
 
 .dfinputtq{
@@ -860,7 +855,6 @@ h2{font-weight:normal;}
 	border-bottom: solid 1px #ced9df;
 	background: url(../images/inputbg.gif) repeat-x;
 	text-indent: 10px;
-	color: #8E8E8E;
 }
 
 
@@ -875,7 +869,6 @@ h2{font-weight:normal;}
 	border-bottom: solid 1px #ced9df;
 	background: url(../images/inputbg.gif) repeat-x;
 	text-indent: 10px;
-	color: #8E8E8E;
 }
 
 .dfinput2{
@@ -1105,7 +1098,7 @@ h2{font-weight:normal;}
 	font-size: 15px;
 }
 .scinput{width:150px; height:32px; line-height:32px; border-top:solid 1px #a7b5bc; border-left:solid 1px #a7b5bc; border-right:solid 1px #ced9df; border-bottom:solid 1px #ced9df; background:url(../images/inputbg.gif) repeat-x; text-indent:10px;}
-.scbtn{width:105px;height:35px; background:url(../images/btnbg.png) no-repeat center; font-size:14px;font-weight:bold;color:#fff; cursor:pointer;border-radius:3px; behavior:url(js/pie.htc);}
+.scbtn{width:125px;height:35px; background:url(../images/btnbg.png) no-repeat center; font-size:14px;font-weight:bold;color:#fff; cursor:pointer;border-radius:3px; behavior:url(js/pie.htc);}
 .zmjs li{
 	padding-right: 5px;
 	padding-left: 5px;
@@ -1516,6 +1509,15 @@ border-color:#4d90fe;
 .toolbarbtn{ 
     background: url(../images/toolbg.gif) repeat-x;
 	line-height: 33px;
+	padding-right: 10px;
+	margin-right: 5px;
+	cursor: pointer;
+	
+	}
+	
+	.toolbarbtn2{ 
+    background: url(../images/toolbg.gif) repeat-x;
+	line-height: 20px;
 	padding-right: 10px;
 	margin-right: 5px;
 	cursor: pointer;

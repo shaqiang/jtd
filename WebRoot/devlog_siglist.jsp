@@ -11,7 +11,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>日志管理</title>
+		<title>故障信息</title>
 		<link href="css/style.css" rel="stylesheet" type="text/css" />
 		<link href="css/select.css" rel="stylesheet" type="text/css" />
 		<link href="css/stilearn-helper.css" rel="stylesheet" type="text/css" />
@@ -51,12 +51,13 @@ $(document).ready(function(e) {
 				<div class="itab">
 					<ul>
 						<li>
-							<a href="#tab4" class="selected">设备状态日志</a>
+							<a href="#tab4" class="selected">故障信息</a>
 						</li>
 					</ul>
 				</div>
 
 				<div id="tab3" class="tabson">
+						<input name="input4" onclick="clearErrorcode()" type="button" class="scbtn" value="清除故障记录" />
 				</div>
 
 				<div id="tab4" class="tabson">

@@ -15,7 +15,7 @@ $(document).ready(function(){
 			var img = "";
 			var conflictStart = "";
 			var conflictStr = "";
-		$("div img").click(function(event) {
+		$(".xwlb img").click(function(event) {
 	
 			var img = $(event.target);
 			var imgsrc = img[0].src;//获得当前焦点的src
@@ -120,7 +120,7 @@ $(document).ready(function(){
 						//console.log("this is class");
 						//class
 						var imgclass= img[0].classList[0];
-						conflictStart = imgclass.substring(0,1);
+						conflictStart = imgclass.substring(0,imgclass.indexOf("_"));
 						if(typeof(conflictStr) != "undefined"&&conflictStr!="")
 						{
 							var strs= conflictStr.split(","); //字符分割 
@@ -128,19 +128,22 @@ $(document).ready(function(){
 							for (i=0;i<strs.length-1;i++) 
 							{ 
 								var lightKind = strs[i].substring(strs[i].length-1,strs[i].length);
-								//console.log("lightKind:-------------------------"+lightKind);
+								console.log("lightKind:-------------------------"+lightKind);
 								var imgNow = null;//当前与之比较的灯
 								var currentLightNumber = 0;//当前与之比较的灯 的种类
 								var srcNow = "";
 								if(lightKind==3)
 								{
 									 imgNow = $("."+conflictStart+strs[i]);
-									 //console.log("imgNow:---------------------------"+"."+conflictStart+strs[i]);
+									 console.log("lightKind==3=========",imgNow);
+									 console.log("imgNow:---------------------------"+"#"+conflictStart+strs[i]);
 									 srcNow = imgNow[0].currentSrc;
 									 currentLightNumber = srcNow.substring(srcNow.indexOf(".png")-1,srcNow.indexOf(".png"));//当前比较灯的颜色
 								}else
 								{
 									imgNow = $("#"+conflictStart+strs[i]);
+									console.log("lightKind!=3=========",imgNow);
+									console.log("imgNow:---------------------------"+"#"+conflictStart+strs[i]);
 									srcNow = imgNow[0].currentSrc;
 								    currentLightNumber = srcNow.substring(srcNow.indexOf(".png")-1,srcNow.indexOf(".png"));//当前比较灯的颜色
 								}
@@ -159,12 +162,8 @@ $(document).ready(function(){
 						//console.log("this is id");
 						var imgid = img[0].id;
 						//console.log("imgid:-------------------------"+imgid);
-						
-						
 						conflictStart = imgid.substring(0,imgid.indexOf("_"));
-						
 						//console.log("conflictStart:-------------------------"+conflictStart);
-						
 						if(typeof(conflictStr) != "undefined"&&conflictStr!="")
 						{
 							var strs= conflictStr.split(","); //字符分割 
