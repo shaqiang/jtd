@@ -68,7 +68,7 @@ console.log(marklineid);
 						</label>
 						<div class="vocation">
 							<span style="margin-right: 5px;"> 
-								<input type="text" name="greenroad.name" class="dfinput" id="tqname" style="width: 165px;"  />
+								<s:textfield name="greenroad.name" cssClass="dfinput" id="tqname" cssStyle="width: 165px;"></s:textfield>
 							</span>
 						</div>
 					</div>

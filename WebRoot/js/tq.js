@@ -412,12 +412,9 @@ function saveControl()
 	var tqname = $("#tqname").val();
 	if(tqname==null||tqname=='')
 	{
-		alert("特勤方案名称不行为空.");
+		alert("特勤方案名称不能为空.");
 		return;
 	}
-	var begindate = $("#begindate").val();
-	console.log(begintime);
-	console.log(begindate);
 		$.ajax({   
             url:'saveControl',//这里是你的action或者servlert的路径地址   
             type:'post', //数据发送方式  
@@ -436,7 +433,7 @@ function saveControl()
             	}else
             	{
             		alert('特勤控制保存成功');   
-            		self.location='stqmap.jsp'; 
+            		location.href ='tqmap.jsp'; 
             	}
             }  
    	    });  
