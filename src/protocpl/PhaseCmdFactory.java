@@ -198,8 +198,16 @@ public class PhaseCmdFactory extends CmdFactoryBase implements ICmdParser{
 						solution.setOrderid((int)data[7]);
 						solution.setSig(sig);
 						solution.setSoluname("相位方案"+data[7]);
+						//重复插入相位方案从16-31
+						Solution solution2 = new Solution();
+						solution2.setOrderid((int)(data[7]+16));
+						solution2.setSig(sig);
+						solution2.setSoluname("相位方案"+(data[7]+16));
+						
 						try {
 							solutionService.add(solution);
+							//重复插入相位方案从16-31
+							solutionService.add(solution2);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -212,8 +220,16 @@ public class PhaseCmdFactory extends CmdFactoryBase implements ICmdParser{
 								step.setPhasename("相位"+k/2);
 								step.setStepname("步序"+k);
 								step.setSolution(solution);
+								//重复插入相位方案的步序从16-31
+								Step step2 = new Step();
+								step2.setOrderid(k);
+								step2.setPhasename("相位"+(k/2+16));
+								step2.setStepname("步序"+k);
+								step2.setSolution(solution2);
+								
 								try {
 									stepService.add(step);
+									stepService.add(step2);
 								} catch (Exception e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
@@ -227,8 +243,17 @@ public class PhaseCmdFactory extends CmdFactoryBase implements ICmdParser{
 									road.setRxcolor(locatelist.get(k)[a][3]);
 									road.setRoadtype(a);
 									road.setStep(step);
+									//重复插入相位方案的方向从16-31
+									Road road2 = new Road();
+									road2.setLeftcolor(locatelist.get(k)[a][0]);
+									road2.setLinecolor(locatelist.get(k)[a][1]);
+									road2.setRightcolor(locatelist.get(k)[a][2]);
+									road2.setRxcolor(locatelist.get(k)[a][3]);
+									road2.setRoadtype(a);
+									road2.setStep(step2);
 									try {
 										roadService.add(road);
+										roadService.add(road2);
 									} catch (Exception e) {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
