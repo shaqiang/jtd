@@ -23,8 +23,7 @@ function countDown(secs,surl){
      setTimeout("countDown("+secs+",'"+surl+"')",1000);     
      }
  else{       
-     history.go(-1);
-     location.reload();     
+     self.location=document.referrer;     
      }     
  }     
 </script>
@@ -60,8 +59,8 @@ function countDown(secs,surl){
     
     <div class="welinfo">
     	<b>消息显示:</b>
-    	<b><s:property value="#request.errorMsg"/>&nbsp;</b>
-    	<span id="jumpTo">5</span>秒后跳转到<a href="javascript:history.go(-1);location.reload();">返回</a>
+    	<b><s:property value="#request.errorMsg"/>&nbsp;<span id="jumpTo">6</span>秒后&nbsp;自动返回</b>
+    	
   		<script type="text/javascript">countDown(5,'#');</script>
     </div>
     
