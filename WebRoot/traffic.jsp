@@ -300,11 +300,10 @@ var btn=document.getElementById('show_btn');
 		<li  onclick="javascript:location.href='promotionAction!promotion?sigNumber=<s:property  value="sig.number"/>'">高级设置</li>
 
 		   <li  id="manyCommands">初始化所有参数</li> 
-		   <li  id="#">恢复默认参数</li> 
+		   <li  id="recoverParams">恢复默认参数</li> 
 		   <!--
 		   <li  onclick="executeCommand(0)">调阅实时状态</li> 
 		     -->
-		  
          </ul>
        </div>
        <div style="width:100%; float:left; margin-bottom:10px;">

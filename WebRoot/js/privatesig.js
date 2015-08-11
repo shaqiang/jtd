@@ -86,7 +86,6 @@ $(document).ready(function(){
 	
 	$("#manyCommands").click(function() 
 	{ 
-		console.log("初始化所有参数");
 				var inits = true;
 				$.ajax({   
 		            url:'checkIOSession',//这里是你的action或者servlert的路径地址   
@@ -109,7 +108,7 @@ $(document).ready(function(){
 		   	    });   
 				if(inits)
 				{
-					alert("所有参数开始初始化..");
+					alert("所有参数开始初始化,请勿中断操作.");
 					$("#divProgressbar").progressbar({value: 0}); 
 					$( "#divProgressbar" ).progressbar({
 					  max: 250
@@ -131,7 +130,7 @@ $(document).ready(function(){
 				        	 $("#divProgressbar").hide();
 				        	 index= 0;
 				        	 commandNumber = 0;
-				        	 alert("所有参数开始初始化完成。");
+				        	 alert("所有参数开始初始化完成,感谢您的耐心等候.");
 				        	 executeCommandAll(0);
 				        }else
 				        {
@@ -140,6 +139,78 @@ $(document).ready(function(){
 	   		 		}
 				}
 				
+				
+	});
+	
+	
+	
+	$("#recoverParams").click(function() 
+	{ 
+				var inits = true;
+				$.ajax({   
+		            url:'checkIOSession',//这里是你的action或者servlert的路径地址   
+		            type:'post', //数据发送方式  
+		            dataType:'json', 
+		            data: { "sigNumber":sigNumber},  
+		            async: false,
+		            error: function(msg)
+		            { //失败   
+		            	alert('检查连接失败');   
+		            },   
+		            success: function(msg)
+		            { //成功   
+						if(msg!=null)
+						{
+							alert(msg.message);
+							inits = false;
+						}
+		            }  
+		   	    });   
+				if(inits)
+				{
+					if(confirm("恢复默认参数会导致信号机与中心软件断开,需要重新设置IP,您确定要恢复默认参数?"))
+					{
+						alert("恢复默认参数后会系统会自动初始化所有参数");
+						executeCommandAll(3);//调阅恢复默认参数
+						alert("所有参数开始初始化,请勿中断操作.");
+						setTimeout(inits,5000);
+						function inits()
+						{
+							$("#divProgressbar").progressbar({value: 0}); 
+							$( "#divProgressbar" ).progressbar({
+							  max: 250
+							});
+							var index = 0;//计数器
+							var commandNumber = 4;//第一条为停止调阅实时状态
+					    	var interval = setInterval(updateProgressbarValue, 4000);
+					 		function updateProgressbarValue()
+					 		{
+					 			console.log("commandNumber:"+commandNumber);
+				 				executeCommandAll(commandNumber);
+				 				index = index+1;
+						 		commandNumber = commandNumber+1;
+						        var newValue = $("#divProgressbar").progressbar("option", "value") + 10; //读取进度条现有值并计算出新值
+						        if(newValue==250)
+						        {
+						        	 $("#divProgressbar").progressbar({value: 0}); 
+						        	 clearInterval(interval);
+						        	 $("#divProgressbar").hide();
+						        	 index= 0;
+						        	 commandNumber = 0;
+						        	 alert("所有参数开始初始化完成,感谢您的耐心等候.");
+						        	 executeCommandAll(0);
+						        }else
+						        {
+						        	 $("#divProgressbar").progressbar("option", "value", newValue);  //设置进度条新值  
+						        }
+			   		 		}
+						}
+						
+					}
+				
+					
+				}
+					
 				
 	});
                
