@@ -125,4 +125,8 @@ public class SigServiceImp implements ISigService  {
 		Object[] p =  null;
 		return sigDao.getObjectsByCondition(queryString, p);
 	}
+	public List<Sig> getSigsByUserarea(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

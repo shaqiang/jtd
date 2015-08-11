@@ -53,6 +53,8 @@ public interface ISigService {
 
 	public abstract List<Sig> getNotNullSigs();
 
+	public abstract List<Sig> getSigsByUserarea(int id);
+
 
 
 }

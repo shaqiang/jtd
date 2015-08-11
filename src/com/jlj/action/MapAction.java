@@ -365,7 +365,6 @@ public class MapAction extends ActionSupport implements RequestAware,
 		sig = sigService.loadByMkid(mkid);
 		
 		deletGreenroad(mkid);
-		
 		sig.setUserarea(null);
 		sig.setMkid(null);
 		sig.setAddress(null);

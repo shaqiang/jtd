@@ -19,9 +19,11 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.jlj.model.Greenroad;
 import com.jlj.model.Sig;
 import com.jlj.model.Userarea;
 import com.jlj.model.Usero;
+import com.jlj.service.IGreenroadService;
 import com.jlj.service.ISigService;
 import com.jlj.service.IUserareaService;
 import com.jlj.service.IUseroService;
@@ -35,7 +37,9 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	
 	private static final long serialVersionUID = 1L;
 	private IUserareaService userareaService;
+	private ISigService sigService;
 	private IUseroService useroService;
+	private IGreenroadService greenroadService;
 	Map<String,Object> request;
 	Map<String,Object> session;
 	private javax.servlet.http.HttpServletResponse response;
@@ -44,6 +48,7 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	private Userarea userarea;
 	//分页显示
 	private List<Userarea> userareas;
+	private List<Greenroad> greenroads;
 	private int page;
 	private final int size=10;
 	private int pageCount;
@@ -128,9 +133,42 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	 * @throws Exception 
 	 */
 	public String delete() throws Exception{
+		List<Sig> sigs = sigService.querySigsByUserarea(id);
+		for(Sig sig:sigs)
+		{
+			deletGreenroad(sig.getMkid());//删除信号机时，同时删除与信号机相关联的的绿波带及特勤控制
+			sig.setUserarea(null);
+			sig.setMkid(null);
+			sig.setAddress(null);
+			sig.setName(null);
+			sig.setLat(null);
+			sig.setLng(null);
+			sig.setIp(null);
+			sig.setIserror(null);
+			sig.setErrorcode(null);
+			sig.setTqdatastr(null);
+			sig.setTqstatus(null);
+			sigService.update(sig);
+			
+		}
 		userareaService.deleteById(id);
 		outinfo="恭喜您，删除片区成功！";
 		return this.alllist();
+	}
+	
+	/*
+	 * 删除信号机相关联动
+	 */
+	private void deletGreenroad(Long mkid) {
+		// TODO Auto-generated method stub
+		greenroads = greenroadService.getGreenroads();
+		for(Greenroad gd : greenroads)
+		{
+			if(gd.getSigmids().contains(mkid.toString()))
+			{
+				greenroadService.delete(gd);
+			}
+		}
 	}
 	
 	
@@ -374,6 +412,31 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 
 	public void setUsero(Usero usero) {
 		this.usero = usero;
+	}
+
+	public ISigService getSigService() {
+		return sigService;
+	}
+	
+	@Resource
+	public void setSigService(ISigService sigService) {
+		this.sigService = sigService;
+	}
+
+	public IGreenroadService getGreenroadService() {
+		return greenroadService;
+	}
+	@Resource
+	public void setGreenroadService(IGreenroadService greenroadService) {
+		this.greenroadService = greenroadService;
+	}
+
+	public List<Greenroad> getGreenroads() {
+		return greenroads;
+	}
+
+	public void setGreenroads(List<Greenroad> greenroads) {
+		this.greenroads = greenroads;
 	}
 	
 	

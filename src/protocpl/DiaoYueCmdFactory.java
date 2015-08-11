@@ -145,6 +145,10 @@ public class DiaoYueCmdFactory extends CmdFactoryBase implements ICmdParser{
 //	  				}
 //	  				sig.setUserarea(userarea);
 	  				sigService.add(sig);
+	  				
+	  				
+	  			}
+	  			if(sig.getLat()!=null){
 	  				//新增两条相位方案
 	  				Solution solution1 = new Solution();
 	  				solution1.setOrderid(32);
@@ -157,7 +161,6 @@ public class DiaoYueCmdFactory extends CmdFactoryBase implements ICmdParser{
 	  				solution2.setSoluname("相位方案33");
 	  				solution2.setSig(sig);
 	  				solutionService.add(solution2);
-	  				
 	  			}
 	  			//插入设备连接日志
   				Devlog devlog = new Devlog();
@@ -319,7 +322,7 @@ public class DiaoYueCmdFactory extends CmdFactoryBase implements ICmdParser{
 	  	}else{
 	  		//正常状态，若该信号机的iserror=1，改为0
 	  		//修改当前信号机故障状态以及故障代码
-	  		if(sig.getIserror()==1){
+	  		if(sig.getLng()!=null&&sig.getIserror()==1){
 	  			int sigStatus = 0;
 				int error_code = 0;
 				sigService.updateSigStatus(sigStatus,error_code,sig.getId());
@@ -345,7 +348,7 @@ public class DiaoYueCmdFactory extends CmdFactoryBase implements ICmdParser{
 	  		flag=0;
 	  	}
 	  	
-	  	if(sig!=null){
+	  	if(sig!=null&&sig.getLat()!=null){
 	  		if(isnext==1){
 	  			//新插入记录
 	  			Flow flowobj = new Flow();

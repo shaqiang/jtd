@@ -59,8 +59,10 @@ function countDown(secs,surl){
     
     <div class="welinfo">
     	<b>消息显示:</b>
-    	<b><s:property value="#request.errorMsg"/>&nbsp;<span id="jumpTo">6</span>秒后&nbsp;自动返回</b>
-    	
+    	<b><s:property value="#request.errorMsg"/></b>&nbsp;
+    	<br/>
+    	<b><span id="jumpTo" style="margin-left:7px;">6</span>秒后&nbsp;自动返回</b>
+    	<br/>
   		<script type="text/javascript">countDown(5,'#');</script>
     </div>
     

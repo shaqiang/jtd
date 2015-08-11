@@ -637,13 +637,13 @@ h2{font-weight:normal;}
 	z-index: 2;
 	float: left;
 }
-.welinfo{height:32px; line-height:32px; padding-bottom:8px;}
+.welinfo{height:64px; line-height:32px; padding-bottom:8px;}
 .welinfo span{float:left;}
 .welinfo b{padding-left:8px;}
 .welinfo a{padding-left:15px;color:#3186c8;}
 .welinfo a:hover{color:#F60;}
 .welinfo i{font-style:normal; padding-left:8px;}
-.xline{border-bottom:solid 1px #dfe9ee; height:5px;}
+.xline{border-bottom:solid 1px #dfe9ee; height:5px;margin-top:25px;}
 .iconlist{padding-left:40px; overflow:hidden;}
 .iconlist li{text-align:center; float:left; margin-right:25px; margin-top:25px;}
 .iconlist li p{line-height:25px;}
