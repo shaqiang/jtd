@@ -13,7 +13,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>默认主页面</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
-
+<script type="text/javascript">     
+function countDown(secs,surl){     
+ //alert(surl);     
+ surl = surl.replace("&amp;","&");
+ var jumpTo = document.getElementById('jumpTo');
+ jumpTo.innerHTML=secs;  
+ if(--secs>0){
+     setTimeout("countDown("+secs+",'"+surl+"')",1000);     
+     }
+ else{       
+     history.go(-1);
+     location.reload();     
+     }     
+ }     
+</script>
 
 </head>
 
@@ -46,7 +60,9 @@
     
     <div class="welinfo">
     	<b>消息显示:</b>
-    	<b><s:property value="#request.errorMsg"/>&nbsp;<a href="javascript:history.back();">返回</a></b>
+    	<b><s:property value="#request.errorMsg"/>&nbsp;</b>
+    	<span id="jumpTo">5</span>秒后跳转到<a href="javascript:history.go(-1);location.reload();">返回</a>
+  		<script type="text/javascript">countDown(5,'#');</script>
     </div>
     
     <div class="xline"></div>
