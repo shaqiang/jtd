@@ -129,7 +129,7 @@ $(document).ready(function(e) {
 					<div style="width: 100%; float: left;">
 						<div class="csleft" style="line-height: 35px;">
 						<form id="sigtimeform" name="sigtimeform" action="sigtimeAction!update"
-									method="post" onkeydown="if(event.keyCode==13)return false;">
+									method="post" onkeydown="if(event.keyCode==13)return false;" onsubmit="return updateStepTimes()">
 									<s:hidden name="commontime.id"></s:hidden>
 									<s:hidden name="commontime.orderid"></s:hidden>
 									<s:hidden name="commontime.timetype"></s:hidden>
@@ -275,7 +275,7 @@ $(document).ready(function(e) {
 														<span><img src="images/note-2.png" alt="" width="24"
 																height="24" /> </span>
 														<input  type="submit" id="submit_cs" class="toolbarbtn2" value="保存并发送时间段参数"
-															onclick="updateStepTimes()"  />
+															onclick=""  />
 															</li>
 													</ul>
 										</div>

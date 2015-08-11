@@ -115,33 +115,16 @@ $(document).ready(function(){
 					  max: 250
 					});
 					var index = 0;//计数器
-					var commandNumber = 0;
-			    	var interval = setInterval(updateProgressbarValue, 3000);
+					var commandNumber = 4;//第一条为停止调阅实时状态
+			    	var interval = setInterval(updateProgressbarValue, 2000);
 			 		function updateProgressbarValue()
 			 		{
-			 			console.log(index);
-			 			if(index == 25)
-			 			{
-			 				executeCommandAll(35);
-			 				commandNumber = 35;
-			 			}
-			 			else if(index==0)
-			 			{
-			 				commandNumber = 1 ;
-			 				executeCommandAll(1);
-			 				index = index+1;
-			 				commandNumber = 4;
-			 				
-			 			}else
-			 			{
-			 				commandNumber = commandNumber+1;
-			 				executeCommandAll(commandNumber);
-			 				index = index+1;
-				 			
-			 			}
 			 			console.log("commandNumber:"+commandNumber);
+		 				executeCommandAll(commandNumber);
+		 				index = index+1;
+				 		commandNumber = commandNumber+1;
 				        var newValue = $("#divProgressbar").progressbar("option", "value") + 10; //读取进度条现有值并计算出新值
-				        if(newValue==260)
+				        if(newValue==250)
 				        {
 				        	 $("#divProgressbar").progressbar({value: 0}); 
 				        	 clearInterval(interval);
@@ -626,7 +609,7 @@ function clearErrorcode()
 {
 	if(confirm("您确定要清除故障信息吗？"))
 	{
-		executeCommand(33);
+		executeCommand(37);
 		$.ajax({   
             url:'clearErrorcode',//这里是你的action或者servlert的路径地址   
             type:'post', //数据发送方式  

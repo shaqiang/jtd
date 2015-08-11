@@ -47,6 +47,7 @@ function updateStepTimes()
             type:'post', //数据发送方式  
             data: { "dates":msg,"timetype":timetype,"orderid":orderid,"signid":signid},  
             traditional: true,  
+            async:false,
             dataType:'json',
             error: function(msg)
             { //失败   
@@ -57,9 +58,10 @@ function updateStepTimes()
 				if(msg!=null)
 				{
 					alert(msg.message);
+					return false;
 				}
 				msg = "";
-				self.location.reload();
+				return true;
             }  
    	    });  
 }

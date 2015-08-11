@@ -286,7 +286,7 @@ function clearErrorcode()
 {
 	if(confirm("您确定要清除故障信息吗？"))
 	{
-		executeCommand(33);
+		executeCommand(37);
 		$.ajax({   
             url:'clearErrorcode',//这里是你的action或者servlert的路径地址   
             type:'post', //数据发送方式  

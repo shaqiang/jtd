@@ -114,7 +114,7 @@ public class SunTimeCmdFactory extends CmdFactoryBase implements ICmdParser{
 			
 		//保存信号机的公共参数下发命令的数据-end-from jlj
 		if(sig!=null){
-			List<Commontime> commontimes = commontimeService.getCommontimesBySigid(sig.getId());
+			List<Commontime> commontimes = commontimeService.getCommontimesBySigid(sig.getId(),1);//1-周日
 			//查询是否数据库中普通参数的公共参数为空，如果为空，新插入；如果不为空，更新所有数据；
 			if(commontimes==null||commontimes.size()==0){
 				for(int i = 0;i<8;i++){
@@ -128,7 +128,7 @@ public class SunTimeCmdFactory extends CmdFactoryBase implements ICmdParser{
 					commontime.setHdtime((int)data[16+i*40]);
 					commontime.setOrderid(i);
 					commontime.setQchdtime((int)data[17+i*40]) ;
-					commontime.setTimetype(3);//普通参数1；周日2；特殊3
+					commontime.setTimetype(1);//0-普通参数1-周日2-特殊
 					commontime.setSig(sig);
 					int worktime[] = new int[32];
 
@@ -228,7 +228,7 @@ public class SunTimeCmdFactory extends CmdFactoryBase implements ICmdParser{
 			
 		//保存信号机的公共参数下发命令的数据-end-from jlj
 		if(sig!=null){
-			List<Commontime> commontimes = commontimeService.getCommontimesBySigid(sig.getId());
+			List<Commontime> commontimes = commontimeService.getCommontimesBySigid(sig.getId(),1);//1-周日
 			//查询是否数据库中普通参数的公共参数为空，如果为空，新插入；如果不为空，更新所有数据；
 			if(commontimes.size()==8){
 				for(int i = 0;i<8;i++){
@@ -242,7 +242,7 @@ public class SunTimeCmdFactory extends CmdFactoryBase implements ICmdParser{
 					commontime.setHdtime((int)data[16+i*40]);
 					commontime.setOrderid(8+i);
 					commontime.setQchdtime((int)data[17+i*40]) ;
-					commontime.setTimetype(3);//普通参数1；周日2；特殊3
+					commontime.setTimetype(1);//0-普通参数1-周日2-特殊
 					commontime.setSig(sig);
 					int worktime[] = new int[32];
 

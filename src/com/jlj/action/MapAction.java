@@ -174,7 +174,7 @@ public class MapAction extends ActionSupport implements RequestAware,
 			/*
 			 * 不属于任何区域的信号机
 			 */
-			List<Sig> allsigs = sigService.getNotNullSigs();//所有信号机
+			List<Sig> allsigs = sigService.getSigs();//所有信号机
 			List<Sig> sigs_nullarea = new ArrayList<Sig>();//区域为null的信号机
 			for(int i=0;i<allsigs.size();i++)
 			{

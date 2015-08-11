@@ -104,7 +104,7 @@ public class GreenconflictServiceImp implements IGreenconflictService  {
 		return greenconflictDao.pageList(queryString,p,page,size);
 	}
 	public List<Greenconflict> loadBySid(int id) {
-		String queryString = "from Greenconflict mo where 1=1 and mo.sig.id ="+id;
+		String queryString = "from Greenconflict mo where 1=1 and mo.sig.id ="+id+" order by mo.id asc";
 		return greenconflictDao.queryList(queryString);
 	}
 	public void updateGreenByCondition(int isct, String name, int gid) {

@@ -153,9 +153,9 @@ public class DiaoYueCmdFactory extends CmdFactoryBase implements ICmdParser{
 	  				solutionService.add(solution1);
 	  				
 	  				Solution solution2 = new Solution();
-	  				solution1.setOrderid(32);
-	  				solution1.setSoluname("相位方案33");
-	  				solution1.setSig(sig);
+	  				solution2.setOrderid(33);
+	  				solution2.setSoluname("相位方案33");
+	  				solution2.setSig(sig);
 	  				solutionService.add(solution2);
 	  				
 	  			}
@@ -314,7 +314,7 @@ public class DiaoYueCmdFactory extends CmdFactoryBase implements ICmdParser{
 	  		}
 	  		if(iserror==0){
 	  			//下发一条”请发故障信息"命令
-	  			Commands.executeCommand(3, session);
+	  			Commands.executeCommand(2, session);
 	  		}
 	  	}else{
 	  		//正常状态，若该信号机的iserror=1，改为0

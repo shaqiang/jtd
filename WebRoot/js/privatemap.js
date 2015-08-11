@@ -237,8 +237,8 @@ function setMarkerEvents(marker)
 //初始化地图所有标志
 function MarkersInit()
 {
-	//console.log("Markers    Init........");
-	//	console.log("areaid...."+areaid);
+	console.log("Markers    Init........");
+		console.log("areaid...."+areaid);
 		$.ajax({   
 	            url:'load',//这里是你的action或者servlert的路径地址   
 	            type:'post', //数据发送方式   
@@ -252,7 +252,7 @@ function MarkersInit()
 	            success: function(msg)
 	            { //成功
 	            		numbers = [];
-	            		
+	            		console.log(msg);
 	            		if(typeof(msg.length)=='undefined')//判断msg为错误提示还是正确数据
 	            		{
 	            			//错误提示
@@ -261,6 +261,7 @@ function MarkersInit()
 	            		{
 	            			//正常数值
 	            			markermsg = msg;
+	            			
 		            	 	for(var i=0;i<markermsg.length;i++)
 				    	    {
 				    	    	numbers.push(markermsg[i].number);
@@ -285,6 +286,7 @@ function MarkersInit()
 	            		}
 	            }  
     	    });  
+    	    console.log("信号机"+initMarkers);
     	    addOption();//初始化select
 }
 

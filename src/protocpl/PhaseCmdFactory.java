@@ -184,12 +184,12 @@ public class PhaseCmdFactory extends CmdFactoryBase implements ICmdParser{
 					}else{
 						issuedcommandService.updateObjectById(datastr,issuedcommand.getId());
 					}
-					
 				
 				}
 				//保存信号机的相位方案下发命令的数据-end-from jlj
 			
 			if(sig!=null){
+				//获取0-15的相位方案对象，若对象为空，表示该信号机还未插入0-15的相位方案
 				int soluorderid = (int)data[7];
 				Solution thissolu = solutionService.getSolutionBySignidAndOrderid(sig.getId(),soluorderid);
 				if(thissolu==null){
@@ -203,7 +203,6 @@ public class PhaseCmdFactory extends CmdFactoryBase implements ICmdParser{
 						solution2.setOrderid((int)(data[7]+16));
 						solution2.setSig(sig);
 						solution2.setSoluname("相位方案"+(data[7]+16));
-						
 						try {
 							solutionService.add(solution);
 							//重复插入相位方案从16-31
@@ -223,7 +222,7 @@ public class PhaseCmdFactory extends CmdFactoryBase implements ICmdParser{
 								//重复插入相位方案的步序从16-31
 								Step step2 = new Step();
 								step2.setOrderid(k);
-								step2.setPhasename("相位"+(k/2+16));
+								step2.setPhasename("相位"+k/2);
 								step2.setStepname("步序"+k);
 								step2.setSolution(solution2);
 								
@@ -261,22 +260,24 @@ public class PhaseCmdFactory extends CmdFactoryBase implements ICmdParser{
 								}
 						}
 					}
-				}else{
+				}
+				//获取16-31的相位方案对象，若对象为空，表示该信号机还未插入16-31的相位方案
+				int soluorderid2 = (int)data[7]+16;
+				Solution thissolu2 = solutionService.getSolutionBySignidAndOrderid(sig.getId(),soluorderid2);
+				if(thissolu2!=null){
 					if(locatelist.size()==64){
 						//更新数据库
-							String soluname="相位方案"+data[7];//?
-							int soluid = thissolu.getId();
-							solutionService.updateBySoluid(soluname,soluid);
-							
+							String soluname="相位方案"+(data[7]+16);
+							int soluid2 = thissolu2.getId();
+							solutionService.updateBySoluid(soluname,soluid2);
 							//保存该相位方案的所有相位步序
 							for (int k = 0; k < 64; k++) {
 								int orderid=k;
 								String phasename="相位"+k/2;
 								String stepname="步序"+k;
 								int stepid=0;
-								Step step = stepService.queryStepBySoluid(orderid,soluid);
-								stepService.updateByStepid(phasename,stepname,step.getId());
-								
+								Step step2 = stepService.queryStepBySoluid(orderid,soluid2);
+								stepService.updateByStepid(phasename,stepname,step2.getId());
 								//保存该相位步序下的所有方向
 								for (int a = 0; a < 4; a++) {
 									int leftcolor=locatelist.get(k)[a][0];
@@ -284,7 +285,7 @@ public class PhaseCmdFactory extends CmdFactoryBase implements ICmdParser{
 									int rightcolor=locatelist.get(k)[a][2];
 									int rxcolor=locatelist.get(k)[a][3];
 									int roadtype=a;
-									roadService.updateByRoadid(leftcolor,linecolor,rightcolor,rxcolor,roadtype,step.getId());
+									roadService.updateByRoadid(leftcolor,linecolor,rightcolor,rxcolor,roadtype,step2.getId());
 								}
 							}
 							

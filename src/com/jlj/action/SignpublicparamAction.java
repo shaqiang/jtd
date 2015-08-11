@@ -100,7 +100,7 @@ public class SignpublicparamAction extends ActionSupport implements RequestAware
 		//System.out.println("2-获取数据库数据，下发命令--------------------------------");
 		updateJiaoShiBytes(sigNumber,getCurrrenSession(sigNumber));
 		//System.out.println("3-调阅新命令和新数据，更新数据库--------------------------------");
-		//Commands.executeCommand(28,this.getCurrrenSession(sigIp));//编号28 校时调阅
+		//Commands.executeCommand(35,this.getCurrrenSession(sigIp));//编号35 校时调阅
 		return NONE;
 	}
 	

@@ -28,12 +28,6 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
 
 <script type="text/javascript" src="js/privatesig.js"></script>
 <script type="text/javascript">
-function test()
-{
-	console.log("coming");
-	executeCommand(5);
-	location.href = "cssz-cs.html";
-}
 		$(function(){
 				setInterval("ShowLights()",250);
 				});
@@ -361,7 +355,7 @@ var btn=document.getElementById('show_btn');
        <div id="test_div" style="width:100%; float:left; display:none; margin-bottom:15px; ">
        
          <ul class="toolbar1" style="margin-left:80px; ">
-           
+           <li  onclick="executeCommand(0)">实时状态<br /></li>
        	 <li  onclick="executeCommand(29)">黄 闪<br /></li>
          <li  onclick="executeCommand(30)">关 灯<br /></li>
          <li  onclick="executeCommand(31)">全 红<br /></li>

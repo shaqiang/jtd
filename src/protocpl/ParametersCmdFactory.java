@@ -347,72 +347,109 @@ public class ParametersCmdFactory extends CmdFactoryBase implements ICmdParser{
 				for (int i = 0; i < 16; i++) {
 					Greenconflict greenconflict = new Greenconflict();
 					greenconflict.setSig(sig);
-					int j2=0;
+					
+					switch (i) {
+					case 0:
+						greenconflict.setName("东左");
+						break;
+					case 1:
+						greenconflict.setName("东直");
+						break;
+					case 2:
+						greenconflict.setName("东右");
+						break;
+					case 3:
+						greenconflict.setName("东人");
+						break;
+					case 4:
+						greenconflict.setName("南左");
+						break;
+					case 5:
+						greenconflict.setName("南直");
+						break;
+					case 6:
+						greenconflict.setName("南右");
+						break;
+					case 7:
+						greenconflict.setName("南人");
+						break;
+					case 8:
+						greenconflict.setName("西左");
+						break;
+					case 9:
+						greenconflict.setName("西直");
+						break;
+					case 10:
+						greenconflict.setName("西右");
+						break;
+					case 11:
+						greenconflict.setName("西人");
+						break;
+					case 12:
+						greenconflict.setName("北左");
+						break;
+					case 13:
+						greenconflict.setName("北直");
+						break;
+					case 14:
+						greenconflict.setName("北右");
+						break;
+					case 15:
+						greenconflict.setName("北人");
+						break;
+					
+					default:
+						break;
+					}
+					
 					for (int j = 0; j < 16; j++) {
-						j2=j;
 						switch (j) {
 						case 0:
-							greenconflict.setName("东左");
 							greenconflict.setL00(conflict[i][j]);
 							break;
 						case 1:
-							greenconflict.setName("东直");
 							greenconflict.setL01(conflict[i][j]);
 							break;
 						case 2:
-							greenconflict.setName("东右");
 							greenconflict.setL02(conflict[i][j]);
 							break;
 						case 3:
-							greenconflict.setName("东人");
 							greenconflict.setL03(conflict[i][j]);
 							break;
 						case 4:
-							greenconflict.setName("南左");
 							greenconflict.setL10(conflict[i][j]);
 							break;
 						case 5:
-							greenconflict.setName("南直");
 							greenconflict.setL11(conflict[i][j]);
 							break;
 						case 6:
-							greenconflict.setName("南右");
 							greenconflict.setL12(conflict[i][j]);
 							break;
 						case 7:
-							greenconflict.setName("南人");
 							greenconflict.setL13(conflict[i][j]);
 							break;
 						case 8:
-							greenconflict.setName("西左");
 							greenconflict.setL20(conflict[i][j]);
 							break;
 						case 9:
-							greenconflict.setName("西直");
 							greenconflict.setL21(conflict[i][j]);
 							break;
 						case 10:
-							greenconflict.setName("西右");
 							greenconflict.setL22(conflict[i][j]);
 							break;
 						case 11:
-							greenconflict.setName("西人");
 							greenconflict.setL23(conflict[i][j]);
 							break;
 						case 12:
-							greenconflict.setName("北左");
 							greenconflict.setL30(conflict[i][j]);
 							break;
 						case 13:
-							greenconflict.setName("北直");
 							greenconflict.setL31(conflict[i][j]);
 							break;
 						case 14:
-							greenconflict.setName("北右");
 							greenconflict.setL32(conflict[i][j]);
 							break;
 						case 15:
-							greenconflict.setName("北人");
 							greenconflict.setL33(conflict[i][j]);
 							break;
 						
@@ -429,6 +466,126 @@ public class ParametersCmdFactory extends CmdFactoryBase implements ICmdParser{
 				}
 				
 				
+			}else{
+				//若存在绿冲突，修改绿冲突
+				for (int i = 0; i < 16; i++) {
+					Greenconflict greenconflict = greenconflicts.get(i);
+					switch (i) {
+					case 0:
+						greenconflict.setName("东左");
+						break;
+					case 1:
+						greenconflict.setName("东直");
+						break;
+					case 2:
+						greenconflict.setName("东右");
+						break;
+					case 3:
+						greenconflict.setName("东人");
+						break;
+					case 4:
+						greenconflict.setName("南左");
+						break;
+					case 5:
+						greenconflict.setName("南直");
+						break;
+					case 6:
+						greenconflict.setName("南右");
+						break;
+					case 7:
+						greenconflict.setName("南人");
+						break;
+					case 8:
+						greenconflict.setName("西左");
+						break;
+					case 9:
+						greenconflict.setName("西直");
+						break;
+					case 10:
+						greenconflict.setName("西右");
+						break;
+					case 11:
+						greenconflict.setName("西人");
+						break;
+					case 12:
+						greenconflict.setName("北左");
+						break;
+					case 13:
+						greenconflict.setName("北直");
+						break;
+					case 14:
+						greenconflict.setName("北右");
+						break;
+					case 15:
+						greenconflict.setName("北人");
+						break;
+					
+					default:
+						break;
+					}
+					for (int j = 0; j < 16; j++) {
+						
+						switch (j) {
+						case 0:
+							greenconflict.setL00(conflict[i][j]);
+							break;
+						case 1:
+							greenconflict.setL01(conflict[i][j]);
+							break;
+						case 2:
+							greenconflict.setL02(conflict[i][j]);
+							break;
+						case 3:
+							greenconflict.setL03(conflict[i][j]);
+							break;
+						case 4:
+							greenconflict.setL10(conflict[i][j]);
+							break;
+						case 5:
+							greenconflict.setL11(conflict[i][j]);
+							break;
+						case 6:
+							greenconflict.setL12(conflict[i][j]);
+							break;
+						case 7:
+							greenconflict.setL13(conflict[i][j]);
+							break;
+						case 8:
+							greenconflict.setL20(conflict[i][j]);
+							break;
+						case 9:
+							greenconflict.setL21(conflict[i][j]);
+							break;
+						case 10:
+							greenconflict.setL22(conflict[i][j]);
+							break;
+						case 11:
+							greenconflict.setL23(conflict[i][j]);
+							break;
+						case 12:
+							greenconflict.setL30(conflict[i][j]);
+							break;
+						case 13:
+							greenconflict.setL31(conflict[i][j]);
+							break;
+						case 14:
+							greenconflict.setL32(conflict[i][j]);
+							break;
+						case 15:
+							greenconflict.setL33(conflict[i][j]);
+							break;
+						
+						default:
+							break;
+						}
+						try {
+							greenconflictService.update(greenconflict);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
 			}
 		}
 	}
