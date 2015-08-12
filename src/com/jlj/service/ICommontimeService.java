@@ -61,4 +61,6 @@ public interface ICommontimeService {
 	public abstract void updateCommontime(int hour, int minute, int seconds,
 			int workingway, int orderid, int timetype, int sid);
 
+	public abstract void deleteBySigid(int sigid);
+
 }

@@ -123,5 +123,11 @@ public class GreenconflictServiceImp implements IGreenconflictService  {
 		Object[] p = new Object[]{sigNumber};
 		return greenconflictDao.getObjectsByCondition(queryString, p);
 	}
+	public void deleteBySigid(int sigid) {
+		String queryString = "delete from Greenconflict mo where mo.sig.id=?";
+		Object[] p = new Object[]{sigid};
+		greenconflictDao.updateGreenconflictByhql(queryString, p);
+		
+	}
 	
 }

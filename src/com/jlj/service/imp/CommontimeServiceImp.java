@@ -202,4 +202,10 @@ public class CommontimeServiceImp implements ICommontimeService  {
 		commontimeDao.updateByHql(queryString, paramNames, values);
 		
 	}
+	public void deleteBySigid(int sigid) {
+		String queryString = "delete from Commontime mo where mo.sig.id=?";
+		Object[] p = new Object[]{sigid};
+		commontimeDao.updateCommontimeByhql(queryString, p);
+		
+	}
 }

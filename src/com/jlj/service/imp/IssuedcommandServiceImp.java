@@ -141,5 +141,11 @@ public class IssuedcommandServiceImp implements IIssuedcommandService  {
 		Object[] values = new Object[] { sigid,number };
 		return issuedcommandDao.queryByNamedParam(queryString, paramNames, values);
 	}
+	public void deleteBySigid(int sigid) {
+		String queryString = "delete from Issuedcommand mo where mo.sig.id=?";
+		Object[] p = new Object[]{sigid};
+		issuedcommandDao.updateIssuedcommandByhql(queryString, p);
+		
+	}
 	
 }

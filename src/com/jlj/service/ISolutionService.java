@@ -47,6 +47,8 @@ public interface ISolutionService {
 
 	public abstract List<Solution> loadByPubidExcept(Integer id);
 
+	public abstract void deleteBySigid(int sigid);
+
 
 
 }

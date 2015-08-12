@@ -397,9 +397,15 @@ public class MapAction extends ActionSupport implements RequestAware,
 //		sig.setTqstatus(null);
 		sigService.update(sig);
 		//删除该信号机的所有子信息
-		devlogService.deleteAllBySigid2(sig.getId());
-//		sigsystimeService.delet)
-		
+		int sigid = sig.getId();
+		devlogService.deleteAllBySigid2(sigid);
+		sigsystimeService.deleteBySigid(sigid);
+		signpublicparamService.deleteBySigid(sigid);
+		issuedcommandService.deleteBySigid(sigid);
+		solutionService.deleteBySigid(sigid);
+		commontimeService.deleteBySigid(sigid);
+		greenconflictService.deleteBySigid(sigid);
+		flowService.deleteAllBySigid(sigid);
 		return NONE;
 	}
 	/*

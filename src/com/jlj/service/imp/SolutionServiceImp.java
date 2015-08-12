@@ -143,4 +143,10 @@ public class SolutionServiceImp implements ISolutionService  {
 		String queryString = "from Solution mo where 1=1 and mo.sig.id ="+pubid+" and mo.orderid>15 and mo.orderid<32 order by mo.orderid asc";
 		return solutionDao.queryList(queryString);
 	}
+	public void deleteBySigid(int sigid) {
+		String queryString = "delete from Solution mo where mo.sig.id=?";
+		Object[] p = new Object[]{sigid};
+		solutionDao.updateSolutionByhql(queryString, p);
+		
+	}
 }

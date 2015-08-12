@@ -62,5 +62,7 @@ public interface ISignpublicparamService {
 
 	public abstract Signpublicparam getPublicparamByNumber(String number2);
 
+	public abstract void deleteBySigid(int sigid);
+
 
 }

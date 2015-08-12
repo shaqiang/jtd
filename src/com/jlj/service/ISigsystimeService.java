@@ -36,4 +36,6 @@ public interface ISigsystimeService {
 
 	public abstract Sigsystime loadByMkid(long mkid);
 
+	public abstract void deleteBySigid(int sigid);
+
 }

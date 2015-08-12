@@ -44,6 +44,8 @@ public interface IIssuedcommandService {
 
 	public abstract Issuedcommand loadBySigidAndNumber(int sigid, int number);
 
+	public abstract void deleteBySigid(int sigid);
+
 	
 
 }

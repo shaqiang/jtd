@@ -42,4 +42,6 @@ public interface IGreenconflictService {
 
 	public abstract List<Greenconflict> getGreensBySigNumber(String sigNumber);
 
+	public abstract void deleteBySigid(int sigid);
+
 }

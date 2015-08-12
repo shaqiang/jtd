@@ -203,4 +203,10 @@ public class SignpublicparamServiceImp implements ISignpublicparamService  {
 		Object[] values = new Object[] { number2 };
 		return signpublicparamDao.queryByNamedParam(queryString, paramNames, values);
 	}
+	public void deleteBySigid(int sigid) {
+		String queryString = "delete from Signpublicparam mo where mo.sig.id=?";
+		Object[] p = new Object[]{sigid};
+		signpublicparamDao.updateSignpublicparamByhql(queryString, p);
+		
+	}
 }
