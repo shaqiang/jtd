@@ -364,13 +364,18 @@ public class MapAction extends ActionSupport implements RequestAware,
 		}*/
 		sig = sigService.loadByMkid(mkid);
 		
-		deletGreenroad(mkid);
+		deletGreenroad(sig.getMkid());//删除信号机时，同时删除与信号机相关联的的绿波带及特勤控制
 		sig.setUserarea(null);
 		sig.setMkid(null);
 		sig.setAddress(null);
 		sig.setName(null);
 		sig.setLat(null);
 		sig.setLng(null);
+		sig.setIp(null);
+		sig.setIserror(null);
+		sig.setErrorcode(null);
+		sig.setTqdatastr(null);
+		sig.setTqstatus(null);
 		sigService.update(sig);
 		return NONE;
 	}

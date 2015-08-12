@@ -146,21 +146,25 @@ public class DiaoYueCmdFactory extends CmdFactoryBase implements ICmdParser{
 //	  				sig.setUserarea(userarea);
 	  				sigService.add(sig);
 	  				
-	  				
 	  			}
 	  			if(sig.getLat()!=null){
+	  				//第一次插入32 33相位
+	  				Solution solution32 = solutionService.getSolutionBySignidAndOrderid(sig.getId(),32);
+	  				if(solution32==null){
 	  				//新增两条相位方案
-	  				Solution solution1 = new Solution();
-	  				solution1.setOrderid(32);
-	  				solution1.setSoluname("相位方案32");
-	  				solution1.setSig(sig);
-	  				solutionService.add(solution1);
+		  				Solution solution1 = new Solution();
+		  				solution1.setOrderid(32);
+		  				solution1.setSoluname("相位方案32");
+		  				solution1.setSig(sig);
+		  				solutionService.add(solution1);
+		  				
+		  				Solution solution2 = new Solution();
+		  				solution2.setOrderid(33);
+		  				solution2.setSoluname("相位方案33");
+		  				solution2.setSig(sig);
+		  				solutionService.add(solution2);
+	  				}
 	  				
-	  				Solution solution2 = new Solution();
-	  				solution2.setOrderid(33);
-	  				solution2.setSoluname("相位方案33");
-	  				solution2.setSig(sig);
-	  				solutionService.add(solution2);
 	  			}
 	  			//插入设备连接日志
   				Devlog devlog = new Devlog();
@@ -322,7 +326,7 @@ public class DiaoYueCmdFactory extends CmdFactoryBase implements ICmdParser{
 	  	}else{
 	  		//正常状态，若该信号机的iserror=1，改为0
 	  		//修改当前信号机故障状态以及故障代码
-	  		if(sig.getLng()!=null&&sig.getIserror()==1){
+	  		if(sig!=null&&sig.getLng()!=null&&sig.getIserror()==1){
 	  			int sigStatus = 0;
 				int error_code = 0;
 				sigService.updateSigStatus(sigStatus,error_code,sig.getId());

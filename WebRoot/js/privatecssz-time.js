@@ -18,18 +18,43 @@ function changeSoSelect()
 
 function changeControl()
 {
+	
 	var index = $("#control").val();
-	if(index==3)
+	var soid = $("#soid").val();
+	var csright = $(".csright");
+	if(index==1)//黄闪 32相位方案
 	{
-		$("#seconds").removeAttr("readOnly");
-	}else
-	{
+		csright.hide();
 		$("#seconds").attr("readOnly","true");
 		$(document).ready(function(){
-			$("#seconds").val(0);
-		});
-	
+				$("#seconds").val(0);
+				$("#soid").val(32);
+			});
 	}
+	else if(index==2)//关灯 33相位方案
+	{
+		csright.hide();
+		$("#seconds").attr("readOnly","true");
+		$(document).ready(function(){
+				$("#seconds").val(0);
+				$("#soid").val(33);
+			});
+	}else
+	{
+		csright.show();
+		if(index==3)
+		{
+			$("#seconds").removeAttr("readOnly");
+		}else
+		{
+			$("#seconds").attr("readOnly","true");
+			$(document).ready(function(){
+				$("#seconds").val(0);
+			});
+		
+		}
+	}
+	
 }
 
 var msg = "";
@@ -58,12 +83,18 @@ function updateStepTimes()
 				if(msg!=null)
 				{
 					alert(msg.message);
-					return false;
+					flag =  false;
+				}else
+				{
+					msg = "";
+					flag =  true;
 				}
-				msg = "";
-				return true;
             }  
    	    });  
+   	    if(!flag)
+   	    {
+   	    	return false;
+   	    }
 }
 
 

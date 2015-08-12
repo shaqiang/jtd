@@ -139,4 +139,8 @@ public class SolutionServiceImp implements ISolutionService  {
 		Object[] values=new Object[]{signid,soluorderid};
 		return solutionDao.queryByNamedParam(queryString,paramNames,values);
 	}
+	public List<Solution> loadByPubidExcept(Integer pubid) {
+		String queryString = "from Solution mo where 1=1 and mo.sig.id ="+pubid+" and mo.orderid>15 and mo.orderid<32 order by mo.orderid asc";
+		return solutionDao.queryList(queryString);
+	}
 }

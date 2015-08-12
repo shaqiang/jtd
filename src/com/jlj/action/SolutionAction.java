@@ -102,7 +102,8 @@ public class SolutionAction extends ActionSupport implements RequestAware,
 			sig = sigService.querySigByNumber(sigNumber);
 			if(sig!=null)
 			{
-				solutions = solutionService.loadByPubid(sig.getId());
+				solutions = solutionService.loadByPubidExcept(sig.getId());//跳转到自定义相位方案页面,0-15相位方案不显示
+				
 			}
 			if(solutions!=null&&solutions.size()>0)
 			{

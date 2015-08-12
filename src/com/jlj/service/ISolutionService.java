@@ -45,6 +45,8 @@ public interface ISolutionService {
 	public abstract Solution getSolutionBySignidAndOrderid(Integer id,
 			int soluorderid);
 
+	public abstract List<Solution> loadByPubidExcept(Integer id);
+
 
 
 }

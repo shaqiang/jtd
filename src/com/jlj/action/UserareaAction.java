@@ -149,7 +149,6 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 			sig.setTqdatastr(null);
 			sig.setTqstatus(null);
 			sigService.update(sig);
-			
 		}
 		userareaService.deleteById(id);
 		outinfo="恭喜您，删除片区成功！";

@@ -430,7 +430,7 @@ function saveMarker(id)
 //删除单个信号机标记
 function deleteMarker(id)
 {
-	if(confirm("相关联动设置也会一并删除,您确定要删除该信号机么?"))
+	if(confirm("相关联动设置及参数也会一并删除,您确定要删除该信号机么?"))
 	{
 		for(var i=0;i<initMarkers.length;i++)
 		{
