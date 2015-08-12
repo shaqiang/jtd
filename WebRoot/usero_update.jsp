@@ -131,7 +131,7 @@ $(document).ready(function(e) {
 									所属角色：
 								</label>
 								<div class="vocation">
-									<s:select list="#{0:'超级管理员',1:'管理员',2:'普通用户'}" listKey="key"
+									<s:select list="#{0:'超级管理员',1:'普通管理员'}" listKey="key"
 										listValue="value" name="usero.ulimit" cssClass="select1"></s:select>
 								</div>
 								<b>*</b>

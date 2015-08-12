@@ -253,9 +253,18 @@ function IsCanDel(){
 										<a
 											href="useroAction!load?id=<s:property value="id"/>&page=<s:property value="page"/>"
 											class="tablelink">编辑 </a>
-										<a
+										<s:if test="#session.usero.id==id">
+											<a href="#" class="tablelink" onclick="alert('无法删除当前用户！')"> 删除</a>
+										
+										</s:if>
+										<s:elseif test="#session.usero.ulimit==0">
+											<a
 											href="useroAction!delete?id=<s:property value="id"/>&page=<s:property value="page"/>"
 											class="tablelink" onclick="return IsCanDel();"> 删除</a>
+										</s:elseif>
+										<s:else>
+											<a href="#" class="tablelink" onclick="alert('请联系超级管理员删除用户！')"> 删除</a>
+										</s:else>
 									</td>
 								</tr>
 							</s:iterator>

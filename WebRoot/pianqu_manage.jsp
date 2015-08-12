@@ -253,9 +253,14 @@ function IsCanDel(){
 										<a
 											href="userareaAction!load?id=<s:property value="id"/>&page=<s:property value="page"/>"
 											class="tablelink">编辑 </a>
+										<s:if test="#session.usero.ulimit==0">
 										<a
 											href="userareaAction!delete?id=<s:property value="id"/>&page=<s:property value="page"/>"
 											class="tablelink" onclick="return IsCanDel();"> 删除</a>
+										</s:if>
+										<s:else>
+											<a href="#" class="tablelink" onclick="alert('请联系超级管理员删除片区！')"> 删除</a>
+										</s:else>
 									</td>
 								</tr>
 							</s:iterator>
