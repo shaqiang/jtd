@@ -146,8 +146,8 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 			sig.setIp(null);
 			sig.setIserror(null);
 			sig.setErrorcode(null);
-			sig.setTqdatastr(null);
-			sig.setTqstatus(null);
+//			sig.setTqdatastr(null);
+//			sig.setTqstatus(null);
 			sigService.update(sig);
 		}
 		userareaService.deleteById(id);

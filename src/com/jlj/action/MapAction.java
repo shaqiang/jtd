@@ -3,7 +3,6 @@ package com.jlj.action;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -25,8 +24,16 @@ import com.jlj.model.Greenroad;
 import com.jlj.model.Sig;
 import com.jlj.model.Userarea;
 import com.jlj.model.Usero;
+import com.jlj.service.ICommontimeService;
+import com.jlj.service.IDevlogService;
+import com.jlj.service.IFlowService;
+import com.jlj.service.IGreenconflictService;
 import com.jlj.service.IGreenroadService;
+import com.jlj.service.IIssuedcommandService;
 import com.jlj.service.ISigService;
+import com.jlj.service.ISignpublicparamService;
+import com.jlj.service.ISigsystimeService;
+import com.jlj.service.ISolutionService;
 import com.jlj.service.IUserareaService;
 import com.jlj.vo.AjaxMsgVO;
 import com.jlj.vo.MarkerVO;
@@ -47,6 +54,17 @@ public class MapAction extends ActionSupport implements RequestAware,
 	private ISigService sigService;
 	private IUserareaService userareaService;
 	private IGreenroadService greenroadService;
+	
+	
+	//子信息删除用
+	private IDevlogService devlogService;
+	private ISigsystimeService sigsystimeService;
+	private ISignpublicparamService signpublicparamService;
+	private IIssuedcommandService issuedcommandService;
+	private ISolutionService solutionService;
+	private ICommontimeService commontimeService;
+	private IGreenconflictService greenconflictService;
+	private IFlowService flowService;
 
 	private List<MarkerVO> initMarkers = new ArrayList<MarkerVO>();
 	private List<Sig> sigs;
@@ -374,9 +392,13 @@ public class MapAction extends ActionSupport implements RequestAware,
 		sig.setIp(null);
 		sig.setIserror(null);
 		sig.setErrorcode(null);
-		sig.setTqdatastr(null);
-		sig.setTqstatus(null);
+//		sig.setTqdatastr(null);
+//		sig.setTqstatus(null);
 		sigService.update(sig);
+		//删除该信号机的所有子信息
+		devlogService.deleteAllBySigid2(sig.getId());
+//		sigsystimeService.delet)
+		
 		return NONE;
 	}
 	/*
@@ -645,6 +667,79 @@ public class MapAction extends ActionSupport implements RequestAware,
 
 	public void setGreenroad(Greenroad greenroad) {
 		this.greenroad = greenroad;
+	}
+
+	public IDevlogService getDevlogService() {
+		return devlogService;
+	}
+
+	@Resource
+	public void setDevlogService(IDevlogService devlogService) {
+		this.devlogService = devlogService;
+	}
+
+	public ISigsystimeService getSigsystimeService() {
+		return sigsystimeService;
+	}
+
+	@Resource
+	public void setSigsystimeService(ISigsystimeService sigsystimeService) {
+		this.sigsystimeService = sigsystimeService;
+	}
+
+	public ISignpublicparamService getSignpublicparamService() {
+		return signpublicparamService;
+	}
+
+	@Resource
+	public void setSignpublicparamService(
+			ISignpublicparamService signpublicparamService) {
+		this.signpublicparamService = signpublicparamService;
+	}
+
+	public IIssuedcommandService getIssuedcommandService() {
+		return issuedcommandService;
+	}
+
+	@Resource
+	public void setIssuedcommandService(IIssuedcommandService issuedcommandService) {
+		this.issuedcommandService = issuedcommandService;
+	}
+
+	public ISolutionService getSolutionService() {
+		return solutionService;
+	}
+
+	@Resource
+	public void setSolutionService(ISolutionService solutionService) {
+		this.solutionService = solutionService;
+	}
+
+	public ICommontimeService getCommontimeService() {
+		return commontimeService;
+	}
+
+	@Resource
+	public void setCommontimeService(ICommontimeService commontimeService) {
+		this.commontimeService = commontimeService;
+	}
+
+	public IGreenconflictService getGreenconflictService() {
+		return greenconflictService;
+	}
+
+	@Resource
+	public void setGreenconflictService(IGreenconflictService greenconflictService) {
+		this.greenconflictService = greenconflictService;
+	}
+
+	public IFlowService getFlowService() {
+		return flowService;
+	}
+
+	@Resource
+	public void setFlowService(IFlowService flowService) {
+		this.flowService = flowService;
 	}
 
 	

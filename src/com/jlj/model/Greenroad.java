@@ -1,12 +1,15 @@
 package com.jlj.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -26,6 +29,7 @@ public class Greenroad implements java.io.Serializable {
 	private String name;
 	private String remark;
 	private Integer type;
+	private List<Tqsig> tqsigs = new ArrayList<Tqsig>();
 	// Constructors
 
 	/** default constructor */
@@ -95,6 +99,15 @@ public class Greenroad implements java.io.Serializable {
 
 	public void setType(Integer type) {
 		this.type = type;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "greenroad")
+	public List<Tqsig> getTqsigs() {
+		return tqsigs;
+	}
+
+	public void setTqsigs(List<Tqsig> tqsigs) {
+		this.tqsigs = tqsigs;
 	}
 
 	

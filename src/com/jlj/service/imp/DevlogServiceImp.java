@@ -130,5 +130,10 @@ public class DevlogServiceImp implements IDevlogService  {
 		Object[] p = new Object[]{iserror,sigid};
 		devlogDao.updateDevlogByhql(queryString, p);
 	}
+	public void deleteAllBySigid2(int sigid) {
+		String queryString = "delete from Devlog mo where mo.sig.id=?";
+		Object[] p = new Object[]{sigid};
+		devlogDao.updateDevlogByhql(queryString, p);
+	}
 	
 }

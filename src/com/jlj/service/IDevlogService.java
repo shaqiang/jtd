@@ -46,4 +46,6 @@ public interface IDevlogService {
 
 	public abstract void deleteAllBySigid(int iserror, int sigid);
 
+	public abstract void deleteAllBySigid2(int sigid);
+
 }

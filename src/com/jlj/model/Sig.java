@@ -37,8 +37,8 @@ public class Sig implements java.io.Serializable {
 	private Long mkid;
 	private Integer iserror;
 	private Integer errorcode;
-	private String tqdatastr;
-	private Integer tqstatus;
+//	private String tqdatastr;
+//	private Integer tqstatus;
 	
 	private Signpublicparam signpublicparam;
 	private List<Devlog> devlogs = new ArrayList<Devlog>();
@@ -55,7 +55,7 @@ public class Sig implements java.io.Serializable {
 
 	/** full constructor */
 	public Sig(Userarea userarea, String name, String address, String lat,
-			String lng, String ip, String number, Long mkid,Integer iserror,Integer errorcode,String tqdatastr,Integer tqstatus,
+			String lng, String ip, String number, Long mkid,Integer iserror,Integer errorcode,
 			Signpublicparam signpublicparam, List<Devlog> devlogs,
 			Sigsystime sigsystime,List<Greenconflict> greenconflicts,List<Commontime> commontimes,
 			List<Solution> solutions,List<Issuedcommand> issuedcommands) {
@@ -69,8 +69,8 @@ public class Sig implements java.io.Serializable {
 		this.mkid = mkid;
 		this.iserror = iserror;
 		this.errorcode = errorcode;
-		this.tqdatastr = tqdatastr;
-		this.tqstatus = tqstatus;
+//		this.tqdatastr = tqdatastr;
+//		this.tqstatus = tqstatus;
 		this.signpublicparam = signpublicparam;
 		this.devlogs = devlogs;
 		this.sigsystime = sigsystime;
@@ -157,23 +157,23 @@ public class Sig implements java.io.Serializable {
 	}
 
 	
-	@Column(name = "tqdatastr", length = 60)
-	public String getTqdatastr() {
-		return tqdatastr;
-	}
-
-	public void setTqdatastr(String tqdatastr) {
-		this.tqdatastr = tqdatastr;
-	}
-
-	@Column(name = "tqstatus")
-	public Integer getTqstatus() {
-		return tqstatus;
-	}
-
-	public void setTqstatus(Integer tqstatus) {
-		this.tqstatus = tqstatus;
-	}
+//	@Column(name = "tqdatastr", length = 60)
+//	public String getTqdatastr() {
+//		return tqdatastr;
+//	}
+//
+//	public void setTqdatastr(String tqdatastr) {
+//		this.tqdatastr = tqdatastr;
+//	}
+//
+//	@Column(name = "tqstatus")
+//	public Integer getTqstatus() {
+//		return tqstatus;
+//	}
+//
+//	public void setTqstatus(Integer tqstatus) {
+//		this.tqstatus = tqstatus;
+//	}
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sig")
 	public Signpublicparam getSignpublicparam() {
