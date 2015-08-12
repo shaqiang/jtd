@@ -36,6 +36,18 @@ $(document).ready(function(e) {
 		width : 100
 	});
 });
+
+function IsCanDel(){
+	if(confirm('此用户下的所有片区及其信号机都将被删除,您确定要删除吗？')){
+		if(confirm('您确定删除该用户吗？')){
+			return true;
+		}else{
+			return false;
+		}
+	}else{
+		return false;
+	}
+}
 </script>
 		<script type="text/javascript" src="js/pageKit.js"></script>
 	</head>
@@ -243,7 +255,7 @@ $(document).ready(function(e) {
 											class="tablelink">编辑 </a>
 										<a
 											href="useroAction!delete?id=<s:property value="id"/>&page=<s:property value="page"/>"
-											class="tablelink"> 删除</a>
+											class="tablelink" onclick="return IsCanDel();"> 删除</a>
 									</td>
 								</tr>
 							</s:iterator>
