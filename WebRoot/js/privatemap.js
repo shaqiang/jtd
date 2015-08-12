@@ -61,7 +61,6 @@ function initialize() {
 
 //初始化select
 function addOption(){  
-
 	for(var i=0;i<numbers.length;i++){   
 	  	options = options+"+<option value=" +numbers[i] + ">" + numbers[i] + "</option>"
 	}   
@@ -253,37 +252,42 @@ function MarkersInit()
 	            { //成功
 	            		numbers = [];
 	            		console.log(msg);
-	            		if(typeof(msg.length)=='undefined')//判断msg为错误提示还是正确数据
+	            		if(msg!=null)
 	            		{
-	            			//错误提示
-	            			alert(msg.message);
-	            		}else
-	            		{
-	            			//正常数值
-	            			markermsg = msg;
-	            			
-		            	 	for(var i=0;i<markermsg.length;i++)
-				    	    {
-				    	    	numbers.push(markermsg[i].number);
-					    	     var marker =  maphelper.markerPoint({
-							  	    id:  markermsg[i].id,
-									lat: markermsg[i].lat,
-							        lng: markermsg[i].lng,
-							        title: '红绿灯',
-							        icon: "images/boot2.png"
-					
-							 	 });
-							 	//  console.log(maphelper);  
-							  marker.dbclickable = true;
-							  marker.connectSuccess = true;
-							  marker.initOver = true;
-							  marker.number = markermsg[i].number;
-							  marker.name = markermsg[i].name;
-							  marker.address = markermsg[i].address;
-							  setMarkerEvents(marker);
-							  initMarkers.push(marker);
-				    	    } 	 
+	            			if(typeof(msg.length)=='undefined')//判断msg为错误提示还是正确数据
+		            		{
+		            			//错误提示
+		            			alert(msg.message);
+		            		}else
+		            		{
+		            			//正常数值
+		            			markermsg = msg;
+		            			
+			            	 	for(var i=0;i<markermsg.length;i++)
+					    	    {
+					    	    	numbers.push(markermsg[i].number);
+						    	     var marker =  maphelper.markerPoint({
+								  	    id:  markermsg[i].id,
+										lat: markermsg[i].lat,
+								        lng: markermsg[i].lng,
+								        title: '红绿灯',
+								        icon: "images/boot2.png"
+						
+								 	 });
+								 	//  console.log(maphelper);  
+								  marker.dbclickable = true;
+								  marker.connectSuccess = true;
+								  marker.initOver = true;
+								  marker.number = markermsg[i].number;
+								  marker.name = markermsg[i].name;
+								  marker.address = markermsg[i].address;
+								  setMarkerEvents(marker);
+								  initMarkers.push(marker);
+					    	    } 	 
+		            		}
+	            		
 	            		}
+	            		
 	            }  
     	    });  
     	    console.log("信号机"+initMarkers);
@@ -294,7 +298,7 @@ function MarkersInit()
 //初始化当前区域
 function AreaInit()
 {
-	//	console.log("Area  Init........");
+		console.log("Area  Init........");
 		$.ajax({   
 	            url:'loadArea',//这里是你的action或者servlert的路径地址   
 	            type:'post', //数据发送方式   
@@ -307,8 +311,7 @@ function AreaInit()
 	            },   
 	            success: function(msg)
 	            { //成功
-	            		encodeURI(msg);
-	            //		console.log(msg);
+	            		console.log(msg);
 	            		if(msg!=null)
 	            		{
 	            			$("#areaname").val(msg.areaname);
@@ -326,6 +329,7 @@ function AreaInit()
 	            			lng = 119.71389770507812;
 							lat = 31.336923737413848;
 							markerZoom = 13;
+							$("#areaid").append("<option  selected>" + '当前无任何区域' + "</option>");
 	            		}
 	            }  
     	    });  
@@ -335,6 +339,7 @@ function AreaInit()
 //初始化当前用户的所有区域
 function AreasInit()
 {
+	console.log("初始化区域");
 		$.ajax({   
 	            url:'loadAreas',//这里是你的action或者servlert的路径地址   
 	            type:'post', //数据发送方式   
@@ -346,19 +351,33 @@ function AreasInit()
 	            },   
 	            success: function(msg)
 	            { //成功
-	            	encodeURI(msg);
+	            	console.log(msg);
 	            	$("#areaid option").remove();
-					for(var i=0;i<msg.length;i++)
+	            	if(msg!=null)
 	            	{
-	            		if(areaid==msg[i].id)
-	            		{
-	            				$("#areaid").append("<option value=" + msg[i].id + "  selected>" + msg[i].areaname + "</option>");
-	            		}else
-	            		{
-	            				$("#areaid").append("<option value=" + msg[i].id + ">" + msg[i].areaname + "</option>");
-	            		}
-		            
-	            	} 
+	            		if(typeof(msg.length)=="undefined")
+		            	{
+		            		$("#areaid").append("<option  selected>" + '当前无任何区域' + "</option>");
+		            	}else
+		            	{
+		            		for(var i=0;i<msg.length;i++)
+			            	{
+			            		if(areaid==msg[i].id)
+			            		{
+			            				$("#areaid").append("<option value=" + msg[i].id + "  selected>" + msg[i].areaname + "</option>");
+			            		}else
+			            		{
+			            				$("#areaid").append("<option value=" + msg[i].id + ">" + msg[i].areaname + "</option>");
+			            		}
+				            
+			            	} 
+		            	}
+	            	}else
+	            	{
+	            		$("#areaid").append("<option  selected>" + '当前无任何区域' + "</option>");
+	            	}
+	            	
+					
 	            }  
     	    });  
 }

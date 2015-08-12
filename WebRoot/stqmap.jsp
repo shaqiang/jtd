@@ -16,7 +16,7 @@ request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+pa
    <frameset cols="*,187" frameborder="no" border="0" framespacing="0" name="pageframe" >
   
       <frame src="tqmap.jsp" name="mapFrame" id="mapFrame" title="mapFrame" />
-      <frame src="sig_status.jsp" name="zztFrame"  noresize="noresize" id="zztFrame" title="zztFrame" />
+      <!--  <frame src="sig_status.jsp" name="zztFrame"  noresize="noresize" id="zztFrame" title="zztFrame" />-->
      
    </frameset>
     

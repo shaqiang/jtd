@@ -174,6 +174,7 @@ function setMarkerEvents(marker)
 //初始化当前所有信号机
 function MarkersInit()
 {
+	console.log("加载信号机");
 		$.ajax({   
 	            url:'load',//这里是你的action或者servlert的路径地址   
 	            type:'post', //数据发送方式   
@@ -185,37 +186,42 @@ function MarkersInit()
 	            },   
 	            success: function(msg)
 	            { //成功
-            		if(typeof(msg.length)=='undefined')//判断msg为错误提示还是正确数据
-            		{
-            			//错误提示
-            			alert(msg.message);
-            		}else
-            		{
-            			//正常数值
-            			console.log(msg);
-            			markermsg = msg;
-	            	 	for(var i=0;i<markermsg.length;i++)
-			    	    {
-			    	    	numbers.push(markermsg[i].number);
-				    	     var marker =  maphelper.markerPoint({
-						  	    id:  markermsg[i].id,
-								lat: markermsg[i].lat,
-						        lng: markermsg[i].lng,
-						        title: '红绿灯',
-						        icon: "images/boot2.png"
-				
-						 	 });
-						 	//  console.log(maphelper);  
-						  marker.dbclickable = true;
-						  marker.connectSuccess = true;
-						  marker.initOver = true;
-						  marker.number = markermsg[i].number;
-						  marker.name = markermsg[i].name;
-						  marker.address = markermsg[i].address;
-						  setMarkerEvents(marker);
-						  initMarkers.push(marker);
-			    	    } 	 
-            		}
+	            	console.log(msg);
+	            	if(msg!=null)
+	            	{
+	            		if(typeof(msg.length)=='undefined')//判断msg为错误提示还是正确数据
+	            		{
+	            			//错误提示
+	            			alert(msg.message);
+	            		}else
+	            		{
+	            			//正常数值
+	            			console.log(msg);
+	            			markermsg = msg;
+		            	 	for(var i=0;i<markermsg.length;i++)
+				    	    {
+				    	    	numbers.push(markermsg[i].number);
+					    	     var marker =  maphelper.markerPoint({
+							  	    id:  markermsg[i].id,
+									lat: markermsg[i].lat,
+							        lng: markermsg[i].lng,
+							        title: '红绿灯',
+							        icon: "images/boot2.png"
+					
+							 	 });
+							 	//  console.log(maphelper);  
+							  marker.dbclickable = true;
+							  marker.connectSuccess = true;
+							  marker.initOver = true;
+							  marker.number = markermsg[i].number;
+							  marker.name = markermsg[i].name;
+							  marker.address = markermsg[i].address;
+							  setMarkerEvents(marker);
+							  initMarkers.push(marker);
+				    	    } 	 
+	            		}
+	            	}
+            		
 	            }  
     	    });  
 }
@@ -223,6 +229,7 @@ function MarkersInit()
 //初始化所有特勤方案
 function GreenLinesInit()
 {
+	console.log("开始加载特勤方案");
 		$.ajax({   
 	            url:'loadTqLines',//这里是你的action或者servlert的路径地址   
 	            type:'post', //数据发送方式   
@@ -230,18 +237,27 @@ function GreenLinesInit()
 	            async:false,
 	            error: function(msg)
 	            { //失败   
-	            	console.log('post失败');   
+	            	console.log('加载特勤方案失败');   
 	            },   
 	            success: function(msg)
 	            { //成功
-	            	 	linesmsg = msg;
-	            	 	console.log(linesmsg);
-		            	$("#tqid option").remove();
-		            	$("#tqid").append("<option value='0' selected>"+'请选择特勤方案'+"</option>");
-						for(var i=0;i<msg.length;i++)
+		            	console.log("line init");
+		            	console.log(msg);
+		            	if(msg==null||typeof(msg.length)=="undefined")
 		            	{
-		            		$("#tqid").append("<option value=" + msg[i].id + ">" + msg[i].name + "</option>");
-		            	} 
+		            		$("#tqid").append("<option  selected>" + '当前无任何特勤方案' + "</option>");
+		            	}else
+		            	{
+		            		$("#tqid option").remove();
+		            		$("#tqid").append("<option value='0' selected>"+'请选择特勤方案'+"</option>");
+							for(var i=0;i<msg.length;i++)
+			            	{
+			            		$("#tqid").append("<option value=" + msg[i].id + ">" + msg[i].name + "</option>");
+			            	} 
+		            	
+		            	}
+		            	
+		            
 	            }  
     	    });  
 }
