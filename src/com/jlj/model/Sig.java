@@ -157,7 +157,7 @@ public class Sig implements java.io.Serializable {
 	}
 
 	
-	@Column(name = "tqdatastr", length = 60)
+	@Column(name = "tqdatastr", length = 65535)
 	public String getTqdatastr() {
 		return tqdatastr;
 	}
