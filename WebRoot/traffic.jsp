@@ -161,7 +161,6 @@ $(document).ready(function(){
 <script type="text/javascript">
 
 var sigNumber = <s:property value="sig.number"/>;
-console.log(sigNumber);
 $(document).ready(function($){
 	
 	

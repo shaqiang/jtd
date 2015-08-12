@@ -111,85 +111,84 @@ $(document).ready(function(){
 						{
 							if(conflictVOs[i].sid==conflictStart)
 							{
-								console.log("冲突:"+conflictVOs[i].c_00);
+								//console.log("冲突:"+conflictVOs[i].c_00);
 								 if(headnumber=="00")
 								{
-									console.log("获取了这里的00");
+									//console.log("获取了这里的00");
 									conflictStr = conflictVOs[i].c_00;
 								}
 								else if(headnumber=="01")
 								{
-									console.log("获取了这里的01");
+									//console.log("获取了这里的01");
 									conflictStr = conflictVOs[i].c_01;
 								}
 								else if(headnumber=="02")
 								{
-									console.log("获取了这里的02");
+									//console.log("获取了这里的02");
 									conflictStr = conflictVOs[i].c_02;
 								}
 								else if(headnumber=="03")
 								{
-									console.log("获取了这里的03");
+									//console.log("获取了这里的03");
 									conflictStr = conflictVOs[i].c_03;
 								}
 								else if(headnumber=="10")
 								{
-									console.log("获取了这里的10");
+									//console.log("获取了这里的10");
 									conflictStr = conflictVOs[i].c_10;
 								}
 								else if(headnumber=="11")
 								{
-									console.log("获取了这里的11");
+									//console.log("获取了这里的11");
 									conflictStr = conflictVOs[i].c_11;
 								}
 								else if(headnumber=="12")
 								{
-									console.log("获取了这里的12");
+									//console.log("获取了这里的12");
 									conflictStr = conflictVOs[i].c_12;
 								}
 								else if(headnumber=="13")
 								{
-									console.log("获取了这里的13");
+									//console.log("获取了这里的13");
 									conflictStr = conflictVOs[i].c_13;
 								}
 								else if(headnumber=="20")
 								{
-									console.log("获取了这里的20");
+									//console.log("获取了这里的20");
 									conflictStr = conflictVOs[i].c_20;
 								}
 								else if(headnumber=="21")
 								{
-									console.log("获取了这里的21");
+									//console.log("获取了这里的21");
 									conflictStr = conflictVOs[i].c_21;
 								}else if(headnumber=="22")
 								{
-									console.log("获取了这里的22");
+									//console.log("获取了这里的22");
 									conflictStr = conflictVOs[i].c_22;
 								}else if(headnumber=="23")
 								{
-									console.log("获取了这里的23");
+									//console.log("获取了这里的23");
 									conflictStr = conflictVOs[i].c_23;
 								}else if(headnumber=="30")
 								{
-									console.log("获取了这里的30");
+									//console.log("获取了这里的30");
 									conflictStr = conflictVOs[i].c_30;
 								}else if(headnumber=="31")
 								{
-									console.log("获取了这里的31");
+									//console.log("获取了这里的31");
 									conflictStr = conflictVOs[i].c_31;
 								}else if(headnumber=="32")
 								{
-									console.log("获取了这里的32");
+									//console.log("获取了这里的32");
 									conflictStr = conflictVOs[i].c_32;
 								}else if(headnumber=="33")
 								{
-									console.log("获取了这里的33");
+									//console.log("获取了这里的33");
 									conflictStr = conflictVOs[i].c_33;
 								}
 							}
 						}
 							
-					console.log("冲突:"+conflictStr);
 							
 						if(typeof(conflictStr) != "undefined"&&conflictStr!="")
 						{
@@ -229,79 +228,79 @@ $(document).ready(function(){
 							console.log(conflictVOs[i]);
 							if(conflictVOs[i].sid==conflictStart)
 							{
-								console.log("冲突:"+conflictVOs[i].c_00);
+								//console.log("冲突:"+conflictVOs[i].c_00);
 								 if(headnumber=="00")
 								{
-									console.log("获取了这里的00");
+									//console.log("获取了这里的00");
 									conflictStr = conflictVOs[i].c_00;
 								}
 								else if(headnumber=="01")
 								{
-									console.log("获取了这里的01");
+									//console.log("获取了这里的01");
 									conflictStr = conflictVOs[i].c_01;
 								}
 								else if(headnumber=="02")
 								{
-									console.log("获取了这里的02");
+									//console.log("获取了这里的02");
 									conflictStr = conflictVOs[i].c_02;
 								}
 								else if(headnumber=="03")
 								{
-									console.log("获取了这里的03");
+									//console.log("获取了这里的03");
 									conflictStr = conflictVOs[i].c_03;
 								}
 								else if(headnumber=="10")
 								{
-									console.log("获取了这里的10");
+									//console.log("获取了这里的10");
 									conflictStr = conflictVOs[i].c_10;
 								}
 								else if(headnumber=="11")
 								{
-									console.log("获取了这里的11");
+									//console.log("获取了这里的11");
 									conflictStr = conflictVOs[i].c_11;
 								}
 								else if(headnumber=="12")
 								{
-									console.log("获取了这里的12");
+									//console.log("获取了这里的12");
 									conflictStr = conflictVOs[i].c_12;
 								}
 								else if(headnumber=="13")
 								{
-									console.log("获取了这里的13");
+									//console.log("获取了这里的13");
 									conflictStr = conflictVOs[i].c_13;
 								}
 								else if(headnumber=="20")
 								{
-									console.log("获取了这里的20");
+									//console.log("获取了这里的20");
 									conflictStr = conflictVOs[i].c_20;
 								}
 								else if(headnumber=="21")
 								{
-									console.log("获取了这里的21");
+									//console.log("获取了这里的21");
 									conflictStr = conflictVOs[i].c_21;
 								}else if(headnumber=="22")
 								{
-									console.log("获取了这里的22");
+									//console.log("获取了这里的22");
 									conflictStr = conflictVOs[i].c_22;
 								}else if(headnumber=="23")
 								{
-									console.log("获取了这里的23");
+									//console.log("获取了这里的23");
 									conflictStr = conflictVOs[i].c_23;
 								}else if(headnumber=="30")
 								{
-									console.log("获取了这里的30");
+									//console.log("获取了这里的30");
 									conflictStr = conflictVOs[i].c_30;
 								}else if(headnumber=="31")
 								{
-									console.log("获取了这里的31");
+									//console.log("获取了这里的31");
 									conflictStr = conflictVOs[i].c_31;
 								}else if(headnumber=="32")
 								{
-									console.log("获取了这里的32");
+									//console.log("获取了这里的32");
 									conflictStr = conflictVOs[i].c_32;
 								}else if(headnumber=="33")
 								{
-									console.log("获取了这里的33");
+									//console.log("获取了这里的33");
 									conflictStr = conflictVOs[i].c_33;
 								}
 							}
@@ -371,12 +370,12 @@ function saveControl()
 	var msg = "";
 	for(var prop in updateFang){
     if(updateFang.hasOwnProperty(prop)){
-        console.log('key is ' + prop +' and value is' + updateFang[prop]);
+        //console.log('key is ' + prop +' and value is' + updateFang[prop]);
         msg = msg + prop+":"+ updateFang[prop]+",";
     	}
 	}
 	var sigSize = sigVOs.length;
-	console.log("sigSize:"+sigSize);
+	//console.log("sigSize:"+sigSize);
 	var time = $(".dfinput_tqtime");
 	var gtime = '';
 	var ytime = '';
@@ -387,7 +386,7 @@ function saveControl()
 		{
 			var number = sigVOs[i].number;//获得当前信号机id
 			var thisid = $(this).attr("id");//获得当前time id
-			console.log(thisid);
+			//console.log(thisid);
 			var gid = number+"_gtime";//组装id
 			var yid = number+"_ytime";//组装id
 			var rid = number+"_rtime";//组装id
@@ -406,10 +405,10 @@ function saveControl()
 		}
 	
 	});
-	console.log(msg);
-	console.log(gtime);
-	console.log(rtime);
-	console.log(ytime);
+	//console.log(msg);
+	//console.log(gtime);
+	//console.log(rtime);
+	//console.log(ytime);
 	var tqname = $("#tqname").val();
 	if(tqname==null||tqname=='')
 	{

@@ -68,12 +68,10 @@ function loadthis(){
 	var checkup = getCookie("checkup");
 	console.log(checkup);
 	if(checkup=='on'){
-		console.log("i m in 1");
 		document.getElementById("username").value=getCookie("username");
 		document.getElementById("password").value=getCookie("password");
 		document.getElementById("checkup").checked=true;
 	}else{
-		console.log("i m in what");
 		document.getElementById("username").value="";
 		document.getElementById("password").value="";
 		document.getElementById("checkup").checked=false;
@@ -82,12 +80,10 @@ function loadthis(){
 
 function checkIsUp(){
 	 if(document.getElementById("checkup").checked==true){
-	 	console.log("checked");
 		setCookie('username', document.getElementById("username").value, 365);	 
 		setCookie('password', document.getElementById("password").value, 365);	 
 		setCookie('checkup', document.getElementById("checkup").value, 365);	 
 	 }else{
-	 	console.log("unchecked");
 	 	clearCookie("username");
 		clearCookie("password");
 		clearCookie("checkup");

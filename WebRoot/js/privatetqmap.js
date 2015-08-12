@@ -112,7 +112,6 @@ function setMarkerEvents(marker)
 	 		{
 				if($.inArray( marker.id, markerids)==-1)
 				{
-					console.log(marker.id);
 					markerids.push(marker.id);
 					for(var i=0;i<initMarkers.length;i++)
 					{
@@ -174,7 +173,6 @@ function setMarkerEvents(marker)
 //初始化当前所有信号机
 function MarkersInit()
 {
-	console.log("加载信号机");
 		$.ajax({   
 	            url:'load',//这里是你的action或者servlert的路径地址   
 	            type:'post', //数据发送方式   
@@ -196,29 +194,32 @@ function MarkersInit()
 	            		}else
 	            		{
 	            			//正常数值
-	            			console.log(msg);
-	            			markermsg = msg;
-		            	 	for(var i=0;i<markermsg.length;i++)
-				    	    {
-				    	    	numbers.push(markermsg[i].number);
-					    	     var marker =  maphelper.markerPoint({
-							  	    id:  markermsg[i].id,
-									lat: markermsg[i].lat,
-							        lng: markermsg[i].lng,
-							        title: '红绿灯',
-							        icon: "images/boot2.png"
-					
-							 	 });
-							 	//  console.log(maphelper);  
-							  marker.dbclickable = true;
-							  marker.connectSuccess = true;
-							  marker.initOver = true;
-							  marker.number = markermsg[i].number;
-							  marker.name = markermsg[i].name;
-							  marker.address = markermsg[i].address;
-							  setMarkerEvents(marker);
-							  initMarkers.push(marker);
-				    	    } 	 
+	            			if(msg!=null)
+	            			{
+	            				markermsg = msg;
+			            	 	for(var i=0;i<markermsg.length;i++)
+					    	    {
+					    	    	numbers.push(markermsg[i].number);
+						    	     var marker =  maphelper.markerPoint({
+								  	    id:  markermsg[i].id,
+										lat: markermsg[i].lat,
+								        lng: markermsg[i].lng,
+								        title: '红绿灯',
+								        icon: "images/boot2.png"
+						
+								 	 });
+								 	//  console.log(maphelper);  
+								  marker.dbclickable = true;
+								  marker.connectSuccess = true;
+								  marker.initOver = true;
+								  marker.number = markermsg[i].number;
+								  marker.name = markermsg[i].name;
+								  marker.address = markermsg[i].address;
+								  setMarkerEvents(marker);
+								  initMarkers.push(marker);
+					    	    } 	 
+	            			}
+	            			
 	            		}
 	            	}
             		
@@ -228,8 +229,8 @@ function MarkersInit()
 
 //初始化所有特勤方案
 function GreenLinesInit()
-{
-	console.log("开始加载特勤方案");
+{	
+	console.log('加载特勤方案');   
 		$.ajax({   
 	            url:'loadTqLines',//这里是你的action或者servlert的路径地址   
 	            type:'post', //数据发送方式   
@@ -241,23 +242,28 @@ function GreenLinesInit()
 	            },   
 	            success: function(msg)
 	            { //成功
-		            	console.log("line init");
-		            	console.log(msg);
-		            	if(msg==null||typeof(msg.length)=="undefined")
-		            	{
-		            		$("#tqid").append("<option  selected>" + '当前无任何特勤方案' + "</option>");
-		            	}else
-		            	{
-		            		$("#tqid option").remove();
-		            		$("#tqid").append("<option value='0' selected>"+'请选择特勤方案'+"</option>");
-							for(var i=0;i<msg.length;i++)
+		            if(msg!=null)
+		            {
+		            	linesmsg = msg;
+						if(typeof(msg.length)=="undefined")
 			            	{
-			            		$("#tqid").append("<option value=" + msg[i].id + ">" + msg[i].name + "</option>");
-			            	} 
+			            		$("#tqid").append("<option  selected>" + '当前无任何特勤方案' + "</option>");
+			            	}else
+			            	{
+			            		$("#tqid option").remove();
+			            		$("#tqid").append("<option value='0' selected>"+'请选择特勤方案'+"</option>");
+								for(var i=0;i<msg.length;i++)
+				            	{
+				            		$("#tqid").append("<option value=" + msg[i].id + ">" + msg[i].name + "</option>");
+				            	} 
+			            	
+			            	}
+			
+					}else
+					{
+						$("#tqid").append("<option  selected>" + '当前无任何特勤方案' + "</option>");
+					}
 		            	
-		            	}
-		            	
-		            
 	            }  
     	    });  
 }
@@ -332,7 +338,6 @@ function deleteLine()
 		alert("当前没有可删除的特勤方案,请选择特勤方案");
 	}else
 	{
-		console.log(lineId);
 		$.ajax({   
            url:'deleteLine',//这里是你的action或者servlert的路径地址   
            type:'post', //数据发送方式     
@@ -359,7 +364,6 @@ function saveAndUpdateLine()
 	}else
 	{
 		poly = maphelper.getLine(lineId);
-		console.log(poly);
 		//改变新增区域按钮状态
 		if($("#addroad").css("background-image")=="none")
 		{
@@ -369,23 +373,22 @@ function saveAndUpdateLine()
 		//通过markerids.length判断是新增特勤路线还是修改已存在的特勤路线		
 		if(markerids.length>0)
 		{
-				console.log("新增");
 				var sids = "";
 				for(var i=0;i<markerids.length;i++)
 				{
 					sids = sids +markerids[i]+",";
 				}
 				$.ajax({   
-	            url:'addOrUpdateTqLine',//这里是你的action或者servlert的路径地址   
-	            type:'post', //数据发送方式     
-	 			data: { "mklid":lineId,"sids":sids},
-	            error: function(msg)
-	            { //失败   
-	            		alert("当前特勤方案保存失败"); 
-	            },   
-	            success: function(msg)
-	            { //成功   
-	            }  
+		            url:'addOrUpdateTqLine',//这里是你的action或者servlert的路径地址   
+		            type:'post', //数据发送方式     
+		 			data: { "mklid":lineId,"sids":sids},
+		            error: function(msg)
+		            { //失败   
+		            		alert("当前特勤方案保存失败"); 
+		            },   
+		            success: function(msg)
+		            { //成功   
+		            }  
 	   	    });   
 		}
    	    self.location='greenroadAction!tq?mklid='+poly.id; 

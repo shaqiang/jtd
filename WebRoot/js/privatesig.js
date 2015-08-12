@@ -118,7 +118,6 @@ $(document).ready(function(){
 			    	var interval = setInterval(updateProgressbarValue, 3500);
 			 		function updateProgressbarValue()
 			 		{
-			 			console.log("commandNumber:"+commandNumber);
 		 				executeCommandAll(commandNumber);
 		 				index = index+1;
 				 		commandNumber = commandNumber+1;
@@ -255,13 +254,10 @@ $(document).ready(function(){
 			var img = $(event.target);
 			var imgsrc = img[0].src;//获得当前焦点的src
 			
-			console.log("imgsrc:-----------------------"+imgsrc);
 			var lastnumber = imgsrc.substring(imgsrc.indexOf(".png")-1,imgsrc.indexOf(".png"));//当前焦点的灯的颜色
 			
-			console.log("lastnumber:-----------------------"+lastnumber);
 			
 			var headnumber = imgsrc.substring(imgsrc.indexOf(".png")-3,imgsrc.indexOf(".png")-1);//当前焦点的路口方位及左转还是右转灯	
-			console.log("headnumber:-----------------------"+headnumber);
 			
 			var headnumber1 = headnumber.substring(0,1);//当前焦点的路口方位
 			var headnumber2 = headnumber.substring(1,2);//当前焦点的灯转向
@@ -276,86 +272,68 @@ $(document).ready(function(){
 					//第一步：判断是那个路口的那个灯进行设置为绿色，则获得当前绿冲突的情况 放在conflictStr中
 					if(headnumber=="00")
 					{
-						console.log("获取了这里的00");
 						conflictStr = $("#c1").val();
 					}
 					else if(headnumber=="01")
 					{
-						console.log("获取了这里的01");
 						conflictStr = $("#c2").val();
 					}
 					else if(headnumber=="02")
 					{
-						console.log("获取了这里的02");
 						conflictStr = $("#c3").val();
 					}
 					else if(headnumber=="03")
 					{
-						console.log("获取了这里的03");
 						conflictStr = $("#c4").val();
 					}
 					else if(headnumber=="10")
 					{
-						console.log("获取了这里的10");
 						conflictStr = $("#c5").val();
 					}
 					else if(headnumber=="11")
 					{
-							console.log("获取了这里的11");
 						conflictStr = $("#c6").val();
 					}
 					else if(headnumber=="12")
 					{
-						console.log("获取了这里的12");
 						conflictStr = $("#c7").val();
 					}
 					else if(headnumber=="13")
 					{
-						console.log("获取了这里的13");
 						conflictStr = $("#c8").val();
 					}
 					else if(headnumber=="20")
 					{
-						console.log("获取了这里的20");
 						conflictStr = $("#c9").val();
 					}
 					else if(headnumber=="21")
 					{
-						console.log("获取了这里的21");
 						conflictStr = $("#c10").val();
 					}else if(headnumber=="22")
 					{
-						console.log("获取了这里的22");
 						conflictStr = $("#c11").val();
 					}else if(headnumber=="23")
 					{
-						console.log("获取了这里的23");
 						conflictStr = $("#c12").val();
 					}else if(headnumber=="30")
 					{
-						console.log("获取了这里的30");
 						conflictStr = $("#c13").val();
 					}else if(headnumber=="31")
 					{
-						console.log("获取了这里的31");
 						conflictStr = $("#c14").val();
 					}else if(headnumber=="32")
 					{
-						console.log("获取了这里的32");
 						conflictStr = $("#c15").val();
 					}else if(headnumber=="33")
 					{
-						console.log("获取了这里的33");
 						conflictStr = $("#c16").val();
 					}
-					console.log("冲突:"+conflictStr);
 					//第二部：分两种情况，一种为 id 一种为 class 解析conflictStr 并逐一找出冲突的灯当前的颜色是否为绿色如果为绿色则返回
 					if(img[0].id==null||img[0].id =="")
 					{
 						//class
 						var imgclass= img[0].classList[0];
 						conflictStart = imgclass.substring(0,1);
-							console.log("====================1")
 						if(typeof(conflictStr) != "undefined"&&conflictStr!="")
 						{
 							var strs= conflictStr.split(","); //字符分割 
@@ -370,7 +348,6 @@ $(document).ready(function(){
 								if(lightKind==3)
 								{
 									 imgNow = $("."+conflictStart+strs[i]);
-									 console.log("imgNow:---------------------------"+"."+conflictStart+strs[i]);
 									 srcNow = imgNow[0].currentSrc;
 									 currentLightNumber = srcNow.substring(srcNow.indexOf(".png")-1,srcNow.indexOf(".png"));//当前比较灯的颜色
 								}else
@@ -386,33 +363,27 @@ $(document).ready(function(){
 								}
 							}
 						}
-						console.log("====================2");
 					}else
 					{
 						//id
 						var imgid = img[0].id;
-						console.log("imgid:-------------------------"+imgid);
 						
 						
 						conflictStart = imgid.substring(0,imgid.indexOf("_"));
 						
-						console.log("conflictStart:-------------------------"+conflictStart);
 						
 						if(typeof(conflictStr) != "undefined"&&conflictStr!="")
 						{
 							var strs= conflictStr.split(","); //字符分割 
-							console.log("strs:-------------------------"+strs);
 							for (i=0;i<strs.length-1;i++) 
 							{ 
 								var lightKind = strs[i].substring(strs[i].length-1,strs[i].length);
-								console.log("lightKind:-------------------------"+lightKind);
 								var imgNow = null;//当前与之比较的灯
 								var currentLightNumber = 0;//当前与之比较的灯 的种类
 								var srcNow = "";
 								if(lightKind==3)
 								{
 									 imgNow = $("."+conflictStart+strs[i]);
-									 console.log("imgNow:---------------------------"+"."+conflictStart+strs[i]);
 									 srcNow = imgNow[0].currentSrc;
 									 currentLightNumber = srcNow.substring(srcNow.indexOf(".png")-1,srcNow.indexOf(".png"));//当前比较灯的颜色
 								}else

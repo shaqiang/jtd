@@ -236,8 +236,6 @@ function setMarkerEvents(marker)
 //初始化地图所有标志
 function MarkersInit()
 {
-	console.log("Markers    Init........");
-		console.log("areaid...."+areaid);
 		$.ajax({   
 	            url:'load',//这里是你的action或者servlert的路径地址   
 	            type:'post', //数据发送方式   
@@ -290,7 +288,6 @@ function MarkersInit()
 	            		
 	            }  
     	    });  
-    	    console.log("信号机"+initMarkers);
     	    addOption();//初始化select
 }
 
@@ -311,7 +308,6 @@ function AreaInit()
 	            },   
 	            success: function(msg)
 	            { //成功
-	            		console.log(msg);
 	            		if(msg!=null)
 	            		{
 	            			$("#areaname").val(msg.areaname);
@@ -351,7 +347,6 @@ function AreasInit()
 	            },   
 	            success: function(msg)
 	            { //成功
-	            	console.log(msg);
 	            	$("#areaid option").remove();
 	            	if(msg!=null)
 	            	{

@@ -15,7 +15,6 @@ var sig =  {"sigid":0,"signame":"test","zxspeed":50,"fxspeed":50,"distance":0,"p
 
 function initGreenRoad()
 {
-	console.log("进入方法、、、、、、、、、、、、、、、、、、、、、");
 	var timetype = $("#timetype").val();
 	var orderid = $("#orderid").val();
 	var maxCircleTime = $("#maxCircleTime").val();
@@ -54,7 +53,7 @@ function initGreenRoad()
 		var dfinputs = $(".dfinput");
 		for(var j=0;j<dfinputs.length;j++)
 		{
-			console.log(dfinputs[j].id);
+		//	console.log(dfinputs[j].id);
 			var id  = dfinputs[j].id;
 			var	time = dfinputs[j].value;	
 			if(id.indexOf('distance')!=-1)
@@ -80,9 +79,8 @@ function initGreenRoad()
 	
 	var number = -1;
 	zxselect.each( function(){
-          console.log($(this).val());//注：1_0 1:表示信号机id，0:表示当前相位
+        //  console.log($(this).val());//注：1_0 1:表示信号机id，0:表示当前相位
           var sigid = parseInt($(this).val().split("_")[0]);//获得信号机id
-          console.log("number:"+number);
           number = number+1;
           var signame = getJqueryMsg(sigid+"_signame");//String
           var circle = parseInt(getJqueryMsg(sigid+"_circle"));//int
@@ -156,7 +154,7 @@ function changeTimeSelect()
 	var timetype = $("#timetype").val();
 	var orderid = $("#orderid").val();
 	var mklid = $("#mklid").val();
-	console.log("sigtimeAction!sigtimes?timetype="+timetype+"&orderid="+orderid+"&mklid="+mklid);
+	//console.log("sigtimeAction!sigtimes?timetype="+timetype+"&orderid="+orderid+"&mklid="+mklid);
 	location.href = "greenroadAction!lbd?timetype="+timetype+"&orderid="+orderid+"&mklid="+mklid;
 }
 

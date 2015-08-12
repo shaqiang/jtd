@@ -103,7 +103,6 @@ function saveArea()
 			alert("请填写区域名称..");
 			return ;
 		}
-		console.log(parseInt(zoom));
 		if(zoom==""||zoom==0||isNaN(parseInt(zoom)))
 		{
 			alert("当前地图级别不正确..");

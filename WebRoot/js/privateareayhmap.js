@@ -37,7 +37,7 @@ google.maps.event.addDomListener(window, "load", initialize);
 			areaid = parseInt(areaidstr);
 		}
 		AreaInit();
-		console.log(searchStrURL);
+		//console.log(searchStrURL);
 	    var mapCanvas = document.getElementById("map_canvas");
 		var myOptions = {
 		zoom: markerZoom,   
@@ -66,7 +66,6 @@ google.maps.event.addDomListener(window, "load", initialize);
 		AreasInit();
 	}
 	MarkersInit();
-	console.log("initialize ulimit:"+ulimit);
 	//GreenLinesInit();
 
 }
@@ -136,7 +135,6 @@ function setMarkerEvents(marker)
 					{
 						if(initMarkers[i].id==marker.id)
 						{
-							console.log(initMarkers[i]);
 							dots.push(new Array(initMarkers[i].getPosition().kb,initMarkers[i].getPosition().jb));
 						}
 					}
@@ -256,7 +254,6 @@ function AreaInit()
 	            },   
 	            success: function(msg)
 	            { //成功
-	            		console.log(msg);
 	            		if(msg!=null)
 	            		{
 	            			$("#areaname").val(msg.areaname);
@@ -338,9 +335,7 @@ function GreenLinesInit()
 	            },   
 	            success: function(msg)
 	            { //成功
-	            		encodeURI(msg);
 	            		
-	            	 	console.log(msg);
 	            	 	linesmsg = msg;
 	            	 	for(var i=0;i<linesmsg.length;i++)
 			    	    {
@@ -441,7 +436,6 @@ function saveLine()
 		alert("当前没有可保存的无电缆联动");
 	}else
 	{
-		console.log(poly);
 		var sids = "";
 		for(var i=0;i<markerids.length;i++)
 		{

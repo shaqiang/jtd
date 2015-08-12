@@ -3,7 +3,6 @@
  			alert("起始点调整与坐标点一致.");
 			var searchStrURL = decodeURI(location.search);
 		    var searchStrArray = searchStrURL.slice(1).split("&");
-		    console.log(searchStrURL);
 			var cirleTime = 0;
 			var timetype = 0;
 			var orderid = 0;
@@ -17,7 +16,6 @@
 				timetype =  parseInt(searchStrArray[2].split("=")[1]);
 				orderid =  parseInt(searchStrArray[3].split("=")[1]);
 				begintime =  searchStrArray[4].split("=")[1];
-				console.log(cirleTime,timetype,orderid,begintime);
 			}
 			else
 			{
@@ -90,8 +88,6 @@
 
                         if(index<2&&index>0)
                         {
-                                console.log(dots[index-1].x);
-                                console.log(dots[index].x);
 
                             console.log(dots[index+1].x);
                             if(dots[index].x>dots[index+1].x || dots[index].x<dots[index-1])
@@ -190,7 +186,6 @@
             function setDots()
             {
 
-                console.log("----------------setDots----------");
                 //正向坐标点
                 for(var i=0;i<sigs.length;i++)
                 {
@@ -273,7 +268,6 @@
                     {
                     	var jsonSig = jsonSigs[i];
                     	var sig = new Sig(jsonSig.sigid,parseInt(jsonSig.signumber),jsonSig.signame,parseInt(jsonSig.sigcircle),jsonSig.zxspeed,jsonSig.fxspeed,jsonSig.distance,jsonSig.pharseArray,jsonSig.zxpharse,jsonSig.fxpharse);//基准点
-                    	console.log("jsonSig.fxpharse:"+jsonSig.fxpharse);
                     	sigs.push(sig);
                     }
                     console.log(sigs);
@@ -283,7 +277,7 @@
              function createDivs()
              {
 
-                console.log("------------------createDiv----------");
+               // console.log("------------------createDiv----------");
                  for(var i=0;i<sigs.length;i++)
                  {
 
@@ -359,7 +353,7 @@
             //设置div
             function setDivs(sigs)
             {
-                console.log("------------------setDivs----------");
+                //console.log("------------------setDivs----------");
                 for(var i=0;i<sigs.length;i++)
                 {
                     //初始化信号机div 在坐标轴的位置
@@ -404,7 +398,7 @@
 
             function setSpeedDivs(dots)
             {
-                console.log("------------------setSpeedDivs----------");
+               // console.log("------------------setSpeedDivs----------");
                 /**
                  * 正向速度
                  */
@@ -478,7 +472,7 @@
                 }
 
                 var phasenumber = sig.zhengxiang.substring(sig.zhengxiang.length-1,sig.zhengxiang.length);//相位编号
-				console.log("phasenumber:"+phasenumber);
+				// console.log("phasenumber:"+phasenumber);
                 var timeT = 0;//相位时间
                 for(var z=1;z<=parseInt(phasenumber);z++)
                 {
@@ -515,7 +509,7 @@
              */
             function changeSpeed(index)
             {
-              console.log("------------------changeSpeed----------");
+          //    console.log("------------------changeSpeed----------");
                 if(index==sigs.length-1)
                 {
                     /**

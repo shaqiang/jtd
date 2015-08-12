@@ -82,7 +82,6 @@ function cleanAll()
 function changeSolution()
 {
 	$("#solutions").val();
-	console.log($("#solutions").val());
 	window.open("solutionAction!solutions?soid="+$("#solutions").val(),"rightFrame");
 }
 
@@ -316,7 +315,6 @@ function clearAllLight(id)
 
 function saveSolution()
 {
-	console.log(updatedatas);
 	var msg = "";
 	
 	for(var prop in updatedatas){
@@ -325,7 +323,6 @@ function saveSolution()
         msg = msg + prop+":"+ updatedatas[prop]+",";
     	}
 	}
-	console.log(msg);
 		$.ajax({   
             url:'update',//这里是你的action或者servlert的路径地址   
             type:'post', //数据发送方式  

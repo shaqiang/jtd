@@ -37,7 +37,6 @@ google.maps.event.addDomListener(window, "load", initialize);
 			areaid = parseInt(areaidstr);
 		}
 		AreaInit();
-		console.log(searchStrURL);
 	    var mapCanvas = document.getElementById("map_canvas");
 		var myOptions = {
 		zoom: markerZoom,   
@@ -131,7 +130,6 @@ function setMarkerEvents(marker)
 	 		{
 				if($.inArray( marker.id, markerids)==-1)
 				{
-					console.log(marker.id);
 					markerids.push(marker.id);
 					for(var i=0;i<initMarkers.length;i++)
 					{
@@ -142,7 +140,6 @@ function setMarkerEvents(marker)
 						}
 					}
 				}
-				console.log(dots);
 				 poly = maphelper.polyline({
 						dots:dots,						
 						color:"#008000",
@@ -340,39 +337,42 @@ function GreenLinesInit()
 	            },   
 	            success: function(msg)
 	            { //成功
-	            		encodeURI(msg);
-	            		
-	            	 	console.log(msg);
-	            	 	linesmsg = msg;
-	            	 	for(var i=0;i<linesmsg.length;i++)
-			    	    {
-			    	    	
-			    	    	//处理mlids
-			    	    	var sigmids = linesmsg[i].sigmids.split(",");
-			    	    	for(var j=0;j<sigmids.length-1;j++)
-			    	    	{
-			    	    		for(var k=0;k<initMarkers.length;k++)
-								{
-									if(initMarkers[k].id==parseInt(sigmids[j]))
+						if(msg!=null)	
+						{
+							linesmsg = msg;
+		            	 	for(var i=0;i<linesmsg.length;i++)
+				    	    {
+				    	    	
+				    	    	//处理mlids
+				    	    	var sigmids = linesmsg[i].sigmids.split(",");
+				    	    	for(var j=0;j<sigmids.length-1;j++)
+				    	    	{
+				    	    		for(var k=0;k<initMarkers.length;k++)
 									{
-										dots.push(new Array(initMarkers[k].getPosition().kb,initMarkers[k].getPosition().jb));
+										if(initMarkers[k].id==parseInt(sigmids[j]))
+										{
+											dots.push(new Array(initMarkers[k].getPosition().kb,initMarkers[k].getPosition().jb));
+										}
 									}
-								}
-			    	    	}
-			    	    	console.log("GreenLinesInit  dots"+dots);
-			    	    	  var	 poly = maphelper.polyline({
-										dots:dots,						
-										color:"#008000",
-										weight:16,
-										opacity:0.5,
-										id:linesmsg[i].marklineid
-								});
-								dots = Array();
-								maphelper.bindInstanceEvent(poly, 'dblclick', function(event,map,poly) {
-									self.location='greenroadAction!lbd?mklid='+poly.id; 
-									
-					        });
-			    	    } 	   
+				    	    	}
+				    	    	  var	 poly = maphelper.polyline({
+											dots:dots,						
+											color:"#008000",
+											weight:16,
+											opacity:0.5,
+											id:linesmsg[i].marklineid
+									});
+									dots = Array();
+									maphelper.bindInstanceEvent(poly, 'dblclick', function(event,map,poly) {
+										self.location='greenroadAction!lbd?mklid='+poly.id; 
+										
+						        });
+				    	    } 	   
+						}else
+						{
+							$("#tqid").append("<option  selected>" + '当前无任何无电缆联动' + "</option>");
+						}    
+	            	 	
 	            }  
     	    });  
 }
@@ -431,7 +431,6 @@ function saveLine()
 		{
 			sids = sids +markerids[i]+",";
 		}
-		console.log(lineId,sids);
 		$.ajax({   
             url:'addOrUpdateLine',//这里是你的action或者servlert的路径地址   
             type:'post', //数据发送方式     

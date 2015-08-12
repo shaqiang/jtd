@@ -40,7 +40,6 @@ $(document).ready(function(e) {
 var conflictVOs = <s:property value="conflictVOs" escape="false"/>;
 var sigVOs = <s:property value="sigVOs" escape="false"/>;
 var marklineid = <s:property value="greenroad.marklineid"/>;
-console.log(marklineid);
 </script>
 <script type="text/javascript" src="js/tq.js"></script>
 	</head>

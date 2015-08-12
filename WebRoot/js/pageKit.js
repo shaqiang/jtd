@@ -36,7 +36,6 @@ function jumpIserrorPage(url,page,iserror){
 
 //分页显示
 function jumpPage(url,page,con,convalue,status,pid){
-console.log("enter1");
 	var page=page;
 	if(isNaN(page)){
 		var page2=document.getElementById(page).value;
@@ -65,7 +64,6 @@ console.log("userManage----------------");
 
 //分页显示片区管理
 function jumpSonPage(url,page,userid,uareaname){
-console.log("userPianqu----------------");
 	var page=page;
 	if(isNaN(page)){
 		var page2=document.getElementById(page).value;
@@ -80,7 +78,6 @@ console.log("userPianqu----------------");
 
 //分页显示用户管理
 function jumpFlowPage(url,page,sigid,time1,time2){
-console.log("jumpFlowPage----------------");
 	var page=page;
 	if(isNaN(page)){
 		var page2=document.getElementById(page).value;
@@ -95,7 +92,6 @@ console.log("jumpFlowPage----------------");
 
 //分页显示用户管理
 function jumpFlowLinePage(url,page,sigid,time1,time2,interval,nextstarttime){
-console.log("jumpFlowPage----------------");
 	var page=page;
 	if(isNaN(page)){
 		var page2=document.getElementById(page).value;
@@ -110,7 +106,6 @@ console.log("jumpFlowPage----------------");
 
 //分页显示片区管理
 function jumpAllPage(url,page,uareaname){
-console.log("pianqu----------------");
 	var page=page;
 	if(isNaN(page)){
 		var page2=document.getElementById(page).value;

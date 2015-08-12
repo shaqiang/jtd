@@ -3,7 +3,6 @@ function changeTimeSelect()
 {
 	var timetype = $("#timetype").val();
 	var orderid = $("#orderid").val();
-	//console.log("sigtimeAction!sigtimes?timetype="+timetype+"&orderid="+orderid);
 	location.href = "sigtimeAction!sigtimes?timetype="+timetype+"&orderid="+orderid;
 }
 
