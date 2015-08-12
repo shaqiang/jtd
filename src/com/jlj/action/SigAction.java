@@ -85,7 +85,7 @@ public class SigAction extends ActionSupport implements RequestAware,
 		 List<Sig> usersigs = new ArrayList<Sig>();
 		 if(usero.getUlimit()==0)
 		 {
-			 usersigs = sigService.getAllSigs();
+			 usersigs = sigService.getNotNullSigs();
 		 }else
 		 {
 			 usersigs = sigService.querySigsByUser(userid);
@@ -103,7 +103,7 @@ public class SigAction extends ActionSupport implements RequestAware,
 				IoSession theSession =this.getCurrrenSession(sigobj.getNumber());
 				if(theSession==null){
 					thestatus.append("<font color=red>断开</font>");
-				}else if(usersigs.get(i).getIserror()==1){
+				}else if(usersigs.get(i).getIserror()!=null&&usersigs.get(i).getIserror()==1){
 					thestatus.append("<font color=red>故障</font>");
 				}else{
 					thestatus.append("正常");
@@ -115,9 +115,7 @@ public class SigAction extends ActionSupport implements RequestAware,
 				}
 				SigStatus sigstatus = new SigStatus(usersigs.get(i)
 						.getName(), thestatus.toString(),url);
-				if(sigobj.getLat()!=null&&!sigobj.getLat().equals("")&&sigobj.getLng()!=null&&!sigobj.getLng().equals("")){
-					sigstatuses.add(sigstatus);
-				}
+				sigstatuses.add(sigstatus);
 				
 			}
 			// 将list转化成JSON对象

@@ -27,8 +27,8 @@
  			 &nbsp;&nbsp;特勤方案 : <select id="tqid" name="select4" class="dfinputtq"">
 											</select>
    <input type="button" onclick="Polyline()" id="addroad" value=" 添加特勤方案 " style="margin-left:20px;margin-top:10px;width:100px;height:20px; background:url(images/topbtn02.fw.png); color:#FFF; border-bottom:#039 1px solid; border-right:#039 1px solid;"/>
-   <input type="button" onclick="saveAndUpdateLine()" id="saveroad" value="编辑特勤方案 " style="margin-left:20px;margin-top:10px;width:100px;height:20px; background:url(images/topbtn02.fw.png); color:#FFF; border-bottom:#039 1px solid; border-right:#039 1px solid;"/>&nbsp;&nbsp;&nbsp;
-   <input type="button" onclick="deleteLine()" id="saveroad" value="删除特勤方案" style="margin-left:20px;margin-top:10px;width:100px;height:20px; background:url(images/topbtn02.fw.png); color:#FFF; border-bottom:#039 1px solid; border-right:#039 1px solid;"/>
+   <input type="button" onclick="saveAndUpdateLine()" id="saveroad" value="编辑特勤方案 " style="margin-left:20px;margin-top:10px;width:100px;height:20px; background:url(images/topbtn02.fw.png); color:#FFF; border-bottom:#039 1px solid; border-right:#039 1px solid;"/>
+   <input type="button" onclick="deleteLine()" id="deleteroad" value="删除特勤方案" style="margin-left:20px;margin-top:10px;width:100px;height:20px; background:url(images/topbtn02.fw.png); color:#FFF; border-bottom:#039 1px solid; border-right:#039 1px solid;"/>
 											</div>
    <div id="map_canvas" style="margin:4px ;width:98%; height:760px;border:2px solid #cfdfe4">
    		地图加载失败....

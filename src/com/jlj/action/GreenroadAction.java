@@ -508,7 +508,7 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	
 	
 	/**
-	 * 设置特勤控制时间
+	 * 保存特勤控制时间
 	 * 
 	 * @return
 	 * @throws Exception
@@ -526,11 +526,8 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 			greenroad.setName(tqname);
 			greenroadService.update(greenroad);
 		}
-		
-		
 	    setSpecifiedPharseVO(dates,gtime,ytime,rtime);
-	    
-	    for (int j = 0;j < pharseVOS.size(); j++) {
+	    /*for (int j = 0;j < pharseVOS.size(); j++) {
 			String number = pharseVOS.get(j).getNumber();
 			IoSession currrenSession=this.getCurrrenSession(number);
 			if(currrenSession==null)
@@ -551,9 +548,8 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 				}
 				return NONE;
 			}
-	    }
+	    }*/
 	    
-            	
         for (int j = 0;j < pharseVOS.size(); j++) {
         	
         			byte send_byte[] = new byte[27+8+4];
@@ -807,7 +803,7 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
         			String number = pharseVOS.get(j).getNumber();
         			
         		}
-		return NONE;
+			return NONE;
 	}
 	
 	/*

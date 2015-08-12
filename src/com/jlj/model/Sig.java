@@ -156,24 +156,6 @@ public class Sig implements java.io.Serializable {
 		this.mkid = mkid;
 	}
 
-	
-//	@Column(name = "tqdatastr", length = 60)
-//	public String getTqdatastr() {
-//		return tqdatastr;
-//	}
-//
-//	public void setTqdatastr(String tqdatastr) {
-//		this.tqdatastr = tqdatastr;
-//	}
-//
-//	@Column(name = "tqstatus")
-//	public Integer getTqstatus() {
-//		return tqstatus;
-//	}
-//
-//	public void setTqstatus(Integer tqstatus) {
-//		this.tqstatus = tqstatus;
-//	}
 
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "sig")
 	public Signpublicparam getSignpublicparam() {

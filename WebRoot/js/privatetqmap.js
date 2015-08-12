@@ -307,6 +307,31 @@ function ClearPoly() {
 	
 }
 
+function deleteLine()
+{
+	poly = maphelper.getLine(lineId);//首先获得当前特勤线路
+	//判断特勤线路
+	if(typeof(poly)=='undefined')
+	{
+		alert("当前没有可删除的特勤方案,请选择特勤方案");
+	}else
+	{
+		console.log(lineId);
+		$.ajax({   
+           url:'deleteLine',//这里是你的action或者servlert的路径地址   
+           type:'post', //数据发送方式     
+			data: { "mklid":lineId},
+           error: function(msg)
+           { //失败   
+           		alert("当前特勤方案删除失败"); 
+           },   
+           success: function(msg)
+           { //成功   
+           }  
+  	    });   
+   	    self.location='stqmap.jsp'; 
+	}
+}
 
 function saveAndUpdateLine()
 {
