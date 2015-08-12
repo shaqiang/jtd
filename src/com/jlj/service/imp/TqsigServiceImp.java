@@ -105,6 +105,12 @@ public class TqsigServiceImp implements ITqsigService {
 //		queryString += " order by mo.id desc ";
 		return tqsigDao.pageList(queryString,p,page,size);
 	}
+	public Tqsig queryByNumber(Integer greenid,String number) {
+		String queryString = "from Tqsig mo where mo.number =:number and mo.greenroad.id="+greenid;
+		String[] paramNames = new String[] { "number" };
+		Object[] values = new Object[] { number };
+		return tqsigDao.queryByNamedParam(queryString, paramNames, values);
+	}
 	
 	
 }

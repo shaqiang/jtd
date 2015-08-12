@@ -147,25 +147,25 @@ public class DiaoYueCmdFactory extends CmdFactoryBase implements ICmdParser{
 	  				sigService.add(sig);
 	  				
 	  			}
-	  			if(sig.getLat()!=null){
-	  				//第一次插入32 33相位
-	  				Solution solution32 = solutionService.getSolutionBySignidAndOrderid(sig.getId(),32);
-	  				if(solution32==null){
-	  				//新增两条相位方案
-		  				Solution solution1 = new Solution();
-		  				solution1.setOrderid(32);
-		  				solution1.setSoluname("相位方案32");
-		  				solution1.setSig(sig);
-		  				solutionService.add(solution1);
-		  				
-		  				Solution solution2 = new Solution();
-		  				solution2.setOrderid(33);
-		  				solution2.setSoluname("相位方案33");
-		  				solution2.setSig(sig);
-		  				solutionService.add(solution2);
-	  				}
-	  				
-	  			}
+//	  			if(sig.getLat()!=null){
+//	  				//第一次插入32 33相位
+//	  				Solution solution32 = solutionService.getSolutionBySignidAndOrderid(sig.getId(),32);
+//	  				if(solution32==null){
+//	  				//新增两条相位方案
+//		  				Solution solution1 = new Solution();
+//		  				solution1.setOrderid(32);
+//		  				solution1.setSoluname("相位方案32");
+//		  				solution1.setSig(sig);
+//		  				solutionService.add(solution1);
+//		  				
+//		  				Solution solution2 = new Solution();
+//		  				solution2.setOrderid(33);
+//		  				solution2.setSoluname("相位方案33");
+//		  				solution2.setSig(sig);
+//		  				solutionService.add(solution2);
+//	  				}
+//	  				
+//	  			}
 	  			//插入设备连接日志
   				Devlog devlog = new Devlog();
   				devlog.setSig(sig);

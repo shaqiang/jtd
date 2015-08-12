@@ -34,4 +34,6 @@ public interface ITqsigService {
 	public abstract List<Tqsig> queryList(int con, String convalue, int page,
 			int size);
 
+	public abstract Tqsig queryByNumber(Integer integer, String number);
+
 }

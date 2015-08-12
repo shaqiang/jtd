@@ -115,7 +115,7 @@ $(document).ready(function(){
 					});
 					var index = 0;//计数器
 					var commandNumber = 4;//第一条为停止调阅实时状态
-			    	var interval = setInterval(updateProgressbarValue, 4000);
+			    	var interval = setInterval(updateProgressbarValue, 3500);
 			 		function updateProgressbarValue()
 			 		{
 			 			console.log("commandNumber:"+commandNumber);

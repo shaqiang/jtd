@@ -375,16 +375,17 @@ function saveControl()
         msg = msg + prop+":"+ updateFang[prop]+",";
     	}
 	}
-	var sigSize = conflictVOs.length;
+	var sigSize = sigVOs.length;
+	console.log("sigSize:"+sigSize);
 	var time = $(".dfinput_tqtime");
 	var gtime = '';
 	var ytime = '';
 	var rtime = '';
 	
 	time.each(function(){
-		for(var i=0;i<conflictVOs.length;i++)
+		for(var i=0;i<sigSize;i++)
 		{
-			var number = conflictVOs[i].number;//获得当前信号机id
+			var number = sigVOs[i].number;//获得当前信号机id
 			var thisid = $(this).attr("id");//获得当前time id
 			console.log(thisid);
 			var gid = number+"_gtime";//组装id

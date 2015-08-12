@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 
 import com.jlj.model.Greenroad;
 import com.jlj.model.Sig;
+import com.jlj.model.Solution;
 import com.jlj.model.Userarea;
 import com.jlj.model.Usero;
 import com.jlj.service.ICommontimeService;
@@ -352,6 +353,25 @@ public class MapAction extends ActionSupport implements RequestAware,
 			{
 				sig1.setUserarea(userarea);
 			}
+			
+			//第一次插入32 33相位
+			Solution solution32 = solutionService.getSolutionBySignidAndOrderid(sig1.getId(),32);
+			if(solution32==null){
+			//新增两条相位方案
+  				Solution solution1 = new Solution();
+  				solution1.setOrderid(32);
+  				solution1.setSoluname("相位方案32");
+  				solution1.setSig(sig1);
+  				solutionService.add(solution1);
+  				
+  				Solution solution2 = new Solution();
+  				solution2.setOrderid(33);
+  				solution2.setSoluname("相位方案33");
+  				solution2.setSig(sig1);
+  				solutionService.add(solution2);
+			}
+  				
+			
 			sig1.setMkid(mkid);
 			sig1.setAddress(address);
 			sig1.setName(name);

@@ -430,29 +430,32 @@ function saveMarker(id)
 //删除单个信号机标记
 function deleteMarker(id)
 {
-	if(confirm("相关联动设置及参数也会一并删除,您确定要删除该信号机么?"))
+	if(confirm("当前信号机所有参数也会一并删除,您确定要删除该信号机么?"))
 	{
-		for(var i=0;i<initMarkers.length;i++)
+		if(confirm("当前信号机所有联动设置也会一并删除,您确定要删除该信号机么?"))
 		{
-	
-			if(initMarkers[i].id == id)
+			for(var i=0;i<initMarkers.length;i++)
 			{
-				$.ajax({   
-		            url:'deleteMarker',//这里是你的action或者servlert的路径地址   
-		            type:'post', //数据发送方式     
-		 			data: { "mkid":id},
-		            error: function(msg)
-		            { //失败   
-		            	alert('信号机删除失败');   
-		            },   
-		            success: function(msg)
-		            { //成功   
-		            	alert('信号机删除成功');  
-		            }  
-		           
-	    	    }); 
-	    	     initMarkers[i].setMap(null);
-		         initMarkers.splice(i,1);  
+		
+				if(initMarkers[i].id == id)
+				{
+					$.ajax({   
+			            url:'deleteMarker',//这里是你的action或者servlert的路径地址   
+			            type:'post', //数据发送方式     
+			 			data: { "mkid":id},
+			            error: function(msg)
+			            { //失败   
+			            	alert('信号机删除失败');   
+			            },   
+			            success: function(msg)
+			            { //成功   
+			            	alert('信号机删除成功');  
+			            }  
+			           
+		    	    }); 
+		    	     initMarkers[i].setMap(null);
+			         initMarkers.splice(i,1);  
+				}
 			}
 		}
 	}

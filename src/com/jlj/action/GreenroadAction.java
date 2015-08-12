@@ -42,9 +42,11 @@ import com.jlj.service.IRoadService;
 import com.jlj.service.ISigService;
 import com.jlj.service.ISolutionService;
 import com.jlj.service.IStepService;
+import com.jlj.service.ITqsigService;
 import com.jlj.util.Commands;
 import com.jlj.vo.AjaxMsgVO;
 import com.jlj.vo.ConflictVO;
+import com.jlj.vo.GreenroadVO;
 import com.jlj.vo.PharseVO;
 import com.jlj.vo.SigGreenRoadVO;
 import com.jlj.vo.UsefulPhaseVO;
@@ -74,6 +76,7 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	private ISigService sigService;
 	private IStepService stepService;
 	private IRoadService roadService;
+	private ITqsigService tqService;
 
 	private Greenroad greenroad;
 	private Commontime commontime;
@@ -81,6 +84,7 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	private Step step;
 	private Sig sig;
 	private SigGreenRoadVO sigVO;
+	private Tqsig tqsig;
 	private int id;
 	
 
@@ -91,6 +95,7 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	 */
 	private List<Greenconflict> greens;
 	private List<ConflictVO>  conflictVOs;
+	private List<GreenroadVO> greenroadVOs;
 	private ConflictVO conflictVO;
 	private IGreenconflictService greenService;
 	
@@ -135,7 +140,8 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 
 		greenroads = greenroadService.getAllGreenroads(0);
 		if (greenroads != null && greenroads.size() > 0) {
-			JSONArray jsonArr = JSONArray.fromObject(greenroads);
+			greenroadVOs = getGreenroadVOs(greenroads);
+			JSONArray jsonArr = JSONArray.fromObject(greenroadVOs);
 			System.out.println(jsonArr);
 			PrintWriter out;
 			try {
@@ -160,9 +166,11 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	 */
 	public String loadTqLines() throws Exception {
 
+		
 		greenroads = greenroadService.getAllGreenroads(1);
 		if (greenroads != null && greenroads.size() > 0) {
-			JSONArray jsonArr = JSONArray.fromObject(greenroads);
+			greenroadVOs = getGreenroadVOs(greenroads);
+			JSONArray jsonArr = JSONArray.fromObject(greenroadVOs);
 			System.out.println(jsonArr);
 			PrintWriter out;
 			try {
@@ -177,6 +185,22 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 		}
 		return NONE;
 
+	}
+	
+	private List<GreenroadVO> getGreenroadVOs(List<Greenroad> greenroads)
+	{
+		greenroadVOs = new ArrayList<GreenroadVO>();
+		for(Greenroad greenroad:greenroads)
+		{
+			GreenroadVO greenroadVO = new GreenroadVO();
+			greenroadVO.setId(greenroad.getId());
+			greenroadVO.setMarklineid(greenroad.getMarklineid());
+			greenroadVO.setName(greenroad.getName());
+			greenroadVO.setSigmids(greenroad.getSigmids());
+			greenroadVO.setType(greenroad.getType());
+			greenroadVOs.add(greenroadVO);
+		}
+		return greenroadVOs;
 	}
 
 	/**
@@ -510,8 +534,8 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	 * @throws Exception
 	 */
 	public String saveControl() throws Exception {
-		System.out.println(tqname);
-		System.out.println(marklineid);
+		//System.out.println(tqname);
+		//System.out.println(marklineid);
 		//System.out.println(gtime);//绿灯持续时间
 		//System.out.println(ytime);//黄灯持续时间
 		//System.out.println(rtime);//红灯持续时间
@@ -523,29 +547,6 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 			greenroadService.update(greenroad);
 		}
 	    setSpecifiedPharseVO(dates,gtime,ytime,rtime);
-	    /*for (int j = 0;j < pharseVOS.size(); j++) {
-			String number = pharseVOS.get(j).getNumber();
-			IoSession currrenSession=this.getCurrrenSession(number);
-			if(currrenSession==null)
-			{
-				AjaxMsgVO msgVO = new AjaxMsgVO();
-				String message = "信号机["+number+"]连接异常,检查信号机是否断开.";
-				msgVO.setMessage(message);
-				JSONObject jsonObj = JSONObject.fromObject(msgVO);
-				PrintWriter out;
-				try {
-					response.setContentType("text/html;charset=UTF-8");
-					out = response.getWriter();
-					out.print(jsonObj.toString());
-					out.flush();
-					out.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				return NONE;
-			}
-	    }*/
-	    
         for (int j = 0;j < pharseVOS.size(); j++) {
         			byte send_byte[] = new byte[27+8+4];
         			send_byte[0] = (byte) 0xff;
@@ -769,9 +770,7 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
         					default:
         						break;
         					}
-        				
         			}
-        			
         			
         			send_byte[18] = (byte) (pharseVOS.get(j).getGltime()&0xff);
         			send_byte[27] = (byte) (pharseVOS.get(j).getYltime()&0xff);
@@ -792,12 +791,22 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
         				System.out.print(send_byte[i3]);
         			}
         			String number = pharseVOS.get(j).getNumber();
-        			Tqsig tqsig = new Tqsig();
-        			tqsig.setGreenroad(greenroad);
-        			String datastr = DataConvertor.toHexString(send_byte);
-        			tqsig.setTqdatastr(datastr);
-        			tqsig.setTqstatus(0);//信号机自动控制
-        			tqsig.setNumber(number);
+        			tqsig = tqService.queryByNumber(greenroad.getId(),number);
+        			if(tqsig==null)
+        			{
+        				Tqsig tqsig = new Tqsig();
+            			tqsig.setGreenroad(greenroad);
+            			String datastr = DataConvertor.toHexString(send_byte);
+            			tqsig.setTqdatastr(datastr);
+            			tqsig.setTqstatus(0);//信号机自动控制
+            			tqsig.setNumber(number);
+            			tqService.add(tqsig);
+        			}else
+        			{
+        				String datastr = DataConvertor.toHexString(send_byte);
+            			tqsig.setTqdatastr(datastr);
+            			tqService.update(tqsig);
+        			}
         			
         		}
 			return NONE;
@@ -1994,6 +2003,26 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 
 	public void setMarklineid(Long marklineid) {
 		this.marklineid = marklineid;
+	}
+
+
+	public ITqsigService getTqService() {
+		return tqService;
+	}
+
+	@Resource
+	public void setTqService(ITqsigService tqService) {
+		this.tqService = tqService;
+	}
+
+
+	public List<GreenroadVO> getGreenroadVOs() {
+		return greenroadVOs;
+	}
+
+
+	public void setGreenroadVOs(List<GreenroadVO> greenroadVOs) {
+		this.greenroadVOs = greenroadVOs;
 	}
 
 	

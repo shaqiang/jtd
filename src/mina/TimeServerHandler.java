@@ -126,7 +126,7 @@ public class TimeServerHandler  implements IoHandler {
 	public void sessionIdle(IoSession arg0, IdleStatus arg1) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println( "IDLE " + arg0.getIdleCount( arg1 ));  
-		if(arg0.getIdleCount( arg1 ) == 3){
+		if(arg0.getIdleCount( arg1 ) == 8){
 			arg0.close(true);
 		}
 	}
