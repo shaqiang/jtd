@@ -429,7 +429,13 @@ $(document).ready(function(){
 					self.location='greenroadAction!tq?mklid='+poly.id; 
 	       		 });
   	    	}
-  	  } 	   
+  	  	}
+  	  	//marklineid可以查询greenroad
+  	  	//根据greenroad查询出所有的特勤信号机
+  	  	//右侧跳转到特勤信号机列表展示页面
+  	  	window.location.target="tqFrame";
+  	  	window.location.href="greenroadAction!tqlist?marklineid="+lineId;
+  	  	 	   
 	
 	});
 
