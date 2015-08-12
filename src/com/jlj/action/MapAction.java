@@ -358,7 +358,7 @@ public class MapAction extends ActionSupport implements RequestAware,
 			sig1.setLat(lat);
 			sig1.setLng(lng);
 			sig1.setIserror(0);
-			sig1.setTqstatus(0);//0:信号机自动运行 1：特勤控制运行
+//			sig1.setTqstatus(0);//0:信号机自动运行 1：特勤控制运行
 			sigService.update(sig1);
 		}
 		return NONE;
