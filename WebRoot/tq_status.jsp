@@ -61,26 +61,30 @@ $(function(){
   <dd style="margin-left:5px;">
     <div class="title">状态</div>
     	<ul class="menuson">
-    	<!-- 
-        <li class="active"><cite></cite><a href="traffic.html" target="mapFrame">1号信号机正常</a></li>
-        <li class="activeprom"><cite></cite><a href="traffic.html" target="mapFrame">2号信号机故障</a></li>
-        <li class="active"><cite></cite><a href="traffic.html" target="mapFrame">3号信号机正常</a></li>
-        <li class="active"><cite></cite><a href="traffic.html" target="mapFrame">3号信号机正常</a></li>
-        <li class="active"><cite></cite><a href="traffic.html" target="mapFrame">3号信号机正常</a></li>
-        <li class="active"><cite></cite><a href="traffic.html" target="mapFrame">3号信号机正常</a></li>
-        <li class="active"><cite></cite><a href="traffic.html" target="mapFrame">3号信号机正常</a></li>
-        <li class="active"><cite></cite><a href="traffic.html" target="mapFrame">3号信号机正常</a></li>
-        <li class="active"><cite></cite><a href="traffic.html" target="mapFrame">3号信号机正常</a></li>
-        <li class="active"><cite></cite><a href="traffic.html" target="mapFrame">3号信号机正常</a></li>
-        <li class="active"><cite></cite><a href="traffic.html" target="mapFrame">3号信号机正常</a></li>
-        <li class="active"><cite></cite><a href="traffic.html" target="mapFrame">3号信号机正常</a></li>
-        <li class="active"><cite></cite><a href="traffic.html" target="mapFrame">3号信号机正常</a></li>
-        <li class="active"><cite></cite><a href="traffic.html" target="mapFrame">3号信号机正常</a></li>
-        <li class="active"><cite></cite><a href="traffic.html" target="mapFrame">3号信号机正常</a></li>
-        <li class="active"><cite></cite><a href="traffic.html" target="mapFrame">3号信号机正常</a></li>
-        <li class="active"><cite></cite><a href="traffic.html" target="mapFrame">3号信号机正常</a></li>
-        <li class="active"><cite></cite><a href="traffic.html" target="mapFrame">4号信号机正常</a></li>
-         -->
+    	<s:if test="%{tqsigs==null||tqsigs.size()==0}">
+    		<li class="active"><cite></cite>
+	    			暂无状态
+    		</li>
+    	</s:if>
+    	<s:iterator value="tqsigs" var="tqsig" status="index">
+    		<li class="active"><cite></cite>
+	    		<s:if test="tqstatus==0">
+		    		<a href="#" target="tqFrame"><s:property value="name"/>&nbsp;
+		    			自动运行
+		    		</a>
+	    		</s:if>
+	    		<s:elseif test="tqstatus==1">
+	    			<a href="#" target="tqFrame"><s:property value="name"/>&nbsp;
+		    			特勤控制
+		    		</a>
+	    		</s:elseif>
+	    		<s:else>
+	    			状态异常
+	    		</s:else>
+    		</li>
+    	</s:iterator>
+        
+        
 
         </ul>    
     </dd>    

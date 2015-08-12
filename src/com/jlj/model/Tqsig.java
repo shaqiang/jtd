@@ -28,7 +28,8 @@ public class Tqsig implements java.io.Serializable {
 	private Integer tqstatus;
 	private String lat;
 	private String lng;
-
+	private String name;
+	private Integer orderid;
 	// Constructors
 
 	/** default constructor */
@@ -37,13 +38,15 @@ public class Tqsig implements java.io.Serializable {
 
 	/** full constructor */
 	public Tqsig(Greenroad greenroad, String number, String tqdatastr, Integer tqstatus,
-			String lat, String lng) {
+			String lat, String lng,String name,Integer orderid) {
 		this.greenroad = greenroad;
 		this.number = number;
 		this.tqdatastr = tqdatastr;
 		this.tqstatus = tqstatus;
 		this.lat = lat;
 		this.lng = lng;
+		this.name = name;
+		this.orderid = orderid;
 	}
 
 	// Property accessors
@@ -111,6 +114,24 @@ public class Tqsig implements java.io.Serializable {
 
 	public void setLng(String lng) {
 		this.lng = lng;
+	}
+
+	@Column(name = "name", length = 50)
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Column(name = "orderid")
+	public Integer getOrderid() {
+		return orderid;
+	}
+
+	public void setOrderid(Integer orderid) {
+		this.orderid = orderid;
 	}
 
 	

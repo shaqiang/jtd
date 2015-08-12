@@ -184,6 +184,7 @@
 			<result name="tq">/tqcontrol.jsp</result>
 			<result name="greenroad">/greenroad.jsp</result>
 			<result name="error">/error.jsp</result>
+			<result name="tqlist">/tq_status.jsp</result>
 		</action>
 	</package>
 	

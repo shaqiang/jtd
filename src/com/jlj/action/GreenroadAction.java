@@ -1641,6 +1641,20 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 		return NONE;
 	}
 
+	/**
+	 * 特勤控制信号机列表
+	 * 
+	 */
+	private List<Tqsig> tqsigs;
+	public String tqlist(){
+		Greenroad grobj = greenroadService.loadByMkid(marklineid);
+		if(grobj!=null){
+			tqsigs = tqService.getTqsigsByGrid(grobj.getId());
+		}
+		
+		return "tqlist";
+	}
+	
 	// get、set-------------------------------------------
 	// 获得HttpServletResponse对象
 	public void setServletResponse(HttpServletResponse response) {
@@ -2023,6 +2037,26 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 
 	public void setGreenroadVOs(List<GreenroadVO> greenroadVOs) {
 		this.greenroadVOs = greenroadVOs;
+	}
+
+
+	public Tqsig getTqsig() {
+		return tqsig;
+	}
+
+
+	public void setTqsig(Tqsig tqsig) {
+		this.tqsig = tqsig;
+	}
+
+
+	public List<Tqsig> getTqsigs() {
+		return tqsigs;
+	}
+
+
+	public void setTqsigs(List<Tqsig> tqsigs) {
+		this.tqsigs = tqsigs;
 	}
 
 	

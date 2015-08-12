@@ -434,8 +434,7 @@ $(document).ready(function(){
   	  	//根据greenroad查询出所有的特勤信号机
   	  	//右侧跳转到特勤信号机列表展示页面
   	  	window.location.target="tqFrame";
-  	  	window.location.href="greenroadAction!tqlist?marklineid="+lineId;
-  	  	 	   
+  	  	window.parent.tqFrame.location.href="greenroadAction!tqlist?marklineid="+lineId;
 	
 	});
 

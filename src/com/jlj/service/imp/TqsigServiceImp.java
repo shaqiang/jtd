@@ -111,6 +111,12 @@ public class TqsigServiceImp implements ITqsigService {
 		Object[] values = new Object[] { number };
 		return tqsigDao.queryByNamedParam(queryString, paramNames, values);
 	}
+	public List<Tqsig> getTqsigsByGrid(int grid) {
+		String queryString = "from Tqsig mo where mo.greenroad.id=? ";
+		Object[] p = new Object[]{grid};
+		queryString += " order by mo.orderid asc ";
+		return tqsigDao.getObjectsByCondition(queryString, p);
+	}
 	
 	
 }

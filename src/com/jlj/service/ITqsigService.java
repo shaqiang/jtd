@@ -36,4 +36,6 @@ public interface ITqsigService {
 
 	public abstract Tqsig queryByNumber(Integer integer, String number);
 
+	public abstract List<Tqsig> getTqsigsByGrid(int grid);
+
 }
