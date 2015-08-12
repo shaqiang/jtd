@@ -23,8 +23,16 @@ import com.jlj.model.Greenroad;
 import com.jlj.model.Sig;
 import com.jlj.model.Userarea;
 import com.jlj.model.Usero;
+import com.jlj.service.ICommontimeService;
+import com.jlj.service.IDevlogService;
+import com.jlj.service.IFlowService;
+import com.jlj.service.IGreenconflictService;
 import com.jlj.service.IGreenroadService;
+import com.jlj.service.IIssuedcommandService;
 import com.jlj.service.ISigService;
+import com.jlj.service.ISignpublicparamService;
+import com.jlj.service.ISigsystimeService;
+import com.jlj.service.ISolutionService;
 import com.jlj.service.IUserareaService;
 import com.jlj.service.IUseroService;
 import com.jlj.vo.UserareaVO;
@@ -40,6 +48,17 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	private ISigService sigService;
 	private IUseroService useroService;
 	private IGreenroadService greenroadService;
+	
+	//子信息删除用
+	private IDevlogService devlogService;
+	private ISigsystimeService sigsystimeService;
+	private ISignpublicparamService signpublicparamService;
+	private IIssuedcommandService issuedcommandService;
+	private ISolutionService solutionService;
+	private ICommontimeService commontimeService;
+	private IGreenconflictService greenconflictService;
+	private IFlowService flowService;
+	
 	Map<String,Object> request;
 	Map<String,Object> session;
 	private javax.servlet.http.HttpServletResponse response;
@@ -149,6 +168,16 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 //			sig.setTqdatastr(null);
 //			sig.setTqstatus(null);
 			sigService.update(sig);
+			
+			int sigid = sig.getId();
+			devlogService.deleteAllBySigid2(sigid);
+			sigsystimeService.deleteBySigid(sigid);
+			signpublicparamService.deleteBySigid(sigid);
+			issuedcommandService.deleteBySigid(sigid);
+			solutionService.deleteBySigid(sigid);
+			commontimeService.deleteBySigid(sigid);
+			greenconflictService.deleteBySigid(sigid);
+			flowService.deleteAllBySigid(sigid);
 		}
 		userareaService.deleteById(id);
 		outinfo="恭喜您，删除片区成功！";
@@ -437,6 +466,81 @@ SessionAware,ServletResponseAware,ServletRequestAware {
 	public void setGreenroads(List<Greenroad> greenroads) {
 		this.greenroads = greenroads;
 	}
+
+	public IDevlogService getDevlogService() {
+		return devlogService;
+	}
+
+	@Resource
+	public void setDevlogService(IDevlogService devlogService) {
+		this.devlogService = devlogService;
+	}
+
+	public ISigsystimeService getSigsystimeService() {
+		return sigsystimeService;
+	}
+
+	@Resource
+	public void setSigsystimeService(ISigsystimeService sigsystimeService) {
+		this.sigsystimeService = sigsystimeService;
+	}
+
+	public ISignpublicparamService getSignpublicparamService() {
+		return signpublicparamService;
+	}
+
+	@Resource
+	public void setSignpublicparamService(
+			ISignpublicparamService signpublicparamService) {
+		this.signpublicparamService = signpublicparamService;
+	}
+
+	public IIssuedcommandService getIssuedcommandService() {
+		return issuedcommandService;
+	}
+
+	@Resource
+	public void setIssuedcommandService(IIssuedcommandService issuedcommandService) {
+		this.issuedcommandService = issuedcommandService;
+	}
+
+	public ISolutionService getSolutionService() {
+		return solutionService;
+	}
+
+	@Resource
+	public void setSolutionService(ISolutionService solutionService) {
+		this.solutionService = solutionService;
+	}
+
+	public ICommontimeService getCommontimeService() {
+		return commontimeService;
+	}
+
+	@Resource
+	public void setCommontimeService(ICommontimeService commontimeService) {
+		this.commontimeService = commontimeService;
+	}
+
+	public IGreenconflictService getGreenconflictService() {
+		return greenconflictService;
+	}
+
+	@Resource
+	public void setGreenconflictService(IGreenconflictService greenconflictService) {
+		this.greenconflictService = greenconflictService;
+	}
+
+	public IFlowService getFlowService() {
+		return flowService;
+	}
+
+	@Resource
+	public void setFlowService(IFlowService flowService) {
+		this.flowService = flowService;
+	}
+	
+	
 	
 	
 }

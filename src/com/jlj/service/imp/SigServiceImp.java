@@ -125,8 +125,9 @@ public class SigServiceImp implements ISigService  {
 		Object[] p =  null;
 		return sigDao.getObjectsByCondition(queryString, p);
 	}
-	public List<Sig> getSigsByUserarea(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Sig> querySigsByUserid(int uid) {
+		String queryString = "from Sig mo where mo.userarea.usero.id = ? ";
+		Object[] p =  new Object[]{uid};
+		return sigDao.getObjectsByCondition(queryString, p);
 	}
 }
