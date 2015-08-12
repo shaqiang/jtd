@@ -3,14 +3,10 @@ package com.jlj.action;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +33,7 @@ import com.jlj.model.Road;
 import com.jlj.model.Sig;
 import com.jlj.model.Solution;
 import com.jlj.model.Step;
+import com.jlj.model.Tqsig;
 import com.jlj.service.ICommontimeService;
 import com.jlj.service.IGreenconflictService;
 import com.jlj.service.IGreenroadService;
@@ -46,7 +43,6 @@ import com.jlj.service.ISigService;
 import com.jlj.service.ISolutionService;
 import com.jlj.service.IStepService;
 import com.jlj.util.Commands;
-import com.jlj.util.DateTimeKit;
 import com.jlj.vo.AjaxMsgVO;
 import com.jlj.vo.ConflictVO;
 import com.jlj.vo.PharseVO;
@@ -551,7 +547,6 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	    }*/
 	    
         for (int j = 0;j < pharseVOS.size(); j++) {
-        	
         			byte send_byte[] = new byte[27+8+4];
         			send_byte[0] = (byte) 0xff;
         			send_byte[1] = (byte) 0xff;
@@ -564,7 +559,6 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
         			send_byte[8] = (byte) 0x00;
         			send_byte[9] = (byte) 0x23;
         			String[] solus = pharseVOS.get(j).getDates().split(",");
-        			
         			
         			for (int i = 0; i < solus.length; i++) {
         				int stepid= Integer.parseInt(solus[i].substring(0, solus[i].indexOf("_")));
@@ -794,13 +788,16 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
         		    	   send_byte[send_byte.length-i1-1]  = (byte) (k >>> (i1 * 8));  
         		       }  
         			
-        			
         			for (int i3 = 0; i3 < send_byte.length; i3++) {
         				System.out.print(send_byte[i3]);
         			}
-        			System.out.println("========================下发特勤控制命令（按指定相位） 保存至数据库=======================================");
-        			//currrenSession.write(send_byte);
         			String number = pharseVOS.get(j).getNumber();
+        			Tqsig tqsig = new Tqsig();
+        			tqsig.setGreenroad(greenroad);
+        			String datastr = DataConvertor.toHexString(send_byte);
+        			tqsig.setTqdatastr(datastr);
+        			tqsig.setTqstatus(0);//信号机自动控制
+        			tqsig.setNumber(number);
         			
         		}
 			return NONE;
