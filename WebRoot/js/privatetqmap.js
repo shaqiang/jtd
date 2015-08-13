@@ -339,15 +339,16 @@ function deleteLine()
 	}else
 	{
 		$.ajax({   
-           url:'deleteLine',//这里是你的action或者servlert的路径地址   
-           type:'post', //数据发送方式     
-			data: { "mklid":lineId},
+           url:'deleteLine',  
+           type:'post',    
+		   data: { "mklid":lineId},
            error: function(msg)
            { //失败   
-           		alert("当前特勤方案删除失败"); 
+           		
            },   
            success: function(msg)
            { //成功   
+        		   alert("当前特勤方案删除成功"); 
            }  
   	    });   
    	    self.location='stqmap.jsp'; 

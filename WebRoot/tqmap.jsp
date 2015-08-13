@@ -24,7 +24,7 @@
 
 <body >
  <div style="float：left;width:660px;">
- 			 &nbsp;&nbsp;特勤方案 : <select id="tqid" name="select4" class="dfinputtq"">
+ 			 &nbsp;&nbsp;特勤方案 : <select id="tqid" name="select4" class="dfinputtq" style="width:215px">
 											</select>
    <input type="button" onclick="Polyline()" id="addroad" value=" 添加特勤方案 " style="margin-left:20px;margin-top:10px;width:100px;height:20px; background:url(images/topbtn02.fw.png); color:#FFF; border-bottom:#039 1px solid; border-right:#039 1px solid;"/>
    <input type="button" onclick="saveAndUpdateLine()" id="saveroad" value="编辑特勤方案 " style="margin-left:20px;margin-top:10px;width:100px;height:20px; background:url(images/topbtn02.fw.png); color:#FFF; border-bottom:#039 1px solid; border-right:#039 1px solid;"/>

@@ -40,4 +40,6 @@ public interface IGreenroadService {
 
 	public abstract List<Greenroad> getAllGreenroads(int i);
 
+	public abstract List<Greenroad> getAllGreenroads(int i, int areaid);
+
 }

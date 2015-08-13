@@ -330,6 +330,7 @@ function GreenLinesInit()
 	            url:'loadLines',//这里是你的action或者servlert的路径地址   
 	            type:'post', //数据发送方式   
 	            dataType:'json', 
+	            data: { "areaid":areaid},
 	            async:false,
 	            error: function(msg)
 	            { //失败   
@@ -419,10 +420,10 @@ function saveAndUpdateLine()
 				$.ajax({   
 		            url:'addOrUpdateLine',//这里是你的action或者servlert的路径地址   
 		            type:'post', //数据发送方式     
-		 			data: { "mklid":lineId,"sids":sids},
+		 			data: { "mklid":lineId,"sids":sids,"areaid":areaid},
+		 			dataType:'json',
 		            error: function(msg)
 		            { //失败   
-		            		alert("当前无电缆联动保存失败"); 
 		            },   
 		            success: function(msg)
 		            { //成功   
@@ -451,19 +452,21 @@ function deleteLine()
 		alert("当前没有可删除的无电缆联动,请选择无电缆联动");
 	}else
 	{
+		console.log("lineId"+lineId);
 		$.ajax({   
-           url:'deleteLine',//这里是你的action或者servlert的路径地址   
-           type:'post', //数据发送方式     
-			data: { "mklid":lineId},
-           error: function(msg)
+           url:'deleteLine',  
+           type:'post',      
+		   data: { "mklid":lineId},
+		   dataType:'json',
+           error: function(XMLHttpRequest, textStatus, errorThrown) 
            { //失败   
-           		alert("当前无电缆联动删除失败"); 
            },   
            success: function(msg)
            { //成功   
+           	 	alert("当前无电缆联动删除成功"); 
            }  
   	    });   
-   	    self.location='sgreenmap.jsp'; 
+   	    self.location='greenmap.jsp'; 
 	}
 }
 

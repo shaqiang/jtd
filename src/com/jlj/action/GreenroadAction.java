@@ -144,7 +144,7 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	 */
 	public String loadLines() throws Exception {
 
-		greenroads = greenroadService.getAllGreenroads(0);
+		greenroads = greenroadService.getAllGreenroads(0,areaid);
 		if (greenroads != null && greenroads.size() > 0) {
 			greenroadVOs = getGreenroadVOs(greenroads);
 			JSONArray jsonArr = JSONArray.fromObject(greenroadVOs);
@@ -239,6 +239,7 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 		} else {
 			greenroad = new Greenroad();
 			greenroad.setTimetype(0);
+			greenroad.setAreaid(areaid);
 			greenroad.setTimexf(0);
 			greenroad.setStarttime("00:00");
 			greenroad.setMarklineid(mklid);

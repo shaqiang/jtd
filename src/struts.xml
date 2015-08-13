@@ -212,8 +212,11 @@
 		<action name="loadLines" class="greenroadAction" method="loadLines"/>	
 		<action name="addOrUpdateTqLine" class="greenroadAction" method="addOrUpdateTqLine"/>	
 		<action name="loadTqLines" class="greenroadAction" method="loadTqLines"/>	
-		<action name="deleteLine" class="greenroadAction" method="deleteLine"/>	
-		<action name="deleteTqLine" class="greenroadAction" method="deleteTqLine"/>	
+		<action name="deleteLine" class="greenroadAction" method="deleteLine">	
+			<result type="json">  
+					  <param name="excludeNullProperties">true</param>  
+            </result>
+		</action>
 	</package>
 	
      <package name="sig_ajax" extends="json-default">
