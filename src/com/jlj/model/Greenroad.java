@@ -34,7 +34,7 @@ public class Greenroad implements java.io.Serializable {
 	private Integer type;
 	private Integer timetype;
 	private Integer timexf;
-	private Date starttime;
+	private String starttime;
 	
 	private List<Tqsig> tqsigs = new ArrayList<Tqsig>();
 	// Constructors
@@ -44,7 +44,7 @@ public class Greenroad implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Greenroad(Long marklineid, String sigmids, String name, String remark,Integer type,Integer timetype,Integer timexf,Date starttime) {
+	public Greenroad(Long marklineid, String sigmids, String name, String remark,Integer type,Integer timetype,Integer timexf,String starttime) {
 		this.marklineid = marklineid;
 		this.sigmids = sigmids;
 		this.name = name;
@@ -138,15 +138,16 @@ public class Greenroad implements java.io.Serializable {
 		this.timexf = timexf;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "starttime", length = 23)
-	public Date getStarttime() {
+	@Column(name = "starttime", length = 8)
+	public String getStarttime() {
 		return starttime;
 	}
 
-	public void setStarttime(Date starttime) {
+	public void setStarttime(String starttime) {
 		this.starttime = starttime;
 	}
+
+	
 
 	
 
