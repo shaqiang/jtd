@@ -22,17 +22,20 @@
 <script type="text/javascript" src="js/privategreenmap.js"></script>
 
 <body >
- <div style="float：left;width:660px;">
+ <div style="float：left;width:660px;margin-top:5px;">
  <s:if test="#session.usero.ulimit==0">
  			 &nbsp;&nbsp;可选区域 : <select id="areaid" name="select4" class="dfinputarea" onchange="changeArea();">
 											</select>
  	 	</s:if>
  	 	<s:else>
-	 				当前区域：<input type="text" name="areaname" id="areaname" class="dfinputarea" size="17" readonly="readonly"/>
-				</s:else>
+				当前区域：<input type="text" name="areaname" id="areaname" class="dfinputarea" size="17" readonly="readonly"/>
+		</s:else>
+	 &nbsp;&nbsp; &nbsp;&nbsp;无电缆联动方案 : <select id="greenid" name="select4" class="dfinputtq"">
+			</select>
+			<br/>
    <input type="button" onclick="Polyline()" id="addroad" value=" 添加无电缆联动 " style="margin-left:20px;margin-top:10px;width:100px;height:20px; background:url(images/topbtn02.fw.png); color:#FFF; border-bottom:#039 1px solid; border-right:#039 1px solid;"/>
-    <input type="button" onclick="saveLine()" id="saveroad" value="保存无电缆联动 " style="margin-left:20px;margin-top:10px;width:100px;height:20px; background:url(images/topbtn02.fw.png); color:#FFF; border-bottom:#039 1px solid; border-right:#039 1px solid;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	
+    <input type="button" onclick="saveAndUpdateLine()" id="saveroad" value="编辑无电缆联动 " style="margin-left:20px;margin-top:10px;width:100px;height:20px; background:url(images/topbtn02.fw.png); color:#FFF; border-bottom:#039 1px solid; border-right:#039 1px solid;"/>
+		<input type="button" onclick="deleteLine()" id="deleteroad" value="删除无电缆联动" style="margin-left:20px;margin-top:10px;width:100px;height:20px; background:url(images/topbtn02.fw.png); color:#FFF; border-bottom:#039 1px solid; border-right:#039 1px solid;"/>
 											</div>
    <div id="map_canvas" style="margin:4px ;width:98%; height:760px;border:2px solid #cfdfe4">
    		地图加载失败....

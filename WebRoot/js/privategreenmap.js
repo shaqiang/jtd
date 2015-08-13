@@ -337,42 +337,27 @@ function GreenLinesInit()
 	            },   
 	            success: function(msg)
 	            { //成功
-						if(msg!=null)	
-						{
-							linesmsg = msg;
-		            	 	for(var i=0;i<linesmsg.length;i++)
-				    	    {
-				    	    	
-				    	    	//处理mlids
-				    	    	var sigmids = linesmsg[i].sigmids.split(",");
-				    	    	for(var j=0;j<sigmids.length-1;j++)
-				    	    	{
-				    	    		for(var k=0;k<initMarkers.length;k++)
-									{
-										if(initMarkers[k].id==parseInt(sigmids[j]))
-										{
-											dots.push(new Array(initMarkers[k].getPosition().kb,initMarkers[k].getPosition().jb));
-										}
-									}
-				    	    	}
-				    	    	  var	 poly = maphelper.polyline({
-											dots:dots,						
-											color:"#008000",
-											weight:16,
-											opacity:0.5,
-											id:linesmsg[i].marklineid
-									});
-									dots = Array();
-									maphelper.bindInstanceEvent(poly, 'dblclick', function(event,map,poly) {
-										self.location='greenroadAction!lbd?mklid='+poly.id; 
-										
-						        });
-				    	    } 	   
+	            	console.log(msg);
+	            		 if(msg!=null)
+			            {
+			            	linesmsg = msg;
+								if(typeof(msg.length)=="undefined")
+				            	{
+				            		$("#greenid").append("<option  selected>" + '当前没有任何无电缆联动' + "</option>");
+				            	}else
+				            	{
+				            		$("#greenid option").remove();
+				            		$("#greenid").append("<option value='0' selected>"+'请选择无电缆联动'+"</option>");
+									for(var i=0;i<msg.length;i++)
+					            	{
+					            		$("#greenid").append("<option value=" + msg[i].id + ">" + msg[i].name + "</option>");
+					            	} 
+				            	}
+				
 						}else
 						{
-							$("#tqid").append("<option  selected>" + '当前无任何无电缆联动' + "</option>");
-						}    
-	            	 	
+							$("#greenid").append("<option  selected>" + '当前没有任何无电缆联动' + "</option>");
+						}
 	            }  
     	    });  
 }
@@ -412,46 +397,133 @@ function ClearPoly() {
 }
 
 
-function saveLine()
+function saveAndUpdateLine()
 {
-	if(markerids.length<2)
+
+	poly = maphelper.getLine(lineId);//首先获得当前无电缆联动
+	//判断特勤线路
+	if(typeof(poly)=='undefined')
 	{
-		alert("当前没有可保存的无电缆联动,请点击添加无电缆联动按钮.");
+		alert("当前没有可编辑的无电缆联动,请选择特无电缆联动");
 	}else
 	{
-		console.log(poly);
-		//改变新增区域按钮状态
-		if($("#addroad").css("background-image")=="none")
+		poly = maphelper.getLine(lineId);
+		//通过markerids.length判断是新增特勤路线还是修改已存在的特勤路线		
+		if(markerids.length>0)
 		{
-			$("#addroad").css("background-image",'url(images/topbtn02.fw.png)').css("color","#fff");
-			 clickable = false;
+				var sids = "";
+				for(var i=0;i<markerids.length;i++)
+				{
+					sids = sids +markerids[i]+",";
+				}
+				$.ajax({   
+		            url:'addOrUpdateLine',//这里是你的action或者servlert的路径地址   
+		            type:'post', //数据发送方式     
+		 			data: { "mklid":lineId,"sids":sids},
+		            error: function(msg)
+		            { //失败   
+		            		alert("当前无电缆联动保存失败"); 
+		            },   
+		            success: function(msg)
+		            { //成功   
+		            }  
+	   	    });   
 		}
-		var sids = "";
-		for(var i=0;i<markerids.length;i++)
-		{
-			sids = sids +markerids[i]+",";
-		}
-		$.ajax({   
-            url:'addOrUpdateLine',//这里是你的action或者servlert的路径地址   
-            type:'post', //数据发送方式     
- 			data: { "mklid":lineId,"sids":sids},
-            error: function(msg)
-            { //失败   
-            		alert("当前无电缆联动保存失败"); 
-            },   
-            success: function(msg)
-            { //成功   
-				alert("当前无电缆联动保存成功");  
-				self.location.reload();  //刷新本页
-            }  
-   	    });   
-	
-	}
-	
+   	    self.location='greenroadAction!lbd?mklid='+poly.id; 
+   	    
+   	 }
+}
+
+
+function updateLine()
+{
+	console.log("mklid---------------------------------------"+mklid);
+	$.ajax({   
+	            url:'addOrUpdateLine',//这里是你的action或者servlert的路径地址   
+	            type:'post', //数据发送方式     
+	 			data: { "mklid":mklid},
+	            error: function(msg)
+	            { //失败   
+	            		alert("当前无电缆联动保存失败"); 
+	            },   
+	            success: function(msg)
+	            { //成功   
+	            		alert("当前无电缆联动保存成功"); 
+	            }  
+	   	    });   
+
 }
 
 function changeArea()
 {
 	location.href = "greenmap.jsp?areaid="+parseInt($("#areaid").val());
 }
+
+function deleteLine()
+{
+	poly = maphelper.getLine(lineId);//首先获得当前无电缆联动线路
+	//判断特勤线路
+	if(typeof(poly)=='undefined')
+	{
+		alert("当前没有可删除的无电缆联动,请选择无电缆联动");
+	}else
+	{
+		$.ajax({   
+           url:'deleteLine',//这里是你的action或者servlert的路径地址   
+           type:'post', //数据发送方式     
+			data: { "mklid":lineId},
+           error: function(msg)
+           { //失败   
+           		alert("当前无电缆联动删除失败"); 
+           },   
+           success: function(msg)
+           { //成功   
+           }  
+  	    });   
+   	    self.location='sgreenmap.jsp'; 
+	}
+}
+
+
+$(document).ready(function(){
+	$("#greenid").on('change',function(){
+		maphelper.clearLine();
+		var selectedLineid = $(this).val();
+		for(var i=0;i<linesmsg.length;i++)
+  	    {
+  	    	var lineObj = linesmsg[i];
+  	    	if(lineObj.id==selectedLineid)
+  	    	{
+  	    		var sigmids = lineObj.sigmids.split(",");
+	  	    	for(var j=0;j<sigmids.length-1;j++)
+	  	    	{
+	  	    		for(var k=0;k<initMarkers.length;k++)
+					{
+						if(initMarkers[k].id==parseInt(sigmids[j]))
+						{
+							dots.push(new Array(initMarkers[k].getPosition().kb,initMarkers[k].getPosition().jb));
+						}
+					}
+	  	    	}
+	  	    	 poly = maphelper.polyline({
+						dots:dots,						
+						color:"#008000",
+						weight:16,
+						opacity:0.5,
+						id:lineObj.marklineid
+				});
+				lineId = lineObj.marklineid;
+				console.log(lineId);
+				dots = Array();
+				maphelper.bindInstanceEvent(poly, 'dblclick', function(event,map,poly) {
+					self.location='greenroadAction!tq?mklid='+poly.id; 
+	       		 });
+  	    	}
+  	  } 	   
+	
+	});
+
+
+});
+
 

@@ -42,6 +42,9 @@ $(document).ready(function(e) {
 		width : 120
 	});
 });
+
+var mklid = <s:property value="greenroad.marklineid" />;
+
 </script>
 	</head>
 
@@ -140,7 +143,17 @@ $(document).ready(function(e) {
 							</select>
 						</div>
 					</div>
-
+					
+					<div style="float: left; line-height: 35px; width: 90%;">
+						<label>
+							无电缆联动：
+						</label>
+						<div class="vocation">
+							<span style="margin-right: 5px;"> 
+								<s:textfield name="greenroad.name" cssClass="dfinput" id="tqname" cssStyle="width: 165px;"></s:textfield>
+							</span>
+						</div>
+					</div>
 
 					<div style="float: left; line-height: 35px; width: 90%;">
 						<label>
@@ -173,7 +186,7 @@ $(document).ready(function(e) {
 					<div style="float: left; line-height: 35px; width: 90%;">
 						<label>
 							<input name="input" type="button" class="scbtn"
-							style="margin-top: 15px;" onclick="deleteLine()" value="删除当前联动" />
+							style="margin-top: 15px;" onclick="updateLine()" value="保存当前联动" />
 						</label>
 						
 					</div>

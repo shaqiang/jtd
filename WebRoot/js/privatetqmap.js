@@ -364,12 +364,6 @@ function saveAndUpdateLine()
 	}else
 	{
 		poly = maphelper.getLine(lineId);
-		//改变新增区域按钮状态
-		if($("#addroad").css("background-image")=="none")
-		{
-			$("#addroad").css("background-image",'url(images/topbtn02.fw.png)').css("color","#fff");
-			 clickable = false;
-		}
 		//通过markerids.length判断是新增特勤路线还是修改已存在的特勤路线		
 		if(markerids.length>0)
 		{

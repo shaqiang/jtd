@@ -163,7 +163,6 @@ $(document).ready(function(){
 var sigNumber = <s:property value="sig.number"/>;
 $(document).ready(function($){
 	
-	
 	//默认选项卡切换
 	$("#normaltab").tabso({
 		cntSelect:"#normalcon",
@@ -171,7 +170,6 @@ $(document).ready(function($){
 		tabStyle:"normal"
 	});
                
-   
 });
 </script>
 <script>
@@ -190,7 +188,6 @@ var btn=document.getElementById('show_btn');
 	}
 }
 </script>
-
 
 </head>
 

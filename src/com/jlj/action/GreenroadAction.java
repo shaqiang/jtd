@@ -244,6 +244,7 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 		greenroad = greenroadService.loadByMkid(mklid);
 		if (greenroad != null) {
 			// update
+			greenroad.getMarklineid();
 		} else {
 			greenroad = new Greenroad();
 			greenroad.setMarklineid(mklid);
