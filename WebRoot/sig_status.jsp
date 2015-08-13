@@ -27,7 +27,12 @@
 					success:function(data){ 
 						var _tr = "";
 						$.each(data,function(i,list){ 
-							_tr += "<li class=active ><cite></cite><a href='"+list.url+"' target='rightFrame'>"+list.name+"信号机"+list.status+"</a></li>";
+							
+							var lname =list.name;
+							if(lname.length>8){
+								lname = list.name.substring(0,8)+"...";
+							}
+							_tr += "<li class=active ><cite></cite><a href='"+list.url+"' title='"+list.name+"' target='rightFrame'>"+lname+list.status+"</a></li>";
 							
 						}) 
 						$(".menuson").html(_tr);
