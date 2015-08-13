@@ -88,7 +88,9 @@ $(document).ready(function(){
 				allRed(sigVOs[i].number);
 			}
 		$(".picbox img").click(function(event) {
-			var img = $(event.target);
+			var img = $(this);
+			console.log(img);
+			
 			var imgsrc = img[0].src;//获得当前焦点的src
 			
 			var lastnumber = imgsrc.substring(imgsrc.indexOf(".png")-1,imgsrc.indexOf(".png"));//当前焦点的灯的颜色
@@ -220,13 +222,17 @@ $(document).ready(function(){
 					}else
 					{
 						//id
+						
+						
 						var imgid = img[0].id;
 						conflictStart = imgid.substring(0,imgid.indexOf("_"));
 						
+						console.log(conflictStart);
+						
+						
 						for(var i=0;i<conflictVOs.length;i++)
 						{
-							console.log(conflictVOs[i]);
-							if(conflictVOs[i].sid==conflictStart)
+							if(conflictVOs[i].number==conflictStart)
 							{
 								//console.log("冲突:"+conflictVOs[i].c_00);
 								 if(headnumber=="00")
@@ -305,8 +311,11 @@ $(document).ready(function(){
 								}
 							}
 						}
+						
+						console.log("conflictStr"+conflictStr);
 						if(typeof(conflictStr) != "undefined"&&conflictStr!="")
 						{
+						
 							var strs= conflictStr.split(","); //字符分割 
 							for (i=0;i<strs.length-1;i++) 
 							{ 

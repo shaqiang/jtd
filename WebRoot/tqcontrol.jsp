@@ -67,7 +67,7 @@ var marklineid = <s:property value="greenroad.marklineid"/>;
 						</label>
 						<div class="vocation">
 							<span style="margin-right: 5px;"> 
-								<s:textfield name="greenroad.name" cssClass="dfinput" id="tqname" cssStyle="width: 165px;"></s:textfield>
+								<s:textfield name="greenroad.name" cssClass="dfinput" id="tqname" cssStyle="width: 200px;"></s:textfield>
 							</span>
 						</div>
 					</div>

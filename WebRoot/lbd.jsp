@@ -44,7 +44,6 @@ $(document).ready(function(e) {
 });
 
 var mklid = <s:property value="greenroad.marklineid" />;
-
 </script>
 	</head>
 
@@ -71,7 +70,7 @@ var mklid = <s:property value="greenroad.marklineid" />;
 						</label>
 						<div class="vocation">
 							<select id="timetype" name="timetype" class="select1"
-								onchange="changeTimeSelect()">
+								onchange="changeTimeSelect()" >
 								<option <s:if test="timetype==0">selected</s:if> value="0">
 									普通日
 								</option>
@@ -90,7 +89,7 @@ var mklid = <s:property value="greenroad.marklineid" />;
 							时段细分：
 						</label>
 						<div class="vocation">
-							<select name="select3" id="orderid" class="select1"
+							<select name="timexf" id="orderid" class="select1"
 								onchange="changeTimeSelect()">
 								<option <s:if test="orderid==0">selected</s:if> value="0">
 									时间段0
@@ -150,7 +149,7 @@ var mklid = <s:property value="greenroad.marklineid" />;
 						</label>
 						<div class="vocation">
 							<span style="margin-right: 5px;"> 
-								<s:textfield name="greenroad.name" cssClass="dfinput" id="tqname" cssStyle="width: 165px;"></s:textfield>
+								<s:textfield name="greenroad.name" cssClass="dfinput" id="gname" cssStyle="width: 200px;"></s:textfield>
 							</span>
 						</div>
 					</div>
@@ -173,7 +172,7 @@ var mklid = <s:property value="greenroad.marklineid" />;
 						</label>
 						<div class="vocation">
 							<span style="margin-right: 5px;"> 
-								<input type="time" name="begintime" class="dfinput" id="begintime" style="width: 125px;"/>
+								<input type="time" name="begintime" value="<s:property value="greenroad.starttime" />" class="dfinput" id="begintime" style="width: 125px;"/>
 									</span>
 						</div>
 					</div>

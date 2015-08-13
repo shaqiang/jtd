@@ -69,13 +69,13 @@ $(function(){
     	<s:iterator value="tqsigs" var="tqsig" status="index">
     		<li class="active"><cite></cite>
 	    		<s:if test="tqstatus==0">
-		    		<a href="greenroadAction!changetqstatus?tqstatus=1&tqid=<s:property value="id"/>&marklineid=<s:property value="marklineid"/>" target="tqFrame"><s:property value="name"/>&nbsp;
-		    			自动运行
+		    		<a href="greenroadAction!changetqstatus?tqstatus2=1&tqid=<s:property value="id"/>&marklineid=<s:property value="marklineid"/>" target="tqFrame"><s:property value="name"/>&nbsp;
+		    			正在自动运行
 		    		</a>
 	    		</s:if>
 	    		<s:elseif test="tqstatus==1">
-	    			<a href="greenroadAction!changetqstatus?tqstatus=0&tqid=<s:property value="id"/>&marklineid=<s:property value="marklineid"/>" target="tqFrame"><s:property value="name"/>&nbsp;
-		    			特勤控制
+	    			<a href="greenroadAction!changetqstatus?tqstatus2=0&tqid=<s:property value="id"/>&marklineid=<s:property value="marklineid"/>" target="tqFrame"><s:property value="name"/>&nbsp;
+		    			正在特勤控制
 		    		</a>
 	    		</s:elseif>
 	    		<s:else>

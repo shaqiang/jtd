@@ -435,24 +435,7 @@ function saveAndUpdateLine()
 }
 
 
-function updateLine()
-{
-	console.log("mklid---------------------------------------"+mklid);
-	$.ajax({   
-	            url:'addOrUpdateLine',//这里是你的action或者servlert的路径地址   
-	            type:'post', //数据发送方式     
-	 			data: { "mklid":mklid},
-	            error: function(msg)
-	            { //失败   
-	            		alert("当前无电缆联动保存失败"); 
-	            },   
-	            success: function(msg)
-	            { //成功   
-	            		alert("当前无电缆联动保存成功"); 
-	            }  
-	   	    });   
 
-}
 
 function changeArea()
 {
@@ -516,7 +499,7 @@ $(document).ready(function(){
 				console.log(lineId);
 				dots = Array();
 				maphelper.bindInstanceEvent(poly, 'dblclick', function(event,map,poly) {
-					self.location='greenroadAction!tq?mklid='+poly.id; 
+					self.location='greenroadAction!lbd?mklid='+poly.id; 
 	       		 });
   	    	}
   	  } 	   

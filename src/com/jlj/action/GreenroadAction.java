@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +45,8 @@ import com.jlj.service.ISolutionService;
 import com.jlj.service.IStepService;
 import com.jlj.service.ITqsigService;
 import com.jlj.util.Commands;
+import com.jlj.util.DateTimeConvertor;
+import com.jlj.util.DateTimeKit;
 import com.jlj.vo.AjaxMsgVO;
 import com.jlj.vo.ConflictVO;
 import com.jlj.vo.GreenroadVO;
@@ -51,6 +54,7 @@ import com.jlj.vo.PharseVO;
 import com.jlj.vo.SigGreenRoadVO;
 import com.jlj.vo.UsefulPhaseVO;
 import com.opensymphony.xwork2.ActionSupport;
+import com.thoughtworks.xstream.converters.basic.DateConverter;
 
 @Component("greenroadAction")
 @Scope("prototype")
@@ -85,6 +89,7 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	private Sig sig;
 	private SigGreenRoadVO sigVO;
 	private Tqsig tqsig;
+	private String  gname;
 	private int id;
 	
 
@@ -124,6 +129,7 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	private String ytime;
 	private String tqname;
 	private Long marklineid;
+	private int isChanging;
 	
 
 	/*
@@ -222,12 +228,19 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	public String addOrUpdateLine() throws Exception {
 		greenroad = greenroadService.loadByMkid(mklid);
 		if (greenroad != null) {
-			// update
+			if(!gname.contains("2015-"))
+			{
+				greenroad.setName(gname+DateTimeKit.getLocal_Time());
+			}
+			greenroad.setTimetype(timetype);
+			greenroad.setTimexf(orderid);
+			greenroad.setStarttime(begintime);
+			greenroadService.update(greenroad);
 		} else {
 			greenroad = new Greenroad();
 			greenroad.setTimetype(0);
 			greenroad.setTimexf(0);
-			//greenroad.setStarttime("00:00");
+			greenroad.setStarttime("00:00");
 			greenroad.setMarklineid(mklid);
 			greenroad.setSigmids(sids);
 			greenroad.setType(0);
@@ -247,7 +260,7 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 		greenroad = greenroadService.loadByMkid(mklid);
 		if (greenroad != null) {
 			// update
-			greenroad.getMarklineid();
+			
 		} else {
 			greenroad = new Greenroad();
 			greenroad.setMarklineid(mklid);
@@ -266,12 +279,24 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	 */
 	public String lbd() throws Exception {
 		greenroad = greenroadService.loadByMkid(mklid);
+		System.out.println(isChanging);
+		if(isChanging==0)//表示是由前台改变时间段类型跳转
+		{
+			if(timetype==0)
+			{
+				timetype = greenroad.getTimetype();
+			}
+			if(orderid==0)
+			{
+				orderid = greenroad.getTimexf();
+			}
+		}
 		if (greenroad != null) {
 			setSigVOS(greenroad);
 			maxCircleTime = setMaxCircle(sigVOs);
 			return "lbd";
 		} else {
-			String errorMsg="没有获得相应绿波带信息,请确保数据不为空.";
+			String errorMsg="没有获得相应无电缆联动信息,请确保数据不为空.";
 			request.put("errorMsg", errorMsg);
 			return "index";
 		}
@@ -545,9 +570,13 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 		//System.out.println(rtime);//红灯持续时间
 		
 		greenroad = greenroadService.loadByMkid(marklineid);//修改名称方案
+		
 		if(greenroad!=null)
 		{
-			greenroad.setName(tqname);
+			if(!tqname.contains("2015-"))
+			{
+				greenroad.setName(tqname+DateTimeKit.getLocal_Time());
+			}
 			greenroadService.update(greenroad);
 		}
 	    setSpecifiedPharseVO(dates,gtime,ytime,rtime);
@@ -1662,18 +1691,18 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	 * 改变特勤状态
 	 * @return
 	 */
-	private int tqstatus;
+	private int tqstatus2;
 	private int tqid;
 	public String changetqstatus(){
-		//下发命令,如果tqstatus=0，表示需要自动运行，执行命令；如果tqstatus=1，表示需要特勤控制，下发数据库中的命令
+		//下发命令,如果tqstatus2=0，表示需要自动运行，执行命令；如果tqstatus2=1，表示需要特勤控制，下发数据库中的命令
 		tqsig = tqService.loadById(tqid);
 		String sigNumber = tqsig.getNumber();
 		IoSession iosession = getCurrrenSession(sigNumber);
 		if(iosession!=null){
-			if(tqstatus==0){
+			if(tqstatus2==0){
 				Commands.executeCommand(33,iosession);
-			}else if (tqstatus==1) {
-				byte[] msendDatas = DataConvertor.decode(tqsig.getTqdatastr(),78);
+			}else if (tqstatus2==1) {
+				byte[] msendDatas = DataConvertor.decode(tqsig.getTqdatastr(),39);
 				iosession.write(msendDatas);
 			}
 		}
@@ -1684,9 +1713,18 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 			return "index";
 		}
 		//修改数据库状态
-		tqService.updateTqstatusById(tqstatus,tqid);
+		tqsig.setTqstatus(tqstatus2);
+		tqService.update(tqsig);
 		//跳转到特勤列表
-		return this.tqlist();
+		Greenroad grobj = greenroadService.loadByMkid(marklineid);
+		if(grobj!=null){
+			tqsigs = tqService.getTqsigsByGrid(grobj.getId());
+			for (Tqsig tqsig : tqsigs) {
+				System.out.println(tqsig.getName()+","+tqsig.getTqstatus());
+			}
+		}
+		
+		return "tqlist";
 	}
 	
 	
@@ -2096,13 +2134,14 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	}
 
 
-	public int getTqstatus() {
-		return tqstatus;
+
+	public int getTqstatus2() {
+		return tqstatus2;
 	}
 
 
-	public void setTqstatus(int tqstatus) {
-		this.tqstatus = tqstatus;
+	public void setTqstatus2(int tqstatus2) {
+		this.tqstatus2 = tqstatus2;
 	}
 
 
@@ -2114,9 +2153,26 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	public void setTqid(int tqid) {
 		this.tqid = tqid;
 	}
-	
-	
-	
+
+
+	public int getIsChanging() {
+		return isChanging;
+	}
+
+
+	public void setIsChanging(int isChanging) {
+		this.isChanging = isChanging;
+	}
+
+
+	public String getGname() {
+		return gname;
+	}
+
+
+	public void setGname(String gname) {
+		this.gname = gname;
+	}
 	
 	
 

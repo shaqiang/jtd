@@ -155,8 +155,9 @@ function changeTimeSelect()
 	var timetype = $("#timetype").val();
 	var orderid = $("#orderid").val();
 	var mklid = $("#mklid").val();
-	//console.log("sigtimeAction!sigtimes?timetype="+timetype+"&orderid="+orderid+"&mklid="+mklid);
-	location.href = "greenroadAction!lbd?timetype="+timetype+"&orderid="+orderid+"&mklid="+mklid;
+	var isChanging = 1;
+	console.log("greenroadAction!lbd?timetype="+timetype+"&orderid="+orderid+"&mklid="+mklid+"&isChanging="+isChanging);
+	location.href = "greenroadAction!lbd?timetype="+timetype+"&orderid="+orderid+"&mklid="+mklid+"&isChanging="+isChanging;
 }
 
 
@@ -178,4 +179,29 @@ function deleteLine()
 	            	location.reload();  //刷新本页
 	            }  
     	    });   	
+}
+
+function updateLine()
+{
+	console.log("mklid---------------------------------------"+mklid);
+	
+	var timetype = $("#timetype").val();
+	var orderid = $("#orderid").val();
+	var begintime = $("#begintime").val();
+	var gname = $("#gname").val();
+	
+	$.ajax({   
+	            url:'addOrUpdateLine',//这里是你的action或者servlert的路径地址   
+	            type:'post', //数据发送方式     
+	 			data: { "mklid":mklid,'timetype':timetype,"orderid":orderid,"begintime":begintime,"gname":gname},
+	            error: function(msg)
+	            { //失败   
+	            		alert("当前无电缆联动保存失败"); 
+	            },   
+	            success: function(msg)
+	            { //成功   
+	            		alert("当前无电缆联动保存成功"); 
+	            }  
+	   	    });   
+
 }
