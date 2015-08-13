@@ -225,6 +225,9 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 			// update
 		} else {
 			greenroad = new Greenroad();
+			greenroad.setTimetype(0);
+			greenroad.setTimexf(0);
+			//greenroad.setStarttime("00:00");
 			greenroad.setMarklineid(mklid);
 			greenroad.setSigmids(sids);
 			greenroad.setType(0);

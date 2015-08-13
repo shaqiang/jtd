@@ -40,6 +40,7 @@ function initGreenRoad()
 				{
 					if(isNaN(time)||time>0)
 					{
+						console.log($(this));
 						alert("速度设置不正确,请重新设置.");
 						$(this).val(60);//恢复原值
 						return ;

@@ -302,8 +302,8 @@ var mklid = <s:property value="greenroad.marklineid" />;
 
 
 											<s:if test="#status.last">
-                      	最后一个路口无需设置反向速度
-                      </s:if>
+						                      	最后一个路口无需设置反向速度
+						                     </s:if>
 											<s:else>
 												<input type="text" alt="反向速度"
 													id="<s:property value="id"/>_fxspeed" class="dfinput"
