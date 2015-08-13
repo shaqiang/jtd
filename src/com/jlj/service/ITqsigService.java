@@ -38,4 +38,6 @@ public interface ITqsigService {
 
 	public abstract List<Tqsig> getTqsigsByGrid(int grid);
 
+	public abstract void updateTqstatusById(int tqstatus,int tqid);
+
 }

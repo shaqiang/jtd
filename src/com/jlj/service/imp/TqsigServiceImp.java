@@ -117,6 +117,13 @@ public class TqsigServiceImp implements ITqsigService {
 		queryString += " order by mo.orderid asc ";
 		return tqsigDao.getObjectsByCondition(queryString, p);
 	}
+	public void updateTqstatusById(int tqstatus,int tqid) {
+		String queryString = "update Tqsig mo set mo.tqstatus=:tqstatus where mo.id=:tqid";
+		String[] paramNames = new String[] { "tqstatus","tqid" };
+		Object[] values = new Object[] { tqstatus,tqid };
+		tqsigDao.updateByHql(queryString, paramNames, values);
+		
+	}
 	
 	
 }

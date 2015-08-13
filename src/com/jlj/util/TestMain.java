@@ -104,6 +104,9 @@ public class TestMain {
 			  System.err.println(pharseVOS.get(j).getDates());
 			}
 		  
+		  System.out.println("-------------------test length");
+		  String tqstr = "ffffffff01f0a206002390949094909490940a0000000000000000039094909490949094050aee";
+		  System.out.println(tqstr.length());
 	}
 	
     /*

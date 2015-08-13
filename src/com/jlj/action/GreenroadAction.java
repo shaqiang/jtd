@@ -1654,6 +1654,38 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 		
 		return "tqlist";
 	}
+	/**
+	 * 改变特勤状态
+	 * @return
+	 */
+	private int tqstatus;
+	private int tqid;
+	public String changetqstatus(){
+		//下发命令,如果tqstatus=0，表示需要自动运行，执行命令；如果tqstatus=1，表示需要特勤控制，下发数据库中的命令
+		tqsig = tqService.loadById(tqid);
+		String sigNumber = tqsig.getNumber();
+		IoSession iosession = getCurrrenSession(sigNumber);
+		if(iosession!=null){
+			if(tqstatus==0){
+				Commands.executeCommand(33,iosession);
+			}else if (tqstatus==1) {
+				byte[] msendDatas = DataConvertor.decode(tqsig.getTqdatastr(),78);
+				iosession.write(msendDatas);
+			}
+		}
+		else
+		{
+			String errorMsg="信号机["+sigNumber+"]连接异常,检查信号机是否断开.";
+			request.put("errorMsg", errorMsg);
+			return "index";
+		}
+		//修改数据库状态
+		tqService.updateTqstatusById(tqstatus,tqid);
+		//跳转到特勤列表
+		return this.tqlist();
+	}
+	
+	
 	
 	// get、set-------------------------------------------
 	// 获得HttpServletResponse对象
@@ -2059,6 +2091,26 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 		this.tqsigs = tqsigs;
 	}
 
+
+	public int getTqstatus() {
+		return tqstatus;
+	}
+
+
+	public void setTqstatus(int tqstatus) {
+		this.tqstatus = tqstatus;
+	}
+
+
+	public int getTqid() {
+		return tqid;
+	}
+
+
+	public void setTqid(int tqid) {
+		this.tqid = tqid;
+	}
+	
 	
 	
 	

@@ -1,6 +1,7 @@
 package com.jlj.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Sigsystime entity.
@@ -29,6 +32,10 @@ public class Greenroad implements java.io.Serializable {
 	private String name;
 	private String remark;
 	private Integer type;
+	private Integer timetype;
+	private Integer timexf;
+	private Date starttime;
+	
 	private List<Tqsig> tqsigs = new ArrayList<Tqsig>();
 	// Constructors
 
@@ -37,12 +44,15 @@ public class Greenroad implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Greenroad(Long marklineid, String sigmids, String name, String remark,Integer type) {
+	public Greenroad(Long marklineid, String sigmids, String name, String remark,Integer type,Integer timetype,Integer timexf,Date starttime) {
 		this.marklineid = marklineid;
 		this.sigmids = sigmids;
 		this.name = name;
 		this.remark = remark;
 		this.type = type;
+		this.timetype = timetype;
+		this.timexf = timexf;
+		this.starttime = starttime;
 	}
 
 	// Property accessors
@@ -108,6 +118,34 @@ public class Greenroad implements java.io.Serializable {
 
 	public void setTqsigs(List<Tqsig> tqsigs) {
 		this.tqsigs = tqsigs;
+	}
+
+	@Column(name = "timetype")
+	public Integer getTimetype() {
+		return timetype;
+	}
+
+	public void setTimetype(Integer timetype) {
+		this.timetype = timetype;
+	}
+
+	@Column(name = "timexf")
+	public Integer getTimexf() {
+		return timexf;
+	}
+
+	public void setTimexf(Integer timexf) {
+		this.timexf = timexf;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "starttime", length = 23)
+	public Date getStarttime() {
+		return starttime;
+	}
+
+	public void setStarttime(Date starttime) {
+		this.starttime = starttime;
 	}
 
 	
