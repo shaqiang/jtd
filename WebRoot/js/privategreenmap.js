@@ -419,11 +419,12 @@ function saveAndUpdateLine()
 				}
 				$.ajax({   
 		            url:'addOrUpdateLine',//这里是你的action或者servlert的路径地址   
-		            type:'post', //数据发送方式     
+		            type:'post', //数据发送方式   
+		            async:false,  
 		 			data: { "mklid":lineId,"sids":sids,"areaid":areaid},
 		 			dataType:'json',
 		            error: function(msg)
-		            { //失败   
+		            { //失败 
 		            },   
 		            success: function(msg)
 		            { //成功   
@@ -452,14 +453,15 @@ function deleteLine()
 		alert("当前没有可删除的无电缆联动,请选择无电缆联动");
 	}else
 	{
-		console.log("lineId"+lineId);
 		$.ajax({   
            url:'deleteLine',  
-           type:'post',      
+           type:'post',     
+           async:false, 
 		   data: { "mklid":lineId},
 		   dataType:'json',
-           error: function(XMLHttpRequest, textStatus, errorThrown) 
+           error: function(msg) 
            { //失败   
+           		alert("当前无电缆联动删除失败"); 
            },   
            success: function(msg)
            { //成功   

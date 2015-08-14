@@ -338,20 +338,25 @@ function deleteLine()
 		alert("当前没有可删除的特勤方案,请选择特勤方案");
 	}else
 	{
+		
 		$.ajax({   
            url:'deleteLine',  
            type:'post',    
 		   data: { "mklid":lineId},
+		   async:false,
            error: function(msg)
            { //失败   
-           		
+           		 alert("当前特勤方案删除失败"); 
            },   
            success: function(msg)
            { //成功   
-        		   alert("当前特勤方案删除成功"); 
+        		 alert("当前特勤方案删除成功"); 
            }  
-  	    });   
-   	    self.location='stqmap.jsp'; 
+  	    });  
+  	 
+  	    window.location.target="rightFrame";
+  	  	window.parent.parent.rightFrame.location.href="stqmap.jsp";
+  	    
 	}
 }
 
@@ -376,13 +381,15 @@ function saveAndUpdateLine()
 				$.ajax({   
 		            url:'addOrUpdateTqLine',//这里是你的action或者servlert的路径地址   
 		            type:'post', //数据发送方式     
+		            async:false,
 		 			data: { "mklid":lineId,"sids":sids},
 		            error: function(msg)
 		            { //失败   
-		            		alert("当前特勤方案保存失败"); 
+		            	alert("当前特勤方案保存失败"); 
 		            },   
 		            success: function(msg)
 		            { //成功   
+		            	  alert("当前特勤方案保存成功"); 
 		            }  
 	   	    });   
 		}

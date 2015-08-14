@@ -261,7 +261,6 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 		greenroad = greenroadService.loadByMkid(mklid);
 		if (greenroad != null) {
 			// update
-			
 		} else {
 			greenroad = new Greenroad();
 			greenroad.setMarklineid(mklid);
@@ -280,7 +279,6 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	 */
 	public String lbd() throws Exception {
 		greenroad = greenroadService.loadByMkid(mklid);
-		System.out.println(isChanging);
 		if(isChanging==0)//表示是由前台改变时间段类型跳转
 		{
 			if(timetype==0)
