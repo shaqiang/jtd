@@ -3,6 +3,8 @@ package com.jlj.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.jms.core.JmsTemplate;
+
 import com.jlj.vo.PharseVO;
 
 
@@ -12,6 +14,7 @@ public class TestMain {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
 		// TODO Auto-generated method stub
 		/*
 		 * test greenroad getUsefulPhase
