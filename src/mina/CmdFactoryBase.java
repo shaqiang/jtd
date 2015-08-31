@@ -13,6 +13,8 @@ import protocpl.CommandPhase;
 import protocpl.CommandSpecialTime;
 import protocpl.CommandSunTime;
 import protocpl.CommandUpLoad;
+import protocpl.CommandXml1;
+import protocpl.CommandXml2;
 import protocpl.CommonTimeCmdFactory;
 import protocpl.ParametersCmdFactory;
 import protocpl.DiaoYueCmdFactory;
@@ -20,6 +22,8 @@ import protocpl.PhaseCmdFactory;
 import protocpl.SpecialTimeFactory;
 import protocpl.SunTimeCmdFactory;
 import protocpl.UploadCmdFactory;
+import protocpl.Xml1CmdFactory;
+import protocpl.Xml2CmdFactory;
 
 import mina.ICmdParser;
 
@@ -37,8 +41,9 @@ public class CmdFactoryBase implements ICmdParser {
 		MONITOR_CMD_COMMON_TIME(3),
 		MONITOR_CMD_SUN_TIME(4),
 		MONITOR_CMD_SPECIAL_TIME(5),
-		MONITOR_CMD_PHASE(6);
-
+		MONITOR_CMD_PHASE(6),
+		MONITOR_CMD_XML1(7),
+		MONITOR_CMD_XML2(8);
 		
 		
 		private final int _val;
@@ -71,7 +76,10 @@ public class CmdFactoryBase implements ICmdParser {
 				return MONITOR_CMD_SPECIAL_TIME;
 			case 6:
 				return MONITOR_CMD_PHASE;
-
+			case 7:
+				return MONITOR_CMD_XML1;
+			case 8:
+				return MONITOR_CMD_XML2;
 			default:
 				return UNKNOWN_CMD;
 				
@@ -84,6 +92,21 @@ public class CmdFactoryBase implements ICmdParser {
 		
 		//int command = data[7] & 0xFF;
 		
+		byte xmlbytes [] = new byte[5];
+		for (int i = 0; i < xmlbytes.length; i++) {
+			xmlbytes[i]= data[i];
+		}
+		if(DataConvertor.bytesToHexString(xmlbytes).equals("<?xml")){
+			if(DataConvertor.bytesToHexString(data).contains("SIGNALSART")){
+				return MONITOR_CMD_TYPE.valueOf(7);
+			}else if(DataConvertor.bytesToHexString(data).contains("SIGNALEND")){
+				return MONITOR_CMD_TYPE.valueOf(8);
+			}
+			else{
+				return MONITOR_CMD_TYPE.valueOf(-1);
+
+			}
+		}else{
 		
 		int sum = 0;
 		int flag_ff = 0;
@@ -104,7 +127,7 @@ public class CmdFactoryBase implements ICmdParser {
 		}else{
 			return MONITOR_CMD_TYPE.valueOf(-1);
 		}
-		
+		}
 	}
 	
 	public static CmdFactoryBase SelectCmdFactory(IoSession session, Object message)
@@ -148,7 +171,15 @@ public class CmdFactoryBase implements ICmdParser {
 			//log.debug("img upload factory");
 			factory = new PhaseCmdFactory(data);
 			break;
-
+			
+		case MONITOR_CMD_XML1:
+			//log.debug("img upload factory");
+			factory = new Xml1CmdFactory(data);
+			break;
+		case MONITOR_CMD_XML2:
+			//log.debug("img upload factory");
+			factory = new Xml2CmdFactory(data);
+			break;	
 		}
 
 		
@@ -199,6 +230,10 @@ public class CmdFactoryBase implements ICmdParser {
 				break;
 			case 	MONITOR_CMD_PHASE:
 				cmd = new CommandPhase(this, m_oData);
+			case 	MONITOR_CMD_XML1:
+				cmd = new CommandXml1(this,m_oData);
+			case 	MONITOR_CMD_XML2:
+				cmd = new CommandXml2(this,m_oData);	
 				break;
 			}
 		return cmd;
