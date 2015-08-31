@@ -171,9 +171,9 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
 	 * @throws Exception
 	 */
 	public String loadTqLines() throws Exception {
-
 		
 		greenroads = greenroadService.getAllGreenroads(1);
+		
 		if (greenroads != null && greenroads.size() > 0) {
 			greenroadVOs = getGreenroadVOs(greenroads);
 			JSONArray jsonArr = JSONArray.fromObject(greenroadVOs);
@@ -834,6 +834,7 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
             			tqsig.setName(sig.getName());
             			tqsig.setTqstatus(0);//信号机自动控制
             			tqsig.setNumber(number);
+            			tqsig.setName(sig.getName());
             			tqService.add(tqsig);
         			}else
         			{

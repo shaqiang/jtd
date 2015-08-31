@@ -89,28 +89,42 @@ public class MyBytesDecoder extends CumulativeProtocolDecoder {
     	
     	in.order(ByteOrder.LITTLE_ENDIAN);
     	
-    	  if (in.remaining() > 1) {
-    		 // 
-    		 
-             int length = ((in.get(in.position()+8)&0xff)<<8)+(in.get(in.position()+9)&0xff)+4;
-            // System.out.println("length is"+length);
-    		 // int length = in.limit();
-              if (length < 1) {
-                  throw new ServerException("Error net message. (Message Length="+length+")");
-              }
-              if (length > 1024*1024) {
-                  throw new ServerException("Error net message. Message Length("+length+") > MessageMaxByte("+1024*1024+")");
-              }
-              if (length > in.remaining()) return false;
-              //复制一个完整消息
-              byte[] bytes = new byte[length];
-              in.get(bytes);
-              
-              out.write(IoBuffer.wrap(bytes));
-              return true;
-          } else {
-              return false;
-          }
+    	if (in.remaining() > 1) {
+   		 // 
+   		byte xmlbytes [] = new byte[5];
+   		for (int i = 0; i < xmlbytes.length; i++) {
+   			xmlbytes[i]= in.get(in.position()+i);
+			}
+   		if(DataConvertor.hexString2String(DataConvertor.bytesToHexString(xmlbytes)).equals("<?xml")){
+   			int i = in.limit();
+   	    	byte[] bs = new byte[i];
+   	    	in.get(bs);
+   	    	//byte cur_b = in.get(); //这个是byte  
+   	    	//int cur_i = cur_b & 0xff; //做运算时要转成整形  
+   	    	out.write(in);
+   	        return true;
+   		}else{
+            int length = ((in.get(in.position()+8)&0xff)<<8)+(in.get(in.position()+9)&0xff)+4;
+           // System.out.println("length is"+length);
+   		 // int length = in.limit();
+             if (length < 1) {
+                 throw new ServerException("Error net message. (Message Length="+length+")");
+             }
+             if (length > 1024*1024) {
+                 throw new ServerException("Error net message. Message Length("+length+") > MessageMaxByte("+1024*1024+")");
+             }
+             if (length > in.remaining()) return false;
+             //复制一个完整消息
+             byte[] bytes = new byte[length];
+             in.get(bytes);
+             
+             out.write(IoBuffer.wrap(bytes));
+             return true;
+   	  }
+         } else {
+             return false;
+         
+   	  }
 //    
 //    	in.order(ByteOrder.LITTLE_ENDIAN);
 //

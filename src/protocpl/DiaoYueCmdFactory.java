@@ -299,11 +299,19 @@ public class DiaoYueCmdFactory extends CmdFactoryBase implements ICmdParser{
 //	  		SigAction.Countdown = Countdown;
 //	  	}
 	  	
-	  	if(SigAction.curruntSigNumber !=  null){
+	  	if(SigAction.curruntSigNumber !=  null&&!SigAction.curruntSigNumber.equals("")){
 		  	if((number+"").equals(SigAction.curruntSigNumber )){
 		  		SigAction.trafficlights = locate;
 		  		SigAction.Countdown = Countdown;
 		  		
+		  		
+		  	}
+	  	}
+	  	
+	  	if(JcCmdFactory.curruntSigNumber !=  null&&!JcCmdFactory.curruntSigNumber.equals("")){
+		  	if((number+"").equals(JcCmdFactory.curruntSigNumber )){
+		  		JcCmdFactory.trafficlights = locate;
+		  		JcCmdFactory.Countdown = Countdown;
 		  		
 		  	}
 	  	}

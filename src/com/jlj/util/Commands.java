@@ -67,6 +67,10 @@ public class Commands {
 		,"101","102","103","104","105","东左转红灯不亮	对应可控硅损坏或负载开路","东直行红灯不亮","东右转红灯不亮","东人行红灯不亮","南左转红灯不亮","南直行红灯不亮","南右转红灯不亮","南人行红灯不亮","西左转红灯不亮"
 		,"西直行红灯不亮","西右转红灯不亮","西人行红灯不亮","北左转红灯不亮","北直行红灯不亮","北右转红灯不亮"};
 	
+	
+	public final static String  upload_realtime_xmlmsg_format="";//上传集成软件的实时状态格式
+	
+	
 	public static String getCommandStr(int i)
 	{
 		switch (i) {

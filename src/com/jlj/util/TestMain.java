@@ -16,100 +16,15 @@ public class TestMain {
 	public static void main(String[] args) {
 		
 		// TODO Auto-generated method stub
-		/*
-		 * test greenroad getUsefulPhase
-		 */
-		/*String s = "0_1_0.5";
-		String phaseString = "20,0,20";
-		if(phaseString.substring(0, 1)!=null&&!phaseString.substring(0, 1).equals("0"))
-		{
-			int firstIndex = phaseString.indexOf(",0");
-			if(firstIndex!=-1)
-			{
-				phaseString = phaseString.substring(0,firstIndex);
-			}
-			String[] usefulPhase = phaseString.split(",");
-			for(int i=0;i<usefulPhase.length;i++)
-			{
-				System.out.println(usefulPhase[i]);
-			}
-		}*/
+		String test1 = "3c3f786d6c2076657273696f6e3d22312e302220656e636f64696e673d22474232333132223f3e3c6d6573736167652053797374656d3d225a544543454e54455222205665723d22312e3030223e3c73797374656d747970653e4a4152495554433c2f73797374656d747970653e3c6d657373616765747970653e524551554553543c2f6d657373616765747970653e3c736f7572636549503e3230313530383330313730393430383537343c2f736f7572636549503e3c74617267657449503e4a4152495554433c2f74617267657449503e3c757365723e45484c3c2f757365723e3c70617373776f72643e45484c3132333435363c2f70617373776f72643e3c726571756573743e3c726f616469643e313739333c2f726f616469643e3c747970653e5349474e414c53544152543c2f747970653e3c6e6f3e303c2f6e6f3e3c2f726571756573743e3c2f6d6573736167653e";
+		String test2 = "3c3f786d6c2076657273696f6e3d22312e302220656e636f64696e673d22474232333132223f3e3c6d6573736167652053797374656d3d225a544543454e54455222205665723d22312e3030223e3c73797374656d747970653e4a4152495554433c2f73797374656d747970653e3c6d657373616765747970653e524551554553543c2f6d657373616765747970653e3c736f7572636549503e3230313530383330313831333536383636363c2f736f7572636549503e3c74617267657449503e4a4152495554433c2f74617267657449503e3c757365723e45484c3c2f757365723e3c70617373776f72643e45484c3132333435363c2f70617373776f72643e3c726571756573743e3c726f616469643e313738373c2f726f616469643e3c747970653e5349474e414c454e443c2f747970653e3c6e6f3e303c2f6e6f3e3c2f726571756573743e3c2f6d6573736167653e0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+		String test3 = "><roadid>1917</roadid><";
 		
+		String number = test3.substring(test3.lastIndexOf("<roadid>")+8,test3.indexOf("</roadid>"));
+		System.out.println(number);
 		
-		//System.out.println(3689/3600);
-		  /*
-		   */
-//		Object obj = null;
-//		obj.equals(""); 
-		
-//		int a = 0;
-//		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
-//		String dateString1=sdf.format(new Date());
-//		System.out.println(dateString1);
-//		List<Usero> useros = new ArrayList<Usero>();
-//		for (int i = 0; i < 300000; i++) {
-//			Usero usero = new Usero();
-//			usero.setId(i);
-//			usero.setUsername("asd");
-//			usero.setPassword("asd");
-//			usero.setUlimit(1);
-//			usero.setUip("192.168.1.21");
-//			useros.add(usero);
-//		}
-//		for (int i = 0; i < useros.size(); i++) {
-//			a  = a + useros.get(i).getId();
-//		}
-//		System.out.println(a);
-//		String dateString2=sdf.format(new Date());
-//		System.out.println(dateString2);
-		String dates = "3_2_3:3,3_0_3:3,3_3_3:3,3_0_2:3,3_0_1:3,3_0_0:3,3_3_2:3,3_3_1:3,3_3_0:3,3_1_0:3,3_1_1:3,3_1_2:3,3_2_0:3,3_2_1:3,3_2_2:3,3_1_3:3,5_2_3:3,5_0_3:3,5_3_3:3,5_0_2:3,5_0_1:3,5_0_0:3,5_3_2:3,5_3_1:3,5_3_0:3,5_1_0:3,5_1_1:3,5_1_2:3,5_2_0:3,5_2_1:3,5_2_2:3,5_1_3:3,";
-		String gtime = "3_10,5_10,";
-		String ytime = "3_10,5_10,";
-		String rtime = "3_10,5_10,";
-		String[] ytimes = ytime.split(",");
-		String[] rtimes = rtime.split(",");
-		String[] gtimes = gtime.split(",");
-		
-		String[] dateses = dates.split(",");
-		 
-		List<PharseVO> pharseVOS= new ArrayList<PharseVO>();
-		for (int j = 0; j < gtimes.length; j++) {
-			PharseVO pharseVO = new PharseVO();
-			String param = gtimes[j];
-			int sid = Integer.parseInt(param.substring(0, param.indexOf("_")));
-			int time = Integer.parseInt(param.substring(param.indexOf("_")+1, param.length()));
-			pharseVO.setSid(sid);
-			pharseVO.setGltime(time);
-			pharseVOS.add(pharseVO);
-		}
-		
-		for (int j = 0; j < ytimes.length; j++) {
-			String param = ytimes[j];
-			int time = Integer.parseInt(param.substring(param.indexOf("_")+1, param.length()));
-			pharseVOS.get(j).setYltime(time);
-		}
-		
-		for (int j = 0; j < rtimes.length; j++) {
-			String param = rtimes[j];
-			int time = Integer.parseInt(param.substring(param.indexOf("_")+1, param.length()));
-			pharseVOS.get(j).setRltime(time);
-		}
-		
-		
-		
-		  int splitSize = pharseVOS.size();//分割的块大小
-		    
-		  List<String> subAry = splitAry(dateses, splitSize);//分割后的子块数组
-		
-		  for (int j = 0; j < pharseVOS.size(); j++) {
-			  pharseVOS.get(j).setDates(subAry.get(j));
-			  
-			  System.err.println(pharseVOS.get(j).getDates());
-			}
-		  
-		  System.out.println("-------------------test length");
-		  String tqstr = "ffffffff00780201008800050300780001aa03130000000000000f5a050064c0a801782a07dde340b60f240a01ffffff00c0a8010109000018140101010201030501050205030a010a020a030a040a050a060a070000000000000000000000000000000000000000000003040500010200000000000000000000000000000000000000000000000000000d47";
-		  System.out.println(tqstr.length());
+		//System.out.println(TestMain.hexString2String(test1));
+		//System.out.println(TestMain.hexString2String(test2));
 	}
 	
     /*
@@ -133,5 +48,112 @@ public class TestMain {
             
           return subAryList;  
     }  
+
+    
+    /** 
+     * @Title:bytes2HexString 
+     * @Description:字节数组转16进制字符串 
+     * @param b 
+     *            字节数组 
+     * @return 16进制字符串 
+     * @throws 
+     */  
+    public static String bytes2HexString(byte[] b) {  
+        StringBuffer result = new StringBuffer();  
+        String hex;  
+        for (int i = 0; i < b.length; i++) {  
+            hex = Integer.toHexString(b[i] & 0xFF);  
+            if (hex.length() == 1) {  
+                hex = '0' + hex;  
+            }  
+            result.append(hex.toUpperCase());  
+        }  
+        return result.toString();  
+    }  
+  
+    /** 
+     * @Title:hexString2Bytes 
+     * @Description:16进制字符串转字节数组 
+     * @param src 
+     *            16进制字符串 
+     * @return 字节数组 
+     * @throws 
+     */  
+    public static byte[] hexString2Bytes(String src) {  
+        int l = src.length() / 2;  
+        byte[] ret = new byte[l];  
+        for (int i = 0; i < l; i++) {  
+            ret[i] = (byte) Integer  
+                    .valueOf(src.substring(i * 2, i * 2 + 2), 16).byteValue();  
+        }  
+        return ret;  
+    }  
+  
+    /** 
+     * @Title:string2HexString 
+     * @Description:字符串转16进制字符串 
+     * @param strPart 
+     *            字符串 
+     * @return 16进制字符串 
+     * @throws 
+     */  
+    public static String string2HexString(String strPart) {  
+        StringBuffer hexString = new StringBuffer();  
+        for (int i = 0; i < strPart.length(); i++) {  
+            int ch = (int) strPart.charAt(i);  
+            String strHex = Integer.toHexString(ch);  
+            hexString.append(strHex);  
+        }  
+        return hexString.toString();  
+    }  
+  
+    /** 
+     * @Title:hexString2String 
+     * @Description:16进制字符串转字符串 
+     * @param src 
+     *            16进制字符串 
+     * @return 字节数组 
+     * @throws 
+     */  
+    public static String hexString2String(String src) {  
+        String temp = "";  
+        for (int i = 0; i < src.length() / 2; i++) {  
+            temp = temp  
+                    + (char) Integer.valueOf(src.substring(i * 2, i * 2 + 2),  
+                            16).byteValue();  
+        }  
+        return temp;  
+    }  
+      
+    /** 
+     * @Title:char2Byte 
+     * @Description:字符转成字节数据char-->integer-->byte 
+     * @param src 
+     * @return 
+     * @throws 
+     */  
+    public static Byte char2Byte(Character src) {  
+        return Integer.valueOf((int)src).byteValue();  
+    }  
+      
+        /** 
+     * @Title:intToHexString 
+     * @Description:10进制数字转成16进制 
+     * @param a 转化数据 
+     * @param len 占用字节数 
+     * @return 
+     * @throws 
+     */  
+    private static String intToHexString(int a,int len){  
+        len<<=1;  
+        String hexString = Integer.toHexString(a);  
+        int b = len -hexString.length();  
+        if(b>0){  
+            for(int i=0;i<b;i++)  {  
+                hexString = "0" + hexString;  
+            }  
+        }  
+        return hexString;  
+    } 
 
 }

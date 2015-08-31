@@ -34,7 +34,6 @@ google.maps.event.addDomListener(window, "load", initialize);
 		zoom: 10,   
 		center: new Array(119.82376098632812, 31.34542731758161),  
 		disableDefaultUI: false, 
-		disableDefaultUI: false,   
 		navigationControl: true,   
 		navigationControlOptions: {position: google.maps.ControlPosition.RIGHT_TOP},    
 		mapTypeControl: false, //比例尺控件  
