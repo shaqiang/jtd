@@ -389,7 +389,6 @@ function saveAndUpdateLine()
 		            },   
 		            success: function(msg)
 		            { //成功   
-		            	  alert("当前特勤方案保存成功"); 
 		            }  
 	   	    });   
 		}

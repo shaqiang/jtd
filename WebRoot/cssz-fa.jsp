@@ -42,22 +42,7 @@ $(document).ready(function(e) {
 	</head>
 
 	<body bgcolor="#EAF1F7">
-		<div class="formbody">
-			<div id="usual1" class="usual">
-				<div class="itab">
-					<ul>
-						<li>
-							<a href="sigpublicparamAction!publicParam">公共参数</a>
-						</li>
-						<li>
-							<a href="solutionAction!solutions" class="selected">相位方案</a>
-						</li>
-						<li>
-							<a href="sigtimeAction!sigtimes">时间段参数</a>
-						</li>
-					</ul>
-				</div>
-				 <s:hidden id="c1" name="conflictVO.c_00"></s:hidden>
+	 			 <s:hidden id="c1" name="conflictVO.c_00"></s:hidden>
 				  <s:hidden id="c2" name="conflictVO.c_01"></s:hidden>
 				   <s:hidden id="c3" name="conflictVO.c_02"></s:hidden>
 				    <s:hidden id="c4" name="conflictVO.c_03"></s:hidden>
@@ -74,33 +59,50 @@ $(document).ready(function(e) {
 				               <s:hidden id="c15" name="conflictVO.c_32"></s:hidden>
 				                <s:hidden id="c16" name="conflictVO.c_33"></s:hidden>
 				                
-				<div id="tab3" class="tabson">
-					<div style="width: 100%; float: left;">
-						<ul class="forminfo">
-							<li></li>
-							<li>
-								<div style="float: left; line-height: 35px;">
-									<label>
-										选择相位方案：
-									</label>
-									<div class="vocation">
-										<s:select list="solutions" name="solution.id"  id="solutions"
-							listKey="id" listValue="soluname" value="solution.id" onchange="changeSolution()" cssClass="select1"></s:select>
-									</div>
-									&nbsp;&nbsp;&nbsp;&nbsp;<b style="color:red;">*注意：请按顺序操作相位.</b>
+	
+		<div class="formbody">
+		
+		
+			<div id="usual1" class="usual">
+				<div class="itab">
+					<ul>
+						<li>
+							<a href="sigpublicparamAction!publicParam">公共参数</a>
+						</li>
+						<li>
+							<a href="solutionAction!solutions" class="selected">相位方案</a>
+						</li>
+						<li>
+							<a href="sigtimeAction!sigtimes">时间段参数</a>
+						</li>
+					</ul>
+				</div>
+				
+				<div style="width: 100%; float: left;">
+					<ul class="forminfo" style="">
+						<li>
+							<div style="float: left; line-height: 35px;">
+								<label>
+									选择相位方案：
+								</label>
+								<div class="vocation">
+									<s:select list="solutions" name="solution.id"  id="solutions"
+						listKey="id" listValue="soluname" value="solution.id" onchange="changeSolution()" cssClass="select1"></s:select>
 								</div>
-							<div style="float: left; line-height: 35px; padding-left: 20px;">
-								<ul class="toolbar">
-									<li onclick="saveSolution()" style="height: 28px; line-height: 28px;">
-										<span><img src="images/note-2.png" width="24"
-												height="20" />
-										</span>保存并发送相位方案
-									</li>
-								</ul>
+								&nbsp;&nbsp;&nbsp;&nbsp;<b style="color:red;">*注意：请按顺序操作相位.</b>
 							</div>
-							</li>
-						</ul>
-						<div>
+						<div style="float: left; line-height: 35px; padding-left: 20px;">
+							<ul class="toolbar">
+								<li onclick="saveSolution()" style="height: 28px; line-height: 28px;">
+									<span><img src="images/note-2.png" width="24"
+											height="20" />
+									</span>保存并发送相位方案
+								</li>
+							</ul>
+						</div>
+						</li>
+					</ul>
+						<div id="tab3" class="tabson">
 							<div class="xwlb">
 							
 							<s:iterator value="steps" var="step" status="status">

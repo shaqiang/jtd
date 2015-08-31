@@ -823,6 +823,7 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
         				System.out.print(send_byte[i3]);
         			}
         			String number = pharseVOS.get(j).getNumber();
+        			sig = sigService.querySigByNumber(number);
         			tqsig = tqService.queryByNumber(greenroad.getId(),number);
         			if(tqsig==null)
         			{
@@ -830,6 +831,7 @@ public class GreenroadAction extends ActionSupport implements RequestAware,
             			tqsig.setGreenroad(greenroad);
             			String datastr = DataConvertor.toHexString(send_byte);
             			tqsig.setTqdatastr(datastr);
+            			tqsig.setName(sig.getName());
             			tqsig.setTqstatus(0);//信号机自动控制
             			tqsig.setNumber(number);
             			tqService.add(tqsig);
